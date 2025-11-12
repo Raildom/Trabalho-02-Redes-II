@@ -9,14 +9,14 @@ import argparse
 
 #Classe para cores no terminal
 class Cores:
-    VERDE = '\033[92m'    # Verde para sucesso
-    VERMELHO = '\033[91m' # Vermelho para erro
-    AMARELO = '\033[93m'  # Amarelo para aviso
-    AZUL = '\033[94m'     # Azul para informação
-    MAGENTA = '\033[95m'  # Magenta para destaque
-    CIANO = '\033[96m'    # Ciano para título
-    RESET = '\033[0m'     # Reset para cor normal
-    NEGRITO = '\033[1m'   # Negrito
+    VERDE = '\033[92m'    #Verde para sucesso
+    VERMELHO = '\033[91m' #Vermelho para erro
+    AMARELO = '\033[93m'  #Amarelo para aviso
+    AZUL = '\033[94m'     #Azul para informação
+    MAGENTA = '\033[95m'  #Magenta para destaque
+    CIANO = '\033[96m'    #Ciano para título
+    RESET = '\033[0m'     #Reset para cor normal
+    NEGRITO = '\033[1m'   #Negrito
 
     @staticmethod
     def sucesso(texto):
@@ -39,9 +39,11 @@ class ProjetoRedes:
         self.info_projeto()
     
     def info_projeto(self):
-        print(f"{Cores.CIANO}{Cores.NEGRITO}=== Projeto Redes II - Servidor Web Sequencial vs Concorrente ==={Cores.RESET}")
+        print(f"{Cores.CIANO}{Cores.NEGRITO}=== Projeto Redes II - Comparação Nginx vs Apache ==={Cores.RESET}")
+        print(f"{Cores.AZUL}Aluno: Raildom da Rocha Sobrinho{Cores.RESET}")
         print(f"{Cores.AZUL}Matrícula: 20239057601{Cores.RESET}")
         print(f"{Cores.AZUL}Subnet configurada: 76.1.0.0/16{Cores.RESET}")
+        print(f"{Cores.VERDE}Observabilidade: Prometheus + Grafana{Cores.RESET}")
         print("")
     
     def verificar_docker(self):
@@ -57,6 +59,7 @@ class ProjetoRedes:
     def iniciar_conteineres(self):
         #Constrói e inicia os contêineres
         print("=== Construindo e iniciando contêineres ===")
+        print(Cores.info("Serviços: Nginx, Apache, Prometheus, Grafana"))
         
         if not os.path.exists('docker'):
             print(Cores.erro("Diretório 'docker' não encontrado"))
@@ -64,23 +67,34 @@ class ProjetoRedes:
         
         try:
             #Para contêineres existentes se estiverem rodando
-            subprocess.run(['docker-compose', '-f', 'docker/docker-compose.yml', 'down'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            print(Cores.info("Parando contêineres existentes..."))
+            subprocess.run(['docker', 'compose', '-f', 'docker/docker-compose.yml', 'down'], 
+                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             
             #Constrói e inicia os contêineres
-            result = subprocess.run(['docker-compose', '-f', 'docker/docker-compose.yml', 'up', '--build', '-d'], check=True)
+            print(Cores.info("Construindo imagens Docker (pode demorar alguns minutos)..."))
+            result = subprocess.run(['docker', 'compose', '-f', 'docker/docker-compose.yml', 'up', '--build', '-d'], 
+                                  check=True)
             
-            print("Aguardando contêineres iniciarem...")
+            print(Cores.info("Aguardando contêineres iniciarem..."))
             time.sleep(2)
             
             #Verifica se os contêineres estão rodando
-            result = subprocess.run(['docker-compose', '-f', 'docker/docker-compose.yml', 'ps'], capture_output=True, text=True)
-            if 'Up' in result.stdout:
-                print(Cores.sucesso("Contêineres iniciados com sucesso"))
-                print(result.stdout)
+            result = subprocess.run(['docker', 'compose', '-f', 'docker/docker-compose.yml', 'ps'], 
+                                  capture_output=True, text=True)
+            if 'Up' in result.stdout or 'running' in result.stdout:
+                print(Cores.sucesso("Contêineres iniciados com sucesso!"))
+                print("")
+                print(f"{Cores.CIANO}Serviços disponíveis:{Cores.RESET}")
+                print(f"  {Cores.VERDE}• Nginx:      http://localhost:8080{Cores.RESET}")
+                print(f"  {Cores.VERDE}• Apache:     http://localhost:8081{Cores.RESET}")
+                print(f"  {Cores.VERDE}• Prometheus: http://localhost:9090{Cores.RESET}")
+                print(f"  {Cores.VERDE}• Grafana:    http://localhost:3000{Cores.RESET} (admin/admin)")
+                print("")
                 return True
             else:
                 print(Cores.erro("Erro ao iniciar contêineres"))
-                subprocess.run(['docker-compose', '-f', 'docker/docker-compose.yml', 'logs'])
+                subprocess.run(['docker', 'compose', '-f', 'docker/docker-compose.yml', 'logs'])
                 return False
                 
         except subprocess.CalledProcessError as e:
@@ -105,21 +119,44 @@ class ProjetoRedes:
             print(Cores.erro("Erro ao verificar contêineres"))
             return False
         
-        #Executa o teste de conectividade
+        #Testa conectividade com Nginx
+        print(Cores.info("Testando Nginx..."))
         try:
-            subprocess.run(['docker', 'exec', 'cliente_teste', 'python3', 'testes/teste_completo.py', '--conectividade'], check=True)
-            print(Cores.sucesso("Teste de conectividade concluído"))
-            return True
-        except subprocess.CalledProcessError:
-            print(Cores.erro("Falha no teste de conectividade"))
-            print("Verifique os logs para mais detalhes")
+            result = subprocess.run([
+                'docker', 'exec', 'cliente_teste', 'python3', '-c',
+                "import sys; sys.path.insert(0, '/app/src'); from cliente import ClienteHTTP; "
+                "c = ClienteHTTP('76.1.0.10', 80); r = c.enviar_requisicao('GET', '/api/pequeno'); "
+                "print('Status:', r['codigo_status'], '- OK' if r['sucesso'] else '- FALHA')"
+            ], capture_output=True, text=True, check=True)
+            print(Cores.sucesso(f"Nginx: {result.stdout.strip()}"))
+        except subprocess.CalledProcessError as e:
+            print(Cores.erro(f"Falha ao conectar com Nginx: {e.stderr}"))
             return False
+        
+        #Testa conectividade com Apache
+        print(Cores.info("Testando Apache..."))
+        try:
+            result = subprocess.run([
+                'docker', 'exec', 'cliente_teste', 'python3', '-c',
+                "import sys; sys.path.insert(0, '/app/src'); from cliente import ClienteHTTP; "
+                "c = ClienteHTTP('76.1.0.11', 80); r = c.enviar_requisicao('GET', '/api/pequeno'); "
+                "print('Status:', r['codigo_status'], '- OK' if r['sucesso'] else '- FALHA')"
+            ], capture_output=True, text=True, check=True)
+            print(Cores.sucesso(f"Apache: {result.stdout.strip()}"))
+        except subprocess.CalledProcessError as e:
+            print(Cores.erro(f"Falha ao conectar com Apache: {e.stderr}"))
+            return False
+        
+        print(Cores.sucesso("Teste de conectividade concluído com sucesso!"))
+        return True
     
     def executar_testes_completos(self):
-        #Executa testes completos
+        #Executa testes completos de carga
         print("")
-        print("=== Executando testes completos ===")
-        print("Isso pode demorar alguns minutos...")
+        print("=== Executando testes de carga completos ===")
+        print(Cores.aviso("Isso pode demorar 5-10 minutos..."))
+        print(Cores.info("Testes: API, Arquivos Estáticos, Pico de Carga, Carga Sustentada"))
+        print("")
         
         #Verifica se o contêiner está rodando
         try:
@@ -132,47 +169,56 @@ class ProjetoRedes:
             print(Cores.erro("Erro ao verificar contêineres"))
             return False
         
-        #Executa os testes completos com tratamento de erro
+        #Executa os testes de carga
         try:
-            subprocess.run(['docker', 'exec', 'cliente_teste', 'python3', 'testes/teste_completo.py', '--completo'], check=True)
-            print(Cores.sucesso("Testes completos concluídos"))
+            subprocess.run([
+                'docker', 'exec', '-it', 'cliente_teste', 
+                'python3', '/app/testes/teste_carga.py'
+            ], check=True)
+            print("")
+            print(Cores.sucesso("Testes de carga concluídos com sucesso!"))
             return True
         except subprocess.CalledProcessError:
-            print(Cores.erro("Falha nos testes completos"))
+            print(Cores.erro("Falha nos testes de carga"))
             print("Verifique os logs para mais detalhes")
+            return False
+        except KeyboardInterrupt:
+            print("")
+            print(Cores.aviso("Testes interrompidos pelo usuário"))
             return False
     
     def gerar_analises(self):
-        #Gera análises e gráficos
+        #Acessa Grafana e Prometheus
         print("")
-        print("=== Gerando análises e gráficos ===")
+        print("=== Observabilidade e Análises ===" )
+        print("")
+        print(f"{Cores.CIANO}Acesse os serviços de observabilidade:{Cores.RESET}")
+        print(f"  {Cores.VERDE}• Prometheus: http://localhost:9090{Cores.RESET}")
+        print(f"    - Visualize métricas em tempo real")
+        print(f"    - Query: rate(nginx_http_requests_total[1m])")
+        print("")
+        print(f"  {Cores.VERDE}• Grafana: http://localhost:3000{Cores.RESET}")
+        print(f"    - Login: admin / admin")
+        print(f"    - Crie dashboards personalizados")
+        print(f"    - Compare Nginx vs Apache")
+        print("")
+        print(f"{Cores.AMARELO}Dica:{Cores.RESET} Execute os testes de carga primeiro para gerar métricas")
+        print("")
         
-        #Verifica se existem resultados para analisar localmente
-        if os.path.exists('resultados/resultados_completos.csv'):
-            try:
-                #Executa a análise localmente
-                subprocess.run(['python3', 'testes/analisar_resultados.py'], check=True)
-                print(Cores.sucesso("Análises e gráficos gerados"))
-                return True
-            except subprocess.CalledProcessError as e:
-                print(Cores.erro(f"Falha ao gerar análises: {e}"))
-                return False
-        else:
-            #Tenta copiar do contêiner se não existir localmente
-            try:
-                subprocess.run(['docker', 'exec', 'cliente_teste', 'test', '-f', '/app/resultados/resultados_completos.csv'], check=True)
-                subprocess.run(['docker', 'cp', 'cliente_teste:/app/resultados/', './'], check=True)
-                
-                #Executa a análise localmente
-                subprocess.run(['python3', 'testes/analisar_resultados.py'], check=True)
-                print(Cores.sucesso("Análises e gráficos gerados a partir do contêiner"))
-                return True
-                
-            except subprocess.CalledProcessError:
-                print(Cores.aviso("Nenhum resultado encontrado para análise."))
-                print("Execute primeiro os testes com a opção 2 (Executar testes completos)")
-                print("ou use a opção 8 (Executar tudo) para executar testes e análises automaticamente.")
-                return False
+        return True
+    
+    def gerar_arquivos_estaticos(self):
+        #Gera arquivos estáticos de teste
+        print("")
+        print("=== Gerando arquivos estáticos de teste ===")
+        
+        try:
+            subprocess.run(['python3', 'src/gerar_arquivos_estaticos.py'], check=True)
+            print(Cores.sucesso("Arquivos estáticos gerados com sucesso"))
+            return True
+        except subprocess.CalledProcessError as e:
+            print(Cores.erro(f"Falha ao gerar arquivos: {e}"))
+            return False
     
     def parar_conteineres(self):
         #Para contêineres
@@ -180,8 +226,8 @@ class ProjetoRedes:
         print("=== Parando contêineres ===")
         
         try:
-            subprocess.run(['docker-compose', '-f', 'docker/docker-compose.yml', 'down'], check=True)
-            print(Cores.sucesso("Contêineres parados"))
+            subprocess.run(['docker', 'compose', '-f', 'docker/docker-compose.yml', 'down'], check=True)
+            print(Cores.sucesso("Contêineres parados com sucesso"))
             return True
         except subprocess.CalledProcessError as e:
             print(Cores.erro(f"Falha ao parar contêineres: {e}"))
@@ -220,30 +266,38 @@ class ProjetoRedes:
         #Mostra menu principal
         print("")
         print(f"{Cores.CIANO}{Cores.NEGRITO}==== MENU PRINCIPAL ===={Cores.RESET}")
-        print("1) Iniciar contêineres")
+        print("1) Iniciar contêineres (Nginx, Apache, Prometheus, Grafana)")
         print("2) Teste de conectividade")
-        print("3) Executar testes completos")
-        print("4) Gerar análises e gráficos")
-        print("5) Entrar no contêiner de teste")
-        print("6) Executar tudo (início ao fim)")
+        print("3) Executar testes de carga completos")
+        print("4) Acessar observabilidade (Prometheus/Grafana)")
+        print("5) Entrar no contêiner de teste (Shell)")
+        print("6) Gerar arquivos estáticos de teste")
+        print("7) Executar tudo (início ao fim)")
+        print("8) Parar contêineres")
         print("0) Sair")
         print("")
     
     def executar_tudo(self):
         #Executa todo o fluxo do projeto
+        print(Cores.info("Iniciando execução completa do projeto..."))
+        print("")
+        
         if not self.iniciar_conteineres():
             return False
         
         print("")
-        resposta = input("Executar testes completos? (pode demorar 10-15 minutos) [Y/N]: ").lower()
+        resposta = input(f"{Cores.AMARELO}Executar testes de carga? (pode demorar 5-10 minutos) [S/N]: {Cores.RESET}").lower()
         
-        if resposta in ['y', 'yes', 's', 'sim']:
+        if resposta in ['s', 'sim', 'y', 'yes']:
             if self.executar_testes_completos():
-                self.gerar_analises()
                 print("")
-                print("=== Projeto concluído! ===")
-                print("Resultados disponíveis em ./resultados/")
+                print(Cores.sucesso("=== Projeto executado com sucesso! ==="))
+                print("")
+                self.gerar_analises()
                 return True
+        else:
+            print(Cores.info("Testes pulados. Servidores estão rodando."))
+            self.gerar_analises()
         
         return True
     
@@ -258,6 +312,8 @@ class ProjetoRedes:
             'teste-completo': self.executar_testes_completos,
             'analyze': self.gerar_analises,
             'analisar': self.gerar_analises,
+            'gerar-arquivos': self.gerar_arquivos_estaticos,
+            'arquivos': self.gerar_arquivos_estaticos,
             'shell': self.entrar_conteiner_teste,
             'all': self.executar_tudo,
             'tudo': self.executar_tudo
@@ -267,7 +323,7 @@ class ProjetoRedes:
             return comandos[comando]()
         else:
             print(f"Opção inválida: {comando}")
-            print("Opções: iniciar, conectividade, teste-completo, analisar, shell, tudo")
+            print("Opções: iniciar, conectividade, teste-completo, analisar, gerar-arquivos, shell, tudo")
             return False
     
     def menu_interativo(self):
@@ -288,20 +344,32 @@ class ProjetoRedes:
                 elif escolha == '5':
                     self.entrar_conteiner_teste()
                 elif escolha == '6':
+                    self.gerar_arquivos_estaticos()
+                elif escolha == '7':
                     self.executar_tudo()
-                elif escolha == '0':
+                elif escolha == '8':
                     self.parar_conteineres()
+                elif escolha == '0':
                     print("Saindo...")
+                    self.parar_conteineres()
                     break
                 else:
-                    print("Opção inválida")
+                    print(Cores.erro("Opção inválida"))
                     
             except KeyboardInterrupt:
-                print("\n\nSaindo...")
-                self.parar_conteineres()
+                print("\n")
+                print(Cores.aviso("Interrompido pelo usuário"))
+                print(Cores.info("Deseja parar os contêineres? [S/N]: "), end='')
+                try:
+                    resp = input().lower()
+                    if resp in ['s', 'sim', 'y', 'yes']:
+                        self.parar_conteineres()
+                except:
+                    pass
+                print("Saindo...")
                 break
             except EOFError:
-                print("\n\nSaindo...")
+                print("\n")
                 self.parar_conteineres()
                 break
 
@@ -323,7 +391,7 @@ def main():
         parser.add_argument('comando', choices=[
             'start', 'iniciar', 'conectividade', 'teste-conectividade',
             'full-test', 'teste-completo', 'analyze', 'analisar',
-            'shell', 'all', 'tudo'
+            'gerar-arquivos', 'arquivos', 'shell', 'all', 'tudo'
         ], help='Comando para executar')
         
         args = parser.parse_args()

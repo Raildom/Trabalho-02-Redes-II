@@ -1,0 +1,102 @@
+FROM ubuntu:22.04
+
+# Evitar prompts interativos durante instalação
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Instalar Apache, Python3 e apache_exporter
+RUN apt-get update && \
+    apt-get install -y apache2 wget python3 ca-certificates && \
+    wget https://github.com/Lusitaniae/apache_exporter/releases/download/v1.0.7/apache_exporter-1.0.7.linux-amd64.tar.gz && \
+    tar xzf apache_exporter-1.0.7.linux-amd64.tar.gz && \
+    mv apache_exporter-1.0.7.linux-amd64/apache_exporter /usr/local/bin/ && \
+    rm -rf apache_exporter-1.0.7.linux-amd64* && \
+    chmod +x /usr/local/bin/apache_exporter && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Criar diretório para arquivos estáticos
+RUN mkdir -p /var/www/html/estatico /var/www/html/api
+
+# Copiar página inicial
+COPY Servidores/pagina_inicial_apache.html /var/www/html/index.html
+
+# Criar script Python para configurar Apache
+RUN echo 'import os' > /configurar.py && \
+    echo 'import json' >> /configurar.py && \
+    echo '' >> /configurar.py && \
+    echo 'with open("/var/www/html/api/pequeno", "w") as f:' >> /configurar.py && \
+    echo '    json.dump({"status": "ok", "servidor": "Apache", "tipo": "pequeno"}, f)' >> /configurar.py && \
+    echo '' >> /configurar.py && \
+    echo 'with open("/var/www/html/api/medio", "w") as f:' >> /configurar.py && \
+    echo '    json.dump({"status": "ok", "servidor": "Apache", "tipo": "medio", "dados": "x"*200}, f)' >> /configurar.py && \
+    echo '' >> /configurar.py && \
+    echo 'with open("/var/www/html/api/grande", "w") as f:' >> /configurar.py && \
+    echo '    json.dump({"status": "ok", "servidor": "Apache", "tipo": "grande", "dados": "x"*500}, f)' >> /configurar.py && \
+    python3 /configurar.py && \
+    rm /configurar.py
+
+# Habilitar módulos e criar configuração
+RUN a2enmod status headers rewrite && \
+    echo '<VirtualHost *:80>' > /etc/apache2/sites-available/000-default.conf && \
+    echo '    ServerAdmin webmaster@localhost' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '    DocumentRoot /var/www/html' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '    <Directory /var/www/html>' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '        Options Indexes FollowSymLinks' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '        AllowOverride All' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '        Require all granted' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '    </Directory>' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '    <Location /api>' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '        Header set Content-Type application/json' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '    </Location>' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '    <Location /status-servidor>' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '        SetHandler server-status' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '        Require all granted' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '    </Location>' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '    ErrorLog ${APACHE_LOG_DIR}/error.log' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '    CustomLog ${APACHE_LOG_DIR}/access.log combined' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '</VirtualHost>' >> /etc/apache2/sites-available/000-default.conf
+
+# Expor portas: 80 (apache) e 9117 (metricas)
+EXPOSE 80 9117
+
+# Script Python embutido para inicialização
+RUN echo '#!/usr/bin/env python3' > /iniciar.py && \
+    echo 'import subprocess' >> /iniciar.py && \
+    echo 'import time' >> /iniciar.py && \
+    echo 'import sys' >> /iniciar.py && \
+    echo 'import signal' >> /iniciar.py && \
+    echo '' >> /iniciar.py && \
+    echo 'print("Iniciando exportador de métricas...")' >> /iniciar.py && \
+    echo 'sys.stdout.flush()' >> /iniciar.py && \
+    echo 'exportador = subprocess.Popen(["/usr/local/bin/apache_exporter", "--scrape_uri=http://localhost:80/status-servidor?auto"])' >> /iniciar.py && \
+    echo 'print("Exportador Prometheus iniciado na porta 9117")' >> /iniciar.py && \
+    echo 'sys.stdout.flush()' >> /iniciar.py && \
+    echo '' >> /iniciar.py && \
+    echo 'time.sleep(2)' >> /iniciar.py && \
+    echo '' >> /iniciar.py && \
+    echo 'print("Iniciando Apache...")' >> /iniciar.py && \
+    echo 'sys.stdout.flush()' >> /iniciar.py && \
+    echo 'apache_proc = subprocess.Popen(["apachectl", "-D", "FOREGROUND"])' >> /iniciar.py && \
+    echo 'print("Apache iniciado")' >> /iniciar.py && \
+    echo 'sys.stdout.flush()' >> /iniciar.py && \
+    echo '' >> /iniciar.py && \
+    echo 'def sinal_handler(sig, frame):' >> /iniciar.py && \
+    echo '    print("Encerrando serviços...")' >> /iniciar.py && \
+    echo '    apache_proc.terminate()' >> /iniciar.py && \
+    echo '    exportador.terminate()' >> /iniciar.py && \
+    echo '    sys.exit(0)' >> /iniciar.py && \
+    echo '' >> /iniciar.py && \
+    echo 'signal.signal(signal.SIGINT, sinal_handler)' >> /iniciar.py && \
+    echo 'signal.signal(signal.SIGTERM, sinal_handler)' >> /iniciar.py && \
+    echo '' >> /iniciar.py && \
+    echo 'try:' >> /iniciar.py && \
+    echo '    apache_proc.wait()' >> /iniciar.py && \
+    echo 'except KeyboardInterrupt:' >> /iniciar.py && \
+    echo '    pass' >> /iniciar.py && \
+    chmod +x /iniciar.py
+
+CMD ["python3", "/iniciar.py"]

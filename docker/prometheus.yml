@@ -1,0 +1,34 @@
+# Configuração do Prometheus
+# Trabalho de Redes II - 2025.2
+# Aluno: Raildom da Rocha Sobrinho
+# Matrícula: 20239057601
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'monitor-redes2'
+    aluno: 'Raildom'
+    matricula: '20239057601'
+
+scrape_configs:
+  # Auto-monitoramento do Prometheus
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Exportador de Métricas do Nginx
+  - job_name: 'nginx'
+    static_configs:
+      - targets: ['76.1.0.10:9113']
+        labels:
+          servidor: 'nginx'
+          tipo: 'servidor_web'
+
+  # Exportador de Métricas do Apache
+  - job_name: 'apache'
+    static_configs:
+      - targets: ['76.1.0.11:9117']
+        labels:
+          servidor: 'apache'
+          tipo: 'servidor_web'

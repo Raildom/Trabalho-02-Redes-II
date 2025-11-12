@@ -341,13 +341,13 @@ class AnalisadorResultados:
                 
                 if not dados_seq.empty:
                     seq_media = dados_seq['throughput_media'].mean()
-                    seq_desvio = np.sqrt((dados_seq['throughput_desvio']**2).mean())  # Desvio médio quadrático
+                    seq_desvio = np.sqrt((dados_seq['throughput_desvio']**2).mean())  #Desvio médio quadrático
                 else:
                     seq_media = seq_desvio = 0
                     
                 if not dados_conc.empty:
                     conc_media = dados_conc['throughput_media'].mean()
-                    conc_desvio = np.sqrt((dados_conc['throughput_desvio']**2).mean())  # Desvio médio quadrático
+                    conc_desvio = np.sqrt((dados_conc['throughput_desvio']**2).mean())  #Desvio médio quadrático
                 else:
                     conc_media = conc_desvio = 0
                 

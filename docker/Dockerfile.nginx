@@ -1,0 +1,125 @@
+FROM ubuntu:22.04
+
+# Evitar prompts interativos durante instalação
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Instalar Nginx, Python3 e nginx-prometheus-exporter
+RUN apt-get update && \
+    apt-get install -y nginx wget python3 ca-certificates && \
+    wget https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v0.11.0/nginx-prometheus-exporter_0.11.0_linux_amd64.tar.gz && \
+    tar xzf nginx-prometheus-exporter_0.11.0_linux_amd64.tar.gz && \
+    mv nginx-prometheus-exporter /usr/local/bin/ && \
+    rm nginx-prometheus-exporter_0.11.0_linux_amd64.tar.gz && \
+    chmod +x /usr/local/bin/nginx-prometheus-exporter && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Criar diretório para arquivos estáticos
+RUN mkdir -p /usr/share/nginx/html/estatico /usr/share/nginx/html/api
+
+# Copiar página inicial
+COPY Servidores/pagina_inicial_nginx.html /usr/share/nginx/html/index.html
+
+# Criar script Python para configurar Nginx
+RUN echo 'import os' > /configurar.py && \
+    echo 'import json' >> /configurar.py && \
+    echo '' >> /configurar.py && \
+    echo 'with open("/usr/share/nginx/html/api/pequeno", "w") as f:' >> /configurar.py && \
+    echo '    json.dump({"status": "ok", "servidor": "Nginx", "tipo": "pequeno"}, f)' >> /configurar.py && \
+    echo '' >> /configurar.py && \
+    echo 'with open("/usr/share/nginx/html/api/medio", "w") as f:' >> /configurar.py && \
+    echo '    json.dump({"status": "ok", "servidor": "Nginx", "tipo": "medio", "dados": "x"*200}, f)' >> /configurar.py && \
+    echo '' >> /configurar.py && \
+    echo 'with open("/usr/share/nginx/html/api/grande", "w") as f:' >> /configurar.py && \
+    echo '    json.dump({"status": "ok", "servidor": "Nginx", "tipo": "grande", "dados": "x"*500}, f)' >> /configurar.py && \
+    python3 /configurar.py && \
+    rm /configurar.py
+
+# Criar configuração do Nginx
+RUN echo 'user www-data;' > /etc/nginx/nginx.conf && \
+    echo 'worker_processes auto;' >> /etc/nginx/nginx.conf && \
+    echo 'error_log /var/log/nginx/error.log warn;' >> /etc/nginx/nginx.conf && \
+    echo 'pid /var/run/nginx.pid;' >> /etc/nginx/nginx.conf && \
+    echo '' >> /etc/nginx/nginx.conf && \
+    echo 'events {' >> /etc/nginx/nginx.conf && \
+    echo '    worker_connections 1024;' >> /etc/nginx/nginx.conf && \
+    echo '}' >> /etc/nginx/nginx.conf && \
+    echo '' >> /etc/nginx/nginx.conf && \
+    echo 'http {' >> /etc/nginx/nginx.conf && \
+    echo '    include /etc/nginx/mime.types;' >> /etc/nginx/nginx.conf && \
+    echo '    default_type application/octet-stream;' >> /etc/nginx/nginx.conf && \
+    echo '' >> /etc/nginx/nginx.conf && \
+    echo '    log_format main '"'"'$remote_addr - $remote_user [$time_local] "$request" '"'"' >> /etc/nginx/nginx.conf && \
+    echo '                     '"'"'$status $body_bytes_sent "$http_referer" '"'"' >> /etc/nginx/nginx.conf && \
+    echo '                     '"'"'"$http_user_agent" X-Custom-ID: $http_x_custom_id'"'"';' >> /etc/nginx/nginx.conf && \
+    echo '' >> /etc/nginx/nginx.conf && \
+    echo '    access_log /var/log/nginx/access.log main;' >> /etc/nginx/nginx.conf && \
+    echo '    sendfile on;' >> /etc/nginx/nginx.conf && \
+    echo '    keepalive_timeout 65;' >> /etc/nginx/nginx.conf && \
+    echo '' >> /etc/nginx/nginx.conf && \
+    echo '    server {' >> /etc/nginx/nginx.conf && \
+    echo '        listen 80;' >> /etc/nginx/nginx.conf && \
+    echo '        server_name localhost;' >> /etc/nginx/nginx.conf && \
+    echo '' >> /etc/nginx/nginx.conf && \
+    echo '        location / {' >> /etc/nginx/nginx.conf && \
+    echo '            root /usr/share/nginx/html;' >> /etc/nginx/nginx.conf && \
+    echo '            index index.html;' >> /etc/nginx/nginx.conf && \
+    echo '        }' >> /etc/nginx/nginx.conf && \
+    echo '' >> /etc/nginx/nginx.conf && \
+    echo '        location /api/ {' >> /etc/nginx/nginx.conf && \
+    echo '            root /usr/share/nginx/html;' >> /etc/nginx/nginx.conf && \
+    echo '            default_type application/json;' >> /etc/nginx/nginx.conf && \
+    echo '        }' >> /etc/nginx/nginx.conf && \
+    echo '' >> /etc/nginx/nginx.conf && \
+    echo '        location /estatico/ {' >> /etc/nginx/nginx.conf && \
+    echo '            alias /usr/share/nginx/html/estatico/;' >> /etc/nginx/nginx.conf && \
+    echo '            autoindex on;' >> /etc/nginx/nginx.conf && \
+    echo '        }' >> /etc/nginx/nginx.conf && \
+    echo '' >> /etc/nginx/nginx.conf && \
+    echo '        location /status_nginx {' >> /etc/nginx/nginx.conf && \
+    echo '            stub_status on;' >> /etc/nginx/nginx.conf && \
+    echo '            access_log off;' >> /etc/nginx/nginx.conf && \
+    echo '        }' >> /etc/nginx/nginx.conf && \
+    echo '    }' >> /etc/nginx/nginx.conf && \
+    echo '}' >> /etc/nginx/nginx.conf
+
+# Expor portas: 80 (nginx) e 9113 (metricas)
+EXPOSE 80 9113
+
+# Script Python embutido para inicialização
+RUN echo '#!/usr/bin/env python3' > /iniciar.py && \
+    echo 'import subprocess' >> /iniciar.py && \
+    echo 'import time' >> /iniciar.py && \
+    echo 'import sys' >> /iniciar.py && \
+    echo 'import signal' >> /iniciar.py && \
+    echo '' >> /iniciar.py && \
+    echo 'print("Iniciando exportador de métricas...")' >> /iniciar.py && \
+    echo 'sys.stdout.flush()' >> /iniciar.py && \
+    echo 'exportador = subprocess.Popen(["/usr/local/bin/nginx-prometheus-exporter", "-nginx.scrape-uri=http://localhost:80/status_nginx"])' >> /iniciar.py && \
+    echo 'print("Exportador Prometheus iniciado na porta 9113")' >> /iniciar.py && \
+    echo 'sys.stdout.flush()' >> /iniciar.py && \
+    echo '' >> /iniciar.py && \
+    echo 'time.sleep(2)' >> /iniciar.py && \
+    echo '' >> /iniciar.py && \
+    echo 'print("Iniciando Nginx...")' >> /iniciar.py && \
+    echo 'sys.stdout.flush()' >> /iniciar.py && \
+    echo 'nginx_proc = subprocess.Popen(["nginx", "-g", "daemon off;"])' >> /iniciar.py && \
+    echo 'print("Nginx iniciado")' >> /iniciar.py && \
+    echo 'sys.stdout.flush()' >> /iniciar.py && \
+    echo '' >> /iniciar.py && \
+    echo 'def sinal_handler(sig, frame):' >> /iniciar.py && \
+    echo '    print("Encerrando serviços...")' >> /iniciar.py && \
+    echo '    nginx_proc.terminate()' >> /iniciar.py && \
+    echo '    exportador.terminate()' >> /iniciar.py && \
+    echo '    sys.exit(0)' >> /iniciar.py && \
+    echo '' >> /iniciar.py && \
+    echo 'signal.signal(signal.SIGINT, sinal_handler)' >> /iniciar.py && \
+    echo 'signal.signal(signal.SIGTERM, sinal_handler)' >> /iniciar.py && \
+    echo '' >> /iniciar.py && \
+    echo 'try:' >> /iniciar.py && \
+    echo '    nginx_proc.wait()' >> /iniciar.py && \
+    echo 'except KeyboardInterrupt:' >> /iniciar.py && \
+    echo '    pass' >> /iniciar.py && \
+    chmod +x /iniciar.py
+
+CMD ["python3", "/iniciar.py"]

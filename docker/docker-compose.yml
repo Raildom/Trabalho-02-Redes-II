@@ -1,37 +1,79 @@
-version: '3.8'
-
 services:
-  # Servidor Sequencial
-  servidor-sequencial:
+  #Servidor Web Nginx
+  nginx:
     build:
       context: ..
-      dockerfile: docker/Dockerfile.sequencial
-    container_name: servidor_sequencial
+      dockerfile: docker/Dockerfile.nginx
+    container_name: servidor_nginx
     networks:
       rede_redes2:
         ipv4_address: 76.1.0.10
     ports:
-      - "8080:8080"
+      - "8080:80"
+      - "9113:9113"  #exportador de metricas
     volumes:
-      - ../src:/app/src
-      - ../resultados:/app/resultados
+      - ../arquivos_estaticos:/usr/share/nginx/html/estatico:ro
+    restart: unless-stopped
 
-  # Servidor Concorrente
-  servidor-concorrente:
+  #Servidor Web Apache
+  apache:
     build:
       context: ..
-      dockerfile: docker/Dockerfile.concorrente
-    container_name: servidor_concorrente
+      dockerfile: docker/Dockerfile.apache
+    container_name: servidor_apache
     networks:
       rede_redes2:
         ipv4_address: 76.1.0.11
     ports:
-      - "8081:8080"
+      - "8081:80"
+      - "9117:9117"  # exportador de metricas
     volumes:
-      - ../src:/app/src
-      - ../resultados:/app/resultados
+      - ../arquivos_estaticos:/var/www/html/estatico:ro
+    restart: unless-stopped
 
-  # Cliente de teste
+  #Prometheus - Coleta de Métricas
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    networks:
+      rede_redes2:
+        ipv4_address: 76.1.0.30
+    ports:
+      - "9090:9090"
+    volumes:
+      - ../docker/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - dados-prometheus:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    restart: unless-stopped
+    depends_on:
+      - nginx
+      - apache
+
+  #Grafana - Visualização
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    networks:
+      rede_redes2:
+        ipv4_address: 76.1.0.40
+    ports:
+      - "3000:3000"
+    volumes:
+      - dados-grafana:/var/lib/grafana
+      - ../docker/grafana-fontes-dados.yml:/etc/grafana/provisioning/datasources/fontes-dados.yml:ro
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+
+  #Cliente de Testes
   cliente-teste:
     build:
       context: ..
@@ -44,9 +86,13 @@ services:
       - ../src:/app/src
       - ../testes:/app/testes
       - ../resultados:/app/resultados
+      - ../arquivos_estaticos:/app/conteudo-estatico
     depends_on:
-      - servidor-sequencial
-      - servidor-concorrente
+      - nginx
+      - apache
+      - prometheus
+      - grafana
+    restart: unless-stopped
 
 networks:
   rede_redes2:
@@ -54,3 +100,7 @@ networks:
     ipam:
       config:
         - subnet: 76.1.0.0/16
+
+volumes:
+  dados-prometheus:
+  dados-grafana:

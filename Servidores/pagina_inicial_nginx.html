@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nginx - Servidor Web</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .conteiner {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #009639;
+        }
+        h2 {
+            color: #666;
+        }
+        .endpoint {
+            background: #f0f0f0;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-left: 4px solid #2196f3;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="conteiner">
+        <h1>Servidor Web Nginx</h1>
+        <p><strong>Trabalho de Redes II - 2025.2</strong></p>
+        <p>Aluno: Raildom da Rocha Sobrinho</p>
+        <p>Matrícula: 20239057601</p>
+
+        <div class="info">
+            <strong>Configuração de Rede:</strong><br>
+            Sub-rede: 76.1.0.0/16<br>
+            IP do Servidor: 76.1.0.10<br>
+            Porta: 80
+        </div>
+
+        <h2>Pontos de Acesso Disponíveis</h2>
+        
+        <h3>API (JSON)</h3>
+        <div class="endpoint">GET /api/pequeno - Resposta JSON pequena (~60 bytes)</div>
+        <div class="endpoint">GET /api/medio - Resposta JSON média (~400 bytes)</div>
+        <div class="endpoint">GET /api/grande - Resposta JSON grande (~1KB)</div>
+
+        <h3>Arquivos Estáticos</h3>
+        <div class="endpoint">GET /estatico/ - Listagem de arquivos de teste</div>
+        <div class="endpoint">GET /estatico/pequeno-1kb.txt - Arquivo de 1 KB</div>
+        <div class="endpoint">GET /estatico/medio-100kb.txt - Arquivo de 100 KB</div>
+        <div class="endpoint">GET /estatico/grande-1mb.txt - Arquivo de 1 MB</div>
+
+        <h3>Monitoramento</h3>
+        <div class="endpoint">GET /saude - Verificação de saúde</div>
+        <div class="endpoint">GET /status_nginx - Status (acesso restrito)</div>
+
+        <h2>Características do Nginx</h2>
+        <ul>
+            <li><strong>Arquitetura:</strong> Orientada a eventos, assíncrona</li>
+            <li><strong>Concorrência:</strong> Alto desempenho com muitas conexões simultâneas</li>
+            <li><strong>Uso de memória:</strong> Baixo consumo de recursos</li>
+            <li><strong>Ideal para:</strong> Servir arquivos estáticos, proxy reverso, balanceamento de carga</li>
+        </ul>
+
+        <p style="margin-top: 30px; color: #666; font-size: 0.9em;">
+            Servidor rodando em contêiner Docker com exportador de métricas Prometheus.
+        </p>
+    </div>
+</body>
+</html>

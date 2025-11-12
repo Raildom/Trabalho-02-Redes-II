@@ -1,0 +1,365 @@
+======================================================================
+TESTADOR DE CARGA - NGINX vs APACHE
+Trabalho de Redes II - 2025.2
+======================================================================
+
+ID Personalizado: 40093cb61c18ade519baca198537dd16
+
+============================================================
+CENÁRIO 1: BAIXA CARGA
+Usuários Virtuais: 10 | Execuções: 100
+============================================================
+
+[NGINX vs APACHE] Endpoint: /api/info
+
+  Testando NGINX: /api/info
+  Requisições: 100, Concorrência: 10
+
+  Resultados:
+    Total de requisições: 100
+    Sucessos: 100 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.02s
+    Requisições/segundo: 4135.25
+    Latência média: 1.75ms
+    Latência P50: 1.53ms
+    Latência P95: 3.63ms
+    Latência P99: 4.82ms
+    Desvio padrão: 0.93ms
+    CPU: 0.00%
+    Memória: Use_Prometheus (0.00%)
+
+  Testando APACHE: /api/info
+  Requisições: 100, Concorrência: 10
+
+  Resultados:
+    Total de requisições: 100
+    Sucessos: 100 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.02s
+    Requisições/segundo: 4131.46
+    Latência média: 1.97ms
+    Latência P50: 1.95ms
+    Latência P95: 3.57ms
+    Latência P99: 4.17ms
+    Desvio padrão: 0.78ms
+    CPU: 0.00%
+    Memória: Use_Prometheus (0.00%)
+
+============================================================
+CENÁRIO 2: MÉDIA CARGA
+Usuários Virtuais: 50 | Execuções: 500
+============================================================
+
+[NGINX vs APACHE] Endpoint: /api/status
+
+  Testando NGINX: /api/status
+  Requisições: 500, Concorrência: 50
+
+  Resultados:
+    Total de requisições: 500
+    Sucessos: 500 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.11s
+    Requisições/segundo: 4422.04
+    Latência média: 6.55ms
+    Latência P50: 5.64ms
+    Latência P95: 14.03ms
+    Latência P99: 17.77ms
+    Desvio padrão: 3.94ms
+    CPU: 0.00%
+    Memória: Use_Prometheus (0.00%)
+
+  Testando APACHE: /api/status
+  Requisições: 500, Concorrência: 50
+
+  Resultados:
+    Total de requisições: 500
+    Sucessos: 500 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.11s
+    Requisições/segundo: 4369.06
+    Latência média: 7.21ms
+    Latência P50: 6.35ms
+    Latência P95: 14.76ms
+    Latência P99: 20.49ms
+    Desvio padrão: 4.15ms
+    CPU: 0.00%
+    Memória: Use_Prometheus (0.00%)
+
+============================================================
+CENÁRIO 3: ALTA CARGA
+Usuários Virtuais: 100 | Execuções: 1000
+============================================================
+
+[NGINX vs APACHE] Endpoint: /api/dados
+
+  Testando NGINX: /api/dados
+  Requisições: 1000, Concorrência: 100
+
+  Resultados:
+    Total de requisições: 1000
+    Sucessos: 1000 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.20s
+    Requisições/segundo: 5034.54
+    Latência média: 6.77ms
+    Latência P50: 5.79ms
+    Latência P95: 14.81ms
+    Latência P99: 20.09ms
+    Desvio padrão: 4.08ms
+    CPU: 0.00%
+    Memória: Use_Prometheus (0.00%)
+
+  Testando APACHE: /api/dados
+  Requisições: 1000, Concorrência: 100
+
+  Resultados:
+    Total de requisições: 1000
+    Sucessos: 1000 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.22s
+    Requisições/segundo: 4611.35
+    Latência média: 9.15ms
+    Latência P50: 8.01ms
+    Latência P95: 19.87ms
+    Latência P99: 27.20ms
+    Desvio padrão: 5.63ms
+    CPU: 0.00%
+    Memória: Use_Prometheus (0.00%)
+
+============================================================
+CENÁRIO 4: ARQUIVO PEQUENO (10KB)
+Usuários Virtuais: 20 | Execuções: 200
+============================================================
+
+[NGINX vs APACHE] Arquivo: pequeno-10kb.txt
+
+  Testando NGINX: /estatico/pequeno-10kb.txt
+  Requisições: 200, Concorrência: 20
+
+  Resultados:
+    Total de requisições: 200
+    Sucessos: 200 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.06s
+    Requisições/segundo: 3524.26
+    Latência média: 4.39ms
+    Latência P50: 3.78ms
+    Latência P95: 8.34ms
+    Latência P99: 9.94ms
+    Desvio padrão: 2.16ms
+    CPU: 0.00%
+    Memória: Use_Prometheus (0.00%)
+
+  Testando APACHE: /estatico/pequeno-10kb.txt
+  Requisições: 200, Concorrência: 20
+
+  Resultados:
+    Total de requisições: 200
+    Sucessos: 200 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.05s
+    Requisições/segundo: 3715.44
+    Latência média: 4.24ms
+    Latência P50: 4.01ms
+    Latência P95: 7.40ms
+    Latência P99: 9.42ms
+    Desvio padrão: 1.87ms
+    CPU: 0.00%
+    Memória: Use_Prometheus (0.00%)
+
+============================================================
+CENÁRIO 5: ARQUIVO MÉDIO (500KB)
+Usuários Virtuais: 15 | Execuções: 150
+============================================================
+
+[NGINX vs APACHE] Arquivo: medio-500kb.txt
+
+  Testando NGINX: /estatico/medio-500kb.txt
+  Requisições: 150, Concorrência: 15
+
+  Resultados:
+    Total de requisições: 150
+    Sucessos: 150 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 1.28s
+    Requisições/segundo: 117.48
+    Latência média: 123.20ms
+    Latência P50: 119.50ms
+    Latência P95: 171.83ms
+    Latência P99: 216.74ms
+    Desvio padrão: 29.00ms
+    CPU: 0.00%
+    Memória: Use_Prometheus (0.00%)
+
+  Testando APACHE: /estatico/medio-500kb.txt
+  Requisições: 150, Concorrência: 15
+
+  Resultados:
+    Total de requisições: 150
+    Sucessos: 150 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 1.01s
+    Requisições/segundo: 147.86
+    Latência média: 96.94ms
+    Latência P50: 93.31ms
+    Latência P95: 144.89ms
+    Latência P99: 172.23ms
+    Desvio padrão: 25.97ms
+    CPU: 0.00%
+    Memória: Use_Prometheus (0.00%)
+
+============================================================
+CENÁRIO 6: ARQUIVO GRANDE (5MB)
+Usuários Virtuais: 10 | Execuções: 50
+============================================================
+
+[NGINX vs APACHE] Arquivo: grande-5mb.txt
+
+  Testando NGINX: /estatico/grande-5mb.txt
+  Requisições: 50, Concorrência: 10
+
+  Resultados:
+    Total de requisições: 50
+    Sucessos: 50 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 46.00s
+    Requisições/segundo: 1.09
+    Latência média: 9045.92ms
+    Latência P50: 7688.39ms
+    Latência P95: 15318.19ms
+    Latência P99: 15328.79ms
+    Desvio padrão: 3195.12ms
+    CPU: 0.00%
+    Memória: Use_Prometheus (0.00%)
+
+  Testando APACHE: /estatico/grande-5mb.txt
+  Requisições: 50, Concorrência: 10
+
+  Resultados:
+    Total de requisições: 50
+    Sucessos: 50 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 37.20s
+    Requisições/segundo: 1.34
+    Latência média: 7064.82ms
+    Latência P50: 7186.30ms
+    Latência P95: 8444.08ms
+    Latência P99: 8670.66ms
+    Desvio padrão: 887.79ms
+    CPU: 0.00%
+    Memória: Use_Prometheus (0.00%)
+
+--- Onda 1/3 ---
+
+  Testando NGINX: /api/status
+  Requisições: 300, Concorrência: 30
+
+  Resultados:
+    Total de requisições: 300
+    Sucessos: 300 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.07s
+    Requisições/segundo: 4456.18
+    Latência média: 3.96ms
+    Latência P50: 3.62ms
+    Latência P95: 7.92ms
+    Latência P99: 10.11ms
+    Desvio padrão: 2.06ms
+    CPU: 0.00%
+    Memória: Use_Prometheus (0.00%)
+
+  Testando APACHE: /api/status
+  Requisições: 300, Concorrência: 30
+
+  Resultados:
+    Total de requisições: 300
+    Sucessos: 300 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.07s
+    Requisições/segundo: 4166.55
+    Latência média: 4.89ms
+    Latência P50: 4.27ms
+    Latência P95: 10.08ms
+    Latência P99: 12.34ms
+    Desvio padrão: 2.73ms
+    CPU: 0.00%
+    Memória: Use_Prometheus (0.00%)
+
+--- Onda 2/3 ---
+
+  Testando NGINX: /api/status
+  Requisições: 300, Concorrência: 30
+
+  Resultados:
+    Total de requisições: 300
+    Sucessos: 300 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.07s
+    Requisições/segundo: 4009.91
+    Latência média: 4.53ms
+    Latência P50: 4.14ms
+    Latência P95: 9.15ms
+    Latência P99: 13.99ms
+    Desvio padrão: 2.51ms
+    CPU: 0.00%
+    Memória: Use_Prometheus (0.00%)
+
+  Testando APACHE: /api/status
+  Requisições: 300, Concorrência: 30
+
+  Resultados:
+    Total de requisições: 300
+    Sucessos: 300 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.07s
+    Requisições/segundo: 4546.11
+    Latência média: 4.29ms
+    Latência P50: 3.95ms
+    Latência P95: 8.57ms
+    Latência P99: 10.79ms
+    Desvio padrão: 2.16ms
+    CPU: 0.00%
+    Memória: Use_Prometheus (0.00%)
+
+--- Onda 3/3 ---
+
+  Testando NGINX: /api/status
+  Requisições: 300, Concorrência: 30
+
+  Resultados:
+    Total de requisições: 300
+    Sucessos: 300 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.07s
+    Requisições/segundo: 4433.52
+    Latência média: 4.46ms
+    Latência P50: 4.13ms
+    Latência P95: 8.71ms
+    Latência P99: 11.55ms
+    Desvio padrão: 2.23ms
+    CPU: 0.00%
+    Memória: Use_Prometheus (0.00%)
+
+  Testando APACHE: /api/status
+  Requisições: 300, Concorrência: 30
+
+  Resultados:
+    Total de requisições: 300
+    Sucessos: 300 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.07s
+    Requisições/segundo: 4157.73
+    Latência média: 4.97ms
+    Latência P50: 4.37ms
+    Latência P95: 10.48ms
+    Latência P99: 12.54ms
+    Desvio padrão: 2.65ms
+    CPU: 0.00%
+    Memória: Use_Prometheus (0.00%)
+
+======================================================================
+TESTES CONCLUÍDOS
+======================================================================
+Tempo total de execução: 1.55 minutos
