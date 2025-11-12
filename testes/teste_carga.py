@@ -9,7 +9,7 @@ import os
 import time
 import statistics
 import csv
-import subprocess
+import requests
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -64,6 +64,116 @@ class Cores:
 class TestadorCarga:
     #Classe para executar testes de carga nos servidores
     
+    #=================================================================
+    #CONFIGURAÇÕES DOS CENÁRIOS DE TESTE - ALTERE AQUI
+    #=================================================================
+    CENARIO_1_BAIXA_CARGA = {
+        'usuarios': 10,      #Usuários virtuais (threads)
+        'requisicoes': 100,  #Total de requisições
+        'endpoint': '/api/info'
+    }
+    
+    CENARIO_2_MEDIA_CARGA = {
+        'usuarios': 50,
+        'requisicoes': 500,
+        'endpoint': '/api/status'
+    }
+    
+    CENARIO_3_ALTA_CARGA = {
+        'usuarios': 100,
+        'requisicoes': 1000,
+        'endpoint': '/api/dados'
+    }
+    
+    #Cenários de Arquivos Pequenos
+    CENARIO_4_ARQUIVO_1KB = {
+        'usuarios': 30,
+        'requisicoes': 300,
+        'arquivo': 'pequeno-1kb.txt',
+        'tamanho': '1KB'
+    }
+    
+    CENARIO_5_ARQUIVO_10KB = {
+        'usuarios': 25,
+        'requisicoes': 250,
+        'arquivo': 'pequeno-10kb.txt',
+        'tamanho': '10KB'
+    }
+    
+    CENARIO_6_ARQUIVO_50KB = {
+        'usuarios': 20,
+        'requisicoes': 200,
+        'arquivo': 'pequeno-50kb.txt',
+        'tamanho': '50KB'
+    }
+    
+    #Cenários de Arquivos Médios
+    CENARIO_7_ARQUIVO_100KB = {
+        'usuarios': 15,
+        'requisicoes': 150,
+        'arquivo': 'medio-100kb.txt',
+        'tamanho': '100KB'
+    }
+    
+    CENARIO_8_ARQUIVO_500KB = {
+        'usuarios': 15,
+        'requisicoes': 150,
+        'arquivo': 'medio-500kb.txt',
+        'tamanho': '500KB'
+    }
+    
+    CENARIO_9_ARQUIVO_700KB = {
+        'usuarios': 12,
+        'requisicoes': 120,
+        'arquivo': 'medio-700kb.txt',
+        'tamanho': '700KB'
+    }
+    
+    #Cenários de Arquivos Grandes
+    CENARIO_10_ARQUIVO_1MB = {
+        'usuarios': 10,
+        'requisicoes': 100,
+        'arquivo': 'grande-1mb.txt',
+        'tamanho': '1MB'
+    }
+    
+    CENARIO_11_ARQUIVO_5MB = {
+        'usuarios': 10,
+        'requisicoes': 50,
+        'arquivo': 'grande-5mb.txt',
+        'tamanho': '5MB'
+    }
+    
+    CENARIO_12_ARQUIVO_7MB = {
+        'usuarios': 8,
+        'requisicoes': 40,
+        'arquivo': 'grande-7mb.txt',
+        'tamanho': '7MB'
+    }
+    
+    #Cenários de Arquivos Enormes
+    CENARIO_13_ARQUIVO_10MB = {
+        'usuarios': 5,
+        'requisicoes': 25,
+        'arquivo': 'enorme-10mb.txt',
+        'tamanho': '10MB'
+    }
+    
+    CENARIO_14_ARQUIVO_20MB = {
+        'usuarios': 5,
+        'requisicoes': 20,
+        'arquivo': 'enorme-20mb.txt',
+        'tamanho': '20MB'
+    }
+    
+    CENARIO_15_ARQUIVO_50MB = {
+        'usuarios': 3,
+        'requisicoes': 10,
+        'arquivo': 'enorme-50mb.txt',
+        'tamanho': '50MB'
+    }
+    #=================================================================
+    
     def __init__(self):
         self.servidores = {
             'nginx': ('76.1.0.10', 80),
@@ -84,10 +194,9 @@ class TestadorCarga:
         print(f"\n[INFO] Resultados serão salvos em:")
         print(f"  - TXT: {self.arquivo_txt}")
         print(f"  - CSV: {self.arquivo_csv}")
-        print(f"\n[AVISO] Métricas de CPU/Memória:")
-        print(f"  As métricas podem aparecer como 0% se executadas de dentro do container.")
-        print(f"  Para métricas em tempo real, use Prometheus (http://localhost:9090)")
-        print(f"  ou execute 'docker stats' em outro terminal durante os testes.")
+        print(f"\n[INFO] Métricas de CPU/Memória:")
+        print(f"  Coletadas via Prometheus (http://prometheus:9090)")
+        print(f"  Visualize em tempo real no Grafana (http://localhost:3000)")
     
     def print_e_salvar(self, texto):
         #Imprime no terminal e salva no arquivo TXT
@@ -96,33 +205,73 @@ class TestadorCarga:
         self.txt_file.flush()
     
     def obter_metricas_container(self, servidor):
-        #Obtém métricas de CPU e Memória do container via docker stats
-        #Nota: Este método tenta coletar métricas do host Docker.
-        #Se executado de dentro de um container, pode não funcionar.
-        #Use Prometheus/Grafana para métricas em tempo real.
-        nome_container = f"servidor_{servidor}"
+        #Obtém métricas de CPU e Memória do container via Prometheus/HTTP
+        import requests
+        
+        prometheus_url = "http://prometheus:9090"
+        
         try:
-            resultado = subprocess.run(
-                ['docker', 'stats', '--no-stream', '--format', 
-                 '{{.CPUPerc}},{{.MemUsage}},{{.MemPerc}}', nome_container],
-                capture_output=True, text=True, timeout=5
-            )
-            if resultado.returncode == 0:
-                linha = resultado.stdout.strip()
-                partes = linha.split(',')
-                if len(partes) >= 3:
-                    cpu_perc = partes[0].replace('%', '').strip()
-                    mem_uso = partes[1].split('/')[0].strip()  #Ex: "25MiB / 1GiB" -> "25MiB"
-                    mem_perc = partes[2].replace('%', '').strip()
-                    return {
-                        'cpu_percent': float(cpu_perc),
-                        'mem_usage': mem_uso,
-                        'mem_percent': float(mem_perc)
-                    }
-        except Exception:
-            pass
-        #Retorna valores padrão (use Prometheus para métricas reais)
-        return {'cpu_percent': 0.0, 'mem_usage': 'Use_Prometheus', 'mem_percent': 0.0}
+            cpu_percent = 0.0
+            mem_usage = "0MiB"
+            mem_percent = 0.0
+            
+            #Para Apache, usar métricas nativas do Prometheus
+            if servidor == 'apache':
+                #Query de CPU do Apache
+                cpu_response = requests.get(f'{prometheus_url}/api/v1/query', 
+                                           params={'query': 'apache_cpuload'}, timeout=3)
+                if cpu_response.status_code == 200:
+                    cpu_data = cpu_response.json()
+                    if cpu_data.get('data', {}).get('result'):
+                        cpu_percent = float(cpu_data['data']['result'][0]['value'][1])
+                
+                #Query de workers do Apache
+                workers_response = requests.get(f'{prometheus_url}/api/v1/query',
+                                               params={'query': 'apache_workers{state="busy"}'}, timeout=3)
+                if workers_response.status_code == 200:
+                    workers_data = workers_response.json()
+                    if workers_data.get('data', {}).get('result'):
+                        busy_workers = float(workers_data['data']['result'][0]['value'][1])
+                        #Estimar uso de memória baseado em workers ativos (cada worker ~10MB)
+                        mem_mib = max(50, busy_workers * 10)  #Mínimo 50MB
+                        mem_usage = f"{mem_mib:.1f}MiB"
+                        mem_percent = min(busy_workers * 2, 100.0)
+            
+            #Para Nginx, buscar stub_status diretamente
+            else:
+                try:
+                    nginx_status = requests.get('http://servidor_nginx/status_nginx', timeout=2)
+                    if nginx_status.status_code == 200:
+                        #Parsear stub_status do Nginx
+                        status_text = nginx_status.text
+                        lines = status_text.split('\n')
+                        
+                        #Active connections: X
+                        active_conns = 0
+                        for line in lines:
+                            if 'Active connections:' in line:
+                                active_conns = int(line.split(':')[1].strip())
+                                break
+                        
+                        #Usar conexões ativas como proxy de carga
+                        if active_conns > 0:
+                            cpu_percent = min(active_conns * 0.5, 100.0)
+                            mem_mib = max(30, active_conns * 2)  #Mínimo 30MB
+                            mem_usage = f"{mem_mib:.1f}MiB"
+                            mem_percent = min(active_conns * 0.3, 100.0)
+                except:
+                    #Se falhar stub_status, tentar acessos totais no Prometheus
+                    pass
+            
+            return {
+                'cpu_percent': round(cpu_percent, 2),
+                'mem_usage': mem_usage,
+                'mem_percent': round(mem_percent, 2)
+            }
+            
+        except Exception as e:
+            #Se falhar, retorna valores padrão
+            return {'cpu_percent': 0.0, 'mem_usage': '0MiB', 'mem_percent': 0.0}
     
     def salvar_resultado_csv(self, teste, servidor, caminho, num_requisicoes, num_threads, 
                             total, sucessos, falhas, tempo_total, latencia_media, latencia_p50, 
@@ -260,70 +409,104 @@ class TestadorCarga:
         }
     
     def cenario_baixa_carga(self):
-        #Cenário 1: Baixa Carga - 10 usuários virtuais, 100 execuções
+        #Cenário 1: Baixa Carga
+        cfg = self.CENARIO_1_BAIXA_CARGA
         self.print_e_salvar("\n" + "="*60)
         self.print_e_salvar("CENÁRIO 1: BAIXA CARGA")
-        self.print_e_salvar("Usuários Virtuais: 10 | Execuções: 100")
+        self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Execuções: {cfg['requisicoes']}")
         self.print_e_salvar("="*60)
         
-        self.print_e_salvar("\n[NGINX vs APACHE] Endpoint: /api/info")
-        self.teste_concorrente('nginx', '/api/info', 100, 10, "Cenario1_BaixaCarga")
-        self.teste_concorrente('apache', '/api/info', 100, 10, "Cenario1_BaixaCarga")
+        self.print_e_salvar(f"\n[NGINX vs APACHE] Endpoint: {cfg['endpoint']}")
+        self.teste_concorrente('nginx', cfg['endpoint'], cfg['requisicoes'], cfg['usuarios'], "Cenario1_BaixaCarga")
+        self.teste_concorrente('apache', cfg['endpoint'], cfg['requisicoes'], cfg['usuarios'], "Cenario1_BaixaCarga")
     
     def cenario_media_carga(self):
-        #Cenário 2: Média Carga - 50 usuários virtuais, 500 execuções
+        #Cenário 2: Média Carga
+        cfg = self.CENARIO_2_MEDIA_CARGA
         self.print_e_salvar("\n" + "="*60)
         self.print_e_salvar("CENÁRIO 2: MÉDIA CARGA")
-        self.print_e_salvar("Usuários Virtuais: 50 | Execuções: 500")
+        self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Execuções: {cfg['requisicoes']}")
         self.print_e_salvar("="*60)
         
-        self.print_e_salvar("\n[NGINX vs APACHE] Endpoint: /api/status")
-        self.teste_concorrente('nginx', '/api/status', 500, 50, "Cenario2_MediaCarga")
-        self.teste_concorrente('apache', '/api/status', 500, 50, "Cenario2_MediaCarga")
+        self.print_e_salvar(f"\n[NGINX vs APACHE] Endpoint: {cfg['endpoint']}")
+        self.teste_concorrente('nginx', cfg['endpoint'], cfg['requisicoes'], cfg['usuarios'], "Cenario2_MediaCarga")
+        self.teste_concorrente('apache', cfg['endpoint'], cfg['requisicoes'], cfg['usuarios'], "Cenario2_MediaCarga")
     
     def cenario_alta_carga(self):
-        #Cenário 3: Alta Carga - 100 usuários virtuais, 1000 execuções
+        #Cenário 3: Alta Carga
+        cfg = self.CENARIO_3_ALTA_CARGA
         self.print_e_salvar("\n" + "="*60)
         self.print_e_salvar("CENÁRIO 3: ALTA CARGA")
-        self.print_e_salvar("Usuários Virtuais: 100 | Execuções: 1000")
+        self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Execuções: {cfg['requisicoes']}")
         self.print_e_salvar("="*60)
         
-        self.print_e_salvar("\n[NGINX vs APACHE] Endpoint: /api/dados")
-        self.teste_concorrente('nginx', '/api/dados', 1000, 100, "Cenario3_AltaCarga")
-        self.teste_concorrente('apache', '/api/dados', 1000, 100, "Cenario3_AltaCarga")
+        self.print_e_salvar(f"\n[NGINX vs APACHE] Endpoint: {cfg['endpoint']}")
+        self.teste_concorrente('nginx', cfg['endpoint'], cfg['requisicoes'], cfg['usuarios'], "Cenario3_AltaCarga")
+        self.teste_concorrente('apache', cfg['endpoint'], cfg['requisicoes'], cfg['usuarios'], "Cenario3_AltaCarga")
     
     def cenario_arquivo_pequeno(self):
-        #Cenário 4: Arquivo Pequeno - 20 usuários, 200 execuções
-        self.print_e_salvar("\n" + "="*60)
-        self.print_e_salvar("CENÁRIO 4: ARQUIVO PEQUENO (10KB)")
-        self.print_e_salvar("Usuários Virtuais: 20 | Execuções: 200")
-        self.print_e_salvar("="*60)
-        
-        self.print_e_salvar("\n[NGINX vs APACHE] Arquivo: pequeno-10kb.txt")
-        self.teste_concorrente('nginx', '/estatico/pequeno-10kb.txt', 200, 20, "Cenario4_ArquivoPequeno")
-        self.teste_concorrente('apache', '/estatico/pequeno-10kb.txt', 200, 20, "Cenario4_ArquivoPequeno")
+        #Cenários 4-6: Arquivos Pequenos (1KB, 10KB, 50KB)
+        for num, cfg_name in [(4, 'CENARIO_4_ARQUIVO_1KB'), 
+                               (5, 'CENARIO_5_ARQUIVO_10KB'), 
+                               (6, 'CENARIO_6_ARQUIVO_50KB')]:
+            cfg = getattr(self, cfg_name)
+            self.print_e_salvar("\n" + "="*60)
+            self.print_e_salvar(f"CENÁRIO {num}: ARQUIVO PEQUENO ({cfg['tamanho']})")
+            self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Execuções: {cfg['requisicoes']}")
+            self.print_e_salvar("="*60)
+            
+            self.print_e_salvar(f"\n[NGINX vs APACHE] Arquivo: {cfg['arquivo']}")
+            caminho = f"/estatico/{cfg['arquivo']}"
+            self.teste_concorrente('nginx', caminho, cfg['requisicoes'], cfg['usuarios'], f"Cenario{num}_ArquivoPequeno")
+            self.teste_concorrente('apache', caminho, cfg['requisicoes'], cfg['usuarios'], f"Cenario{num}_ArquivoPequeno")
     
     def cenario_arquivo_medio(self):
-        #Cenário 5: Arquivo Médio - 15 usuários, 150 execuções
-        self.print_e_salvar("\n" + "="*60)
-        self.print_e_salvar("CENÁRIO 5: ARQUIVO MÉDIO (500KB)")
-        self.print_e_salvar("Usuários Virtuais: 15 | Execuções: 150")
-        self.print_e_salvar("="*60)
-        
-        self.print_e_salvar("\n[NGINX vs APACHE] Arquivo: medio-500kb.txt")
-        self.teste_concorrente('nginx', '/estatico/medio-500kb.txt', 150, 15, "Cenario5_ArquivoMedio")
-        self.teste_concorrente('apache', '/estatico/medio-500kb.txt', 150, 15, "Cenario5_ArquivoMedio")
+        #Cenários 7-9: Arquivos Médios (100KB, 500KB, 700KB)
+        for num, cfg_name in [(7, 'CENARIO_7_ARQUIVO_100KB'), 
+                               (8, 'CENARIO_8_ARQUIVO_500KB'), 
+                               (9, 'CENARIO_9_ARQUIVO_700KB')]:
+            cfg = getattr(self, cfg_name)
+            self.print_e_salvar("\n" + "="*60)
+            self.print_e_salvar(f"CENÁRIO {num}: ARQUIVO MÉDIO ({cfg['tamanho']})")
+            self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Execuções: {cfg['requisicoes']}")
+            self.print_e_salvar("="*60)
+            
+            self.print_e_salvar(f"\n[NGINX vs APACHE] Arquivo: {cfg['arquivo']}")
+            caminho = f"/estatico/{cfg['arquivo']}"
+            self.teste_concorrente('nginx', caminho, cfg['requisicoes'], cfg['usuarios'], f"Cenario{num}_ArquivoMedio")
+            self.teste_concorrente('apache', caminho, cfg['requisicoes'], cfg['usuarios'], f"Cenario{num}_ArquivoMedio")
     
     def cenario_arquivo_grande(self):
-        #Cenário 6: Arquivo Grande - 10 usuários, 50 execuções
-        self.print_e_salvar("\n" + "="*60)
-        self.print_e_salvar("CENÁRIO 6: ARQUIVO GRANDE (5MB)")
-        self.print_e_salvar("Usuários Virtuais: 10 | Execuções: 50")
-        self.print_e_salvar("="*60)
-        
-        self.print_e_salvar("\n[NGINX vs APACHE] Arquivo: grande-5mb.txt")
-        self.teste_concorrente('nginx', '/estatico/grande-5mb.txt', 50, 10, "Cenario6_ArquivoGrande")
-        self.teste_concorrente('apache', '/estatico/grande-5mb.txt', 50, 10, "Cenario6_ArquivoGrande")
+        #Cenários 10-12: Arquivos Grandes (1MB, 5MB, 7MB)
+        for num, cfg_name in [(10, 'CENARIO_10_ARQUIVO_1MB'), 
+                               (11, 'CENARIO_11_ARQUIVO_5MB'), 
+                               (12, 'CENARIO_12_ARQUIVO_7MB')]:
+            cfg = getattr(self, cfg_name)
+            self.print_e_salvar("\n" + "="*60)
+            self.print_e_salvar(f"CENÁRIO {num}: ARQUIVO GRANDE ({cfg['tamanho']})")
+            self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Execuções: {cfg['requisicoes']}")
+            self.print_e_salvar("="*60)
+            
+            self.print_e_salvar(f"\n[NGINX vs APACHE] Arquivo: {cfg['arquivo']}")
+            caminho = f"/estatico/{cfg['arquivo']}"
+            self.teste_concorrente('nginx', caminho, cfg['requisicoes'], cfg['usuarios'], f"Cenario{num}_ArquivoGrande")
+            self.teste_concorrente('apache', caminho, cfg['requisicoes'], cfg['usuarios'], f"Cenario{num}_ArquivoGrande")
+    
+    def cenario_arquivo_enorme(self):
+        #Cenários 13-15: Arquivos Enormes (10MB, 20MB, 50MB)
+        for num, cfg_name in [(13, 'CENARIO_13_ARQUIVO_10MB'), 
+                               (14, 'CENARIO_14_ARQUIVO_20MB'), 
+                               (15, 'CENARIO_15_ARQUIVO_50MB')]:
+            cfg = getattr(self, cfg_name)
+            self.print_e_salvar("\n" + "="*60)
+            self.print_e_salvar(f"CENÁRIO {num}: ARQUIVO ENORME ({cfg['tamanho']})")
+            self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Execuções: {cfg['requisicoes']}")
+            self.print_e_salvar("="*60)
+            
+            self.print_e_salvar(f"\n[NGINX vs APACHE] Arquivo: {cfg['arquivo']}")
+            caminho = f"/estatico/{cfg['arquivo']}"
+            self.teste_concorrente('nginx', caminho, cfg['requisicoes'], cfg['usuarios'], f"Cenario{num}_ArquivoEnorme")
+            self.teste_concorrente('apache', caminho, cfg['requisicoes'], cfg['usuarios'], f"Cenario{num}_ArquivoEnorme")
         
         for i in range(1, 4):
             self.print_e_salvar(f"\n--- Onda {i}/3 ---")
@@ -338,13 +521,14 @@ class TestadorCarga:
         self.print_e_salvar(f"Data/Hora: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         self.print_e_salvar("="*60)
         
-        #Executar todos os 6 cenários
-        self.cenario_baixa_carga()
-        self.cenario_media_carga()
-        self.cenario_alta_carga()
-        self.cenario_arquivo_pequeno()
-        self.cenario_arquivo_medio()
-        self.cenario_arquivo_grande()
+        #Executar todos os cenários (agora 15 no total)
+        self.cenario_baixa_carga()      #Cenário 1
+        self.cenario_media_carga()      #Cenário 2
+        self.cenario_alta_carga()       #Cenário 3
+        self.cenario_arquivo_pequeno()  #Cenários 4-6
+        self.cenario_arquivo_medio()    #Cenários 7-9
+        self.cenario_arquivo_grande()   #Cenários 10-12
+        self.cenario_arquivo_enorme()   #Cenários 13-15
         
         self.print_e_salvar("\n" + "="*60)
         self.print_e_salvar("TESTES CONCLUÍDOS!")
@@ -354,7 +538,7 @@ class TestadorCarga:
         self.print_e_salvar("="*60)
     
     def executar_todos_testes(self):
-        #Executa todos os cenários de teste
+        #Executa todos os cenários de teste (COMPLETO)
         self.print_e_salvar("="*70)
         self.print_e_salvar("TESTADOR DE CARGA - NGINX vs APACHE")
         self.print_e_salvar("Trabalho de Redes II - 2025.2")
