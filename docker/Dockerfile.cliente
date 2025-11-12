@@ -1,0 +1,18 @@
+FROM python:3.9
+
+#Instala dependências básicas
+RUN apt-get update && apt-get install -y \
+    net-tools \
+    iputils-ping \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+#Cria diretório de trabalho
+WORKDIR /app
+
+#Copia os arquivos necessários
+COPY src/ ./src/
+COPY testes/ ./testes/
+
+#Comando para manter o contêiner ativo
+CMD ["tail", "-f", "/dev/null"]
