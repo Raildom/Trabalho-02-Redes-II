@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 #Script principal para executar o projeto Redes II
 
 import subprocess

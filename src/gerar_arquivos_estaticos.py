@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-
-#Trabalho de Redes II - 2025.2
-#Aluno: Raildom da Rocha Sobrinho
-#Matrícula: 20239057601
-
-
 import os
 
 #Classe para cores no terminal

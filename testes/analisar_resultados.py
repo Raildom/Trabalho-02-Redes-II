@@ -1,5 +1,4 @@
 #Script para gerar gráficos e análises dos resultados dos testes a partir do CSV
-#Inclui estatisticas com media e desvio padrao de multiplas execucoes
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
