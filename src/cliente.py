@@ -8,10 +8,10 @@ from configuracao import ID_CUSTOMIZADO, PORTA_SERVIDOR
 
 class ClienteHTTP:
     def __init__(self, host_servidor, porta_servidor=PORTA_SERVIDOR):
-        self.host = host
-        self.porta = porta
+        self.host = host_servidor
+        self.porta = porta_servidor
     
-    def enviar_requisicao(self, metodo='GET', caminho='/'):
+    def enviar_requisicao(self, metodo='GET', caminho='/', corpo=None):
         #Envia uma requisição HTTP para o servidor
         tempo_inicio = time.time()
         
@@ -28,7 +28,7 @@ class ClienteHTTP:
             socket_cliente.settimeout(10)  #Timeout de 10 segundos
             
             tempo_inicio = time.time()
-            socket_cliente.connect((self.host_servidor, self.porta_servidor))
+            socket_cliente.connect((self.host, self.porta))
             tempo_conexao = time.time() - tempo_inicio
             
             #Monta a requisição HTTP

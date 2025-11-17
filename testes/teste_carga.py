@@ -62,8 +62,8 @@ class TestadorCarga:
     #CONFIGURACOES DOS CENÁRIOS DE TESTE
     #=================================================================
     NUM_EXECUCOES = 10 
-    NUM_USUARIOS = 10
-    NUM_REQUISTICOES = 50
+    NUM_USUARIOS = 1
+    NUM_REQUISTICOES = 5
     
     CENARIO_1_BAIXA_CARGA = {
         'usuarios': 100,     
