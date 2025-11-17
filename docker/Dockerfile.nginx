@@ -95,6 +95,28 @@ RUN echo '#!/usr/bin/env python3' > /iniciar.py && \
     echo 'import time' >> /iniciar.py && \
     echo 'import sys' >> /iniciar.py && \
     echo 'import signal' >> /iniciar.py && \
+    echo 'import urllib.request' >> /iniciar.py && \
+    echo '' >> /iniciar.py && \
+    echo 'print("Iniciando Nginx...")' >> /iniciar.py && \
+    echo 'sys.stdout.flush()' >> /iniciar.py && \
+    echo 'nginx_proc = subprocess.Popen(["nginx", "-g", "daemon off;"])' >> /iniciar.py && \
+    echo 'print("Nginx iniciado, aguardando estar pronto...")' >> /iniciar.py && \
+    echo 'sys.stdout.flush()' >> /iniciar.py && \
+    echo '' >> /iniciar.py && \
+    echo '# Aguardar Nginx estar pronto' >> /iniciar.py && \
+    echo 'for i in range(30):' >> /iniciar.py && \
+    echo '    try:' >> /iniciar.py && \
+    echo '        urllib.request.urlopen("http://localhost:80/status_nginx", timeout=1)' >> /iniciar.py && \
+    echo '        print("Nginx pronto!")' >> /iniciar.py && \
+    echo '        sys.stdout.flush()' >> /iniciar.py && \
+    echo '        break' >> /iniciar.py && \
+    echo '    except:' >> /iniciar.py && \
+    echo '        time.sleep(0.5)' >> /iniciar.py && \
+    echo 'else:' >> /iniciar.py && \
+    echo '    print("AVISO: Nginx pode não estar respondendo")' >> /iniciar.py && \
+    echo '    sys.stdout.flush()' >> /iniciar.py && \
+    echo '' >> /iniciar.py && \
+    echo 'time.sleep(1)' >> /iniciar.py && \
     echo '' >> /iniciar.py && \
     echo 'print("Iniciando exportador de métricas...")' >> /iniciar.py && \
     echo 'sys.stdout.flush()' >> /iniciar.py && \
@@ -102,18 +124,10 @@ RUN echo '#!/usr/bin/env python3' > /iniciar.py && \
     echo 'print("Exportador Prometheus iniciado na porta 9113")' >> /iniciar.py && \
     echo 'sys.stdout.flush()' >> /iniciar.py && \
     echo '' >> /iniciar.py && \
-    echo 'time.sleep(2)' >> /iniciar.py && \
-    echo '' >> /iniciar.py && \
-    echo 'print("Iniciando Nginx...")' >> /iniciar.py && \
-    echo 'sys.stdout.flush()' >> /iniciar.py && \
-    echo 'nginx_proc = subprocess.Popen(["nginx", "-g", "daemon off;"])' >> /iniciar.py && \
-    echo 'print("Nginx iniciado")' >> /iniciar.py && \
-    echo 'sys.stdout.flush()' >> /iniciar.py && \
-    echo '' >> /iniciar.py && \
     echo 'def sinal_handler(sig, frame):' >> /iniciar.py && \
     echo '    print("Encerrando serviços...")' >> /iniciar.py && \
-    echo '    nginx_proc.terminate()' >> /iniciar.py && \
     echo '    exportador.terminate()' >> /iniciar.py && \
+    echo '    nginx_proc.terminate()' >> /iniciar.py && \
     echo '    sys.exit(0)' >> /iniciar.py && \
     echo '' >> /iniciar.py && \
     echo 'signal.signal(signal.SIGINT, sinal_handler)' >> /iniciar.py && \

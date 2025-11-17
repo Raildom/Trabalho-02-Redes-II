@@ -58,12 +58,10 @@ class Cores:
 class TestadorCarga:
     #Classe para executar testes de carga nos servidores
     
-    #=================================================================
-    #CONFIGURACOES DOS CENÁRIOS DE TESTE
-    #=================================================================
-    NUM_EXECUCOES = 10 
-    NUM_USUARIOS = 1
-    NUM_REQUISTICOES = 5
+    #configuracoes dos cenarios de teste
+    NUM_EXECUCOES = 1
+    NUM_USUARIOS = 10
+    NUM_REQUISTICOES = 50
     
     CENARIO_1_BAIXA_CARGA = {
         'usuarios': 100,     
@@ -179,80 +177,51 @@ class TestadorCarga:
         self.txt_file.write(texto + '\n')
         self.txt_file.flush()
     
-    def obter_metricas_container(self, servidor):
-        #Obtem metricas de CPU e Memoria do container via Prometheus/HTTP
+    def obter_metricas_container(self, servidor, inicio_teste=None, fim_teste=None, num_requisicoes=0, duracao=1.0):
+        #obtem metricas de cpu dos exporters via prometheus
         import requests
         
         prometheus_url = "http://prometheus:9090"
         
         try:
             cpu_percent = 0.0
-            mem_usage = "0MiB"
-            mem_percent = 0.0
             
-            #Para Apache, usar metricas nativas do Prometheus
-            if servidor == 'apache':
-                #Query de CPU do Apache
-                cpu_response = requests.get(f'{prometheus_url}/api/v1/query', 
-                                           params={'query': 'apache_cpuload'}, timeout=3)
-                if cpu_response.status_code == 200:
-                    cpu_data = cpu_response.json()
-                    if cpu_data.get('data', {}).get('result'):
-                        cpu_percent = float(cpu_data['data']['result'][0]['value'][1])
-                
-                #Query de workers do Apache
-                workers_response = requests.get(f'{prometheus_url}/api/v1/query',
-                                               params={'query': 'apache_workers{state="busy"}'}, timeout=3)
-                if workers_response.status_code == 200:
-                    workers_data = workers_response.json()
-                    if workers_data.get('data', {}).get('result'):
-                        busy_workers = float(workers_data['data']['result'][0]['value'][1])
-                        #Estimar uso de memoria baseado em workers ativos (cada worker ~10MB)
-                        mem_mib = max(50, busy_workers * 10)  #Minimo 50MB
-                        mem_usage = f"{mem_mib:.1f}MiB"
-                        mem_percent = min(busy_workers * 2, 100.0)
-            
-            #Para Nginx, buscar stub_status diretamente
+            #usar métricas nativas de cada servidor
+            if servidor == 'nginx':
+                #nginx: conexões ativas como indicador de carga
+                query = 'nginx_connections_active'
             else:
-                try:
-                    nginx_status = requests.get('http://servidor_nginx/status_nginx', timeout=2)
-                    if nginx_status.status_code == 200:
-                        #Parsear stub_status do Nginx
-                        status_text = nginx_status.text
-                        lines = status_text.split('\n')
-                        
-                        #Active connections: X
-                        active_conns = 0
-                        for line in lines:
-                            if 'Active connections:' in line:
-                                active_conns = int(line.split(':')[1].strip())
-                                break
-                        
-                        #Usar conexoes ativas como proxy de carga
-                        if active_conns > 0:
-                            cpu_percent = min(active_conns * 0.5, 100.0)
-                            mem_mib = max(30, active_conns * 2)  #Minimo 30MB
-                            mem_usage = f"{mem_mib:.1f}MiB"
-                            mem_percent = min(active_conns * 0.3, 100.0)
-                except:
-                    #Se falhar stub_status, tentar acessos totais no Prometheus
-                    pass
+                #apache: cpuload do mod_status
+                query = 'apache_cpuload'
+            
+            response = requests.get(f'{prometheus_url}/api/v1/query',
+                                   params={'query': query}, timeout=5)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get('data', {}).get('result'):
+                    value = float(data['data']['result'][0]['value'][1])
+                    
+                    if servidor == 'nginx':
+                        #nginx: conexoes ativas (valor bruto, nao percentual)
+                        #normalizar para percentual: assumir ~100 conexoes = 1% cpu
+                        cpu_percent = (value / 100) * 1.0
+                    else:
+                        #apache: apache_cpuload ja e um percentual
+                        cpu_percent = value
             
             return {
-                'cpu_percent': round(cpu_percent, 2),
-                'mem_usage': mem_usage,
-                'mem_percent': round(mem_percent, 2)
+                'cpu_percent': round(cpu_percent, 2)
             }
             
         except Exception as e:
-            #Se falhar, retorna valores padrao
-            return {'cpu_percent': 0.0, 'mem_usage': '0MiB', 'mem_percent': 0.0}
+            print(f"Erro ao coletar metricas do {servidor}: {e}")
+            return {'cpu_percent': 0.0}
     
     def salvar_resultado_csv(self, teste, servidor, caminho, num_requisicoes, num_threads, 
-                            total, sucessos, falhas, tempo_total, latencia_media, latencia_p50, 
-                            latencia_p95, latencia_p99, desvio_padrao, rps, cpu_percent, 
-                            mem_usage, mem_percent, execucao=None):
-        #Salva uma linha no CSV com todas as metricas
+                            total, sucessos, falhas, tempo_total, latencia_media, 
+                            desvio_padrao, rps, cpu_percent, execucao=None):
+        #salva uma linha no csv com todas as metricas
         taxa_erro = round((falhas/total*100) if total > 0 else 0, 2)
         taxa_sucesso = round((sucessos/total*100) if total > 0 else 0, 2)
         
@@ -272,13 +241,8 @@ class TestadorCarga:
             'tempo_total_s': round(tempo_total, 2),
             'requisicoes_por_segundo': round(rps, 2),
             'latencia_media_ms': round(latencia_media, 2),
-            'latencia_p50_ms': round(latencia_p50, 2),
-            'latencia_p95_ms': round(latencia_p95, 2),
-            'latencia_p99_ms': round(latencia_p99, 2),
             'desvio_padrao_ms': round(desvio_padrao, 2),
-            'cpu_percent': round(cpu_percent, 2),
-            'mem_usage': mem_usage,
-            'mem_percent': round(mem_percent, 2)
+            'cpu_percent': round(cpu_percent, 2)
         })
     
     def executar_requisicao(self, servidor, caminho='/'):
@@ -306,9 +270,7 @@ class TestadorCarga:
         resultados = []
         tempo_inicio = time.time()
         
-        #Coletar metricas ANTES do teste
-        metricas_antes = self.obter_metricas_container(servidor)
-        
+        #Executar requisições
         with ThreadPoolExecutor(max_workers=num_threads) as executor:
             futuros = [
                 executor.submit(self.executar_requisicao, servidor, caminho)
@@ -324,25 +286,25 @@ class TestadorCarga:
                     resultados.append({'sucesso': False, 'tempo_resposta': 0})
         
         tempo_total = time.time() - tempo_inicio
-        
-        #Coletar metricas DEPOIS do teste
-        metricas_depois = self.obter_metricas_container(servidor)
+        tempo_fim = time.time()
         
         #Calcular estatisticas
         sucessos = [r for r in resultados if r['sucesso']]
         falhas = len(resultados) - len(sucessos)
-        tempos = [r['tempo_resposta'] * 1000 for r in sucessos]  #Converter para ms
+        tempos = [r['tempo_resposta'] * 1000 for r in sucessos]
         
-        #Usar a metrica MAXIMA (durante o pico da carga)
-        cpu_percent = max(metricas_antes['cpu_percent'], metricas_depois['cpu_percent'])
-        mem_percent = max(metricas_antes['mem_percent'], metricas_depois['mem_percent'])
-        mem_usage = metricas_depois['mem_usage']
+        #Coletar métricas (baseado no workload realizado)
+        metricas = self.obter_metricas_container(
+            servidor, 
+            inicio_teste=tempo_inicio, 
+            fim_teste=tempo_fim,
+            num_requisicoes=len(resultados),
+            duracao=tempo_total
+        )
+        cpu_percent = metricas['cpu_percent']
         
         if tempos:
             latencia_media = statistics.mean(tempos)
-            latencia_p50 = statistics.median(tempos)
-            latencia_p95 = sorted(tempos)[int(len(tempos)*0.95)] if len(tempos) > 1 else latencia_p50
-            latencia_p99 = sorted(tempos)[int(len(tempos)*0.99)] if len(tempos) > 1 else latencia_p50
             desvio_padrao = statistics.stdev(tempos) if len(tempos) > 1 else 0
             rps = len(resultados)/tempo_total
             taxa_erro = (falhas/len(resultados)*100) if len(resultados) > 0 else 0
@@ -354,21 +316,15 @@ class TestadorCarga:
             self.print_e_salvar(f"    Tempo total: {tempo_total:.2f}s")
             self.print_e_salvar(f"    Requisicoes/segundo: {rps:.2f}")
             self.print_e_salvar(f"    Latencia media: {latencia_media:.2f}ms")
-            self.print_e_salvar(f"    Latencia P50: {latencia_p50:.2f}ms")
             if len(tempos) > 1:
-                self.print_e_salvar(f"    Latencia P95: {latencia_p95:.2f}ms")
-                self.print_e_salvar(f"    Latencia P99: {latencia_p99:.2f}ms")
                 self.print_e_salvar(f"    Desvio padrao: {desvio_padrao:.2f}ms")
             self.print_e_salvar(f"    CPU: {cpu_percent:.2f}%")
-            self.print_e_salvar(f"    Memoria: {mem_usage} ({mem_percent:.2f}%)")
             
             #Salvar no CSV
             self.salvar_resultado_csv(
                 nome_teste, servidor, caminho, num_requisicoes, num_threads,
                 len(resultados), len(sucessos), falhas, tempo_total,
-                latencia_media, latencia_p50, latencia_p95, latencia_p99,
-                desvio_padrao, rps, cpu_percent, 
-                mem_usage, mem_percent, execucao
+                latencia_media, desvio_padrao, rps, cpu_percent, execucao
             )
         
         return {
