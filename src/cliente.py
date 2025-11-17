@@ -8,18 +8,19 @@ from configuracao import ID_CUSTOMIZADO, PORTA_SERVIDOR
 
 class ClienteHTTP:
     def __init__(self, host_servidor, porta_servidor=PORTA_SERVIDOR):
-        self.host_servidor = host_servidor
-        self.porta_servidor = porta_servidor
-        
-    def enviar_requisicao(self, metodo='GET', caminho='/', cabecalhos=None, corpo=None):
+        self.host = host
+        self.porta = porta
+    
+    def enviar_requisicao(self, metodo='GET', caminho='/'):
         #Envia uma requisição HTTP para o servidor
-        if cabecalhos is None:
-            cabecalhos = {}
+        tempo_inicio = time.time()
         
         #Adiciona o cabeçalho customizado obrigatório
-        cabecalhos['X-Custom-ID'] = ID_CUSTOMIZADO
-        cabecalhos['Host'] = f"{self.host_servidor}:{self.porta_servidor}"
-        cabecalhos['Connection'] = 'close'
+        cabecalhos = {
+            'Host': self.host,
+            'User-Agent': 'Cliente-Redes-II',
+            'X-Custom-ID': ID_CUSTOMIZADO
+        }
         
         try:
             #Cria conexão
@@ -100,6 +101,11 @@ class ClienteHTTP:
                 codigo_status = 0
                 parte_corpo = ""
             
+            #Verificar se X-Custom-ID foi retornado
+            custom_id_retornado = cabecalhos.get('X-Custom-ID', '')
+            custom_id_esperado = ID_CUSTOMIZADO
+            id_valido = (custom_id_retornado == custom_id_esperado)
+            
             return {
                 'codigo_status': codigo_status,
                 'corpo': parte_corpo,
@@ -108,7 +114,10 @@ class ClienteHTTP:
                 'tempo_conexao': tempo_conexao,
                 'tempo_envio': tempo_envio,
                 'tempo_recepcao': tempo_recepcao,
-                'sucesso': True
+                'sucesso': True,
+                'x_custom_id_enviado': custom_id_esperado,
+                'x_custom_id_recebido': custom_id_retornado,
+                'x_custom_id_valido': id_valido
             }
             
         except Exception as e:

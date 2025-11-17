@@ -1,9 +1,9 @@
 FROM ubuntu:22.04
 
-# Evitar prompts interativos durante instalação
+#Evitar prompts interativos durante instalacao
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Instalar Nginx, Python3 e nginx-prometheus-exporter
+#Instalar Nginx, Python3 e nginx-prometheus-exporter
 RUN apt-get update && \
     apt-get install -y nginx wget python3 ca-certificates && \
     wget https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v0.11.0/nginx-prometheus-exporter_0.11.0_linux_amd64.tar.gz && \
@@ -14,13 +14,13 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Criar diretório para arquivos estáticos
+#Criar diretorio para arquivos estaticos
 RUN mkdir -p /usr/share/nginx/html/estatico /usr/share/nginx/html/api
 
-# Copiar página inicial
+#Copiar pagina inicial
 COPY Servidores/pagina_inicial_nginx.html /usr/share/nginx/html/index.html
 
-# Criar script Python para configurar Nginx
+#Criar script Python para configurar Nginx
 RUN echo 'import os' > /configurar.py && \
     echo 'import json' >> /configurar.py && \
     echo '' >> /configurar.py && \
@@ -35,7 +35,7 @@ RUN echo 'import os' > /configurar.py && \
     python3 /configurar.py && \
     rm /configurar.py
 
-# Criar configuração do Nginx
+#Criar configuracao do Nginx
 RUN echo 'user www-data;' > /etc/nginx/nginx.conf && \
     echo 'worker_processes auto;' >> /etc/nginx/nginx.conf && \
     echo 'error_log /var/log/nginx/error.log warn;' >> /etc/nginx/nginx.conf && \
@@ -56,6 +56,9 @@ RUN echo 'user www-data;' > /etc/nginx/nginx.conf && \
     echo '    access_log /var/log/nginx/access.log main;' >> /etc/nginx/nginx.conf && \
     echo '    sendfile on;' >> /etc/nginx/nginx.conf && \
     echo '    keepalive_timeout 65;' >> /etc/nginx/nginx.conf && \
+    echo '' >> /etc/nginx/nginx.conf && \
+    echo '    # Echo do X-Custom-ID em todas as respostas' >> /etc/nginx/nginx.conf && \
+    echo '    add_header X-Custom-ID $http_x_custom_id always;' >> /etc/nginx/nginx.conf && \
     echo '' >> /etc/nginx/nginx.conf && \
     echo '    server {' >> /etc/nginx/nginx.conf && \
     echo '        listen 80;' >> /etc/nginx/nginx.conf && \
@@ -83,10 +86,10 @@ RUN echo 'user www-data;' > /etc/nginx/nginx.conf && \
     echo '    }' >> /etc/nginx/nginx.conf && \
     echo '}' >> /etc/nginx/nginx.conf
 
-# Expor portas: 80 (nginx) e 9113 (metricas)
+#Expor portas: 80 (nginx) e 9113 (metricas)
 EXPOSE 80 9113
 
-# Script Python embutido para inicialização
+#Script Python embutido para inicializacao
 RUN echo '#!/usr/bin/env python3' > /iniciar.py && \
     echo 'import subprocess' >> /iniciar.py && \
     echo 'import time' >> /iniciar.py && \

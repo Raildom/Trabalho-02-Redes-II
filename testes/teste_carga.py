@@ -24,9 +24,9 @@ class Cores:
     VERDE = '\033[92m'    #Verde para sucesso
     VERMELHO = '\033[91m' #Vermelho para erro
     AMARELO = '\033[93m'  #Amarelo para aviso
-    AZUL = '\033[94m'     #Azul para informacao
+    AZUL = '\033[94m'     #Azul para informação
     MAGENTA = '\033[95m'  #Magenta para destaque
-    CIANO = '\033[96m'    #Ciano para titulo
+    CIANO = '\033[96m'    #Ciano para título
     RESET = '\033[0m'     #Reset para cor normal
     NEGRITO = '\033[1m'   #Negrito
 
@@ -59,31 +59,31 @@ class TestadorCarga:
     #Classe para executar testes de carga nos servidores
     
     #=================================================================
-    #CONFIGURACOES DOS CENARIOS DE TESTE
+    #CONFIGURACOES DOS CENÁRIOS DE TESTE
     #=================================================================
     NUM_EXECUCOES = 10 
     NUM_USUARIOS = 10
     NUM_REQUISTICOES = 50
     
     CENARIO_1_BAIXA_CARGA = {
-        'usuarios': 10,     
-        'requisicoes': 100, 
+        'usuarios': 100,     
+        'requisicoes': 1000, 
         'endpoint': '/api/info'
     }
     
     CENARIO_2_MEDIA_CARGA = {
-        'usuarios': 50,
-        'requisicoes': 500,
+        'usuarios': 500,
+        'requisicoes': 5000,
         'endpoint': '/api/status'
     }
     
     CENARIO_3_ALTA_CARGA = {
-        'usuarios': 100,
-        'requisicoes': 1000,
+        'usuarios': 1000,
+        'requisicoes': 10000,
         'endpoint': '/api/dados'
     }
     
-    #Cenarios de Arquivos Pequenos
+    #Cenários de Arquivos Pequenos
     CENARIO_4_ARQUIVO_1KB = {
         'usuarios': NUM_USUARIOS,
         'requisicoes': NUM_REQUISTICOES,
@@ -105,7 +105,7 @@ class TestadorCarga:
         'tamanho': '50KB'
     }
     
-    #Cenarios de Arquivos Medios
+    #Cenários de Arquivos Médios
     CENARIO_7_ARQUIVO_100KB = {
         'usuarios': NUM_USUARIOS,
         'requisicoes': NUM_REQUISTICOES,
@@ -127,7 +127,7 @@ class TestadorCarga:
         'tamanho': '700KB'
     }
     
-    #Cenarios de Arquivos Grandes
+    #Cenários de Arquivos Grandes
     CENARIO_10_ARQUIVO_1MB = {
         'usuarios': NUM_USUARIOS,
         'requisicoes': NUM_REQUISTICOES,
@@ -282,7 +282,7 @@ class TestadorCarga:
         })
     
     def executar_requisicao(self, servidor, caminho='/'):
-        #Executa uma unica requisicao e retorna o resultado
+        #Executa uma única requisição e retorna o resultado
         host, porta = self.servidores[servidor]
         cliente = ClienteHTTP(host, porta)
         
@@ -300,15 +300,8 @@ class TestadorCarga:
     
     def teste_concorrente(self, servidor, caminho, num_requisicoes, num_threads, nome_teste="Teste", execucao=None):
         #Executa teste com requisicoes concorrentes
-        #Argumentos:
-        #    servidor: 'nginx' ou 'apache'
-        #    caminho: Caminho do endpoint a testar
-        #    num_requisicoes: Numero total de requisicoes
-        #    num_threads: Numero de threads concorrentes
-        #    nome_teste: Nome do teste para o CSV
-        #    execucao: Numero da execucao (opcional)
         self.print_e_salvar(f"\n  Testando {servidor.upper()}: {caminho}")
-        self.print_e_salvar(f"  Requisicoes: {num_requisicoes}, Concorrencia: {num_threads}")
+        self.print_e_salvar(f"  Requisicoes: {num_requisicoes}, Usuários: {num_threads}")
         
         resultados = []
         tempo_inicio = time.time()
@@ -386,11 +379,11 @@ class TestadorCarga:
         }
     
     def cenario_baixa_carga(self, execucao=None):
-        #Cenario 1: Baixa Carga
+        #Cenário 1: Baixa Carga
         cfg = self.CENARIO_1_BAIXA_CARGA
         self.print_e_salvar("\n" + "="*60)
-        self.print_e_salvar("CENARIO 1: BAIXA CARGA")
-        self.print_e_salvar(f"Usuarios Virtuais: {cfg['usuarios']} | Requisicoes: {cfg['requisicoes']}")
+        self.print_e_salvar("CENÁRIO 1: BAIXA CARGA")
+        self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Requisições: {cfg['requisicoes']}")
         self.print_e_salvar("="*60)
         
         self.print_e_salvar(f"\n[NGINX vs APACHE] Endpoint: {cfg['endpoint']}")
@@ -399,11 +392,11 @@ class TestadorCarga:
         self.teste_concorrente('apache', cfg['endpoint'], cfg['requisicoes'], cfg['usuarios'], nome_teste, execucao)
     
     def cenario_media_carga(self, execucao=None):
-        #Cenario 2: Media Carga
+        #Cenário 2: Média Carga
         cfg = self.CENARIO_2_MEDIA_CARGA
         self.print_e_salvar("\n" + "="*60)
-        self.print_e_salvar("CENARIO 2: MEDIA CARGA")
-        self.print_e_salvar(f"Usuarios Virtuais: {cfg['usuarios']} | Requisicoes: {cfg['requisicoes']}")
+        self.print_e_salvar("CENÁRIO 2: MÉDIA CARGA")
+        self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Requisições: {cfg['requisicoes']}")
         self.print_e_salvar("="*60)
         
         self.print_e_salvar(f"\n[NGINX vs APACHE] Endpoint: {cfg['endpoint']}")
@@ -412,11 +405,11 @@ class TestadorCarga:
         self.teste_concorrente('apache', cfg['endpoint'], cfg['requisicoes'], cfg['usuarios'], nome_teste, execucao)
     
     def cenario_alta_carga(self, execucao=None):
-        #Cenario 3: Alta Carga
+        #Cenário 3: Alta Carga
         cfg = self.CENARIO_3_ALTA_CARGA
         self.print_e_salvar("\n" + "="*60)
-        self.print_e_salvar("CENARIO 3: ALTA CARGA")
-        self.print_e_salvar(f"Usuarios Virtuais: {cfg['usuarios']} | Requisicoes: {cfg['requisicoes']}")
+        self.print_e_salvar("CENÁRIO 3: ALTA CARGA")
+        self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Requisições: {cfg['requisicoes']}")
         self.print_e_salvar("="*60)
         
         self.print_e_salvar(f"\n[NGINX vs APACHE] Endpoint: {cfg['endpoint']}")
@@ -425,14 +418,14 @@ class TestadorCarga:
         self.teste_concorrente('apache', cfg['endpoint'], cfg['requisicoes'], cfg['usuarios'], nome_teste, execucao)
     
     def cenario_arquivo_pequeno(self, execucao=None):
-        #Cenarios 4-6: Arquivos Pequenos (1KB, 10KB, 50KB)
+        #Cenários 4-6: Arquivos Pequenos (1KB, 10KB, 50KB)
         for num, cfg_name in [(4, 'CENARIO_4_ARQUIVO_1KB'), 
                                (5, 'CENARIO_5_ARQUIVO_10KB'), 
                                (6, 'CENARIO_6_ARQUIVO_50KB')]:
             cfg = getattr(self, cfg_name)
             self.print_e_salvar("\n" + "="*60)
-            self.print_e_salvar(f"CENARIO {num}: ARQUIVO PEQUENO ({cfg['tamanho']})")
-            self.print_e_salvar(f"Usuarios Virtuais: {cfg['usuarios']} | Requisicoes: {cfg['requisicoes']}")
+            self.print_e_salvar(f"CENÁRIO {num}: ARQUIVO PEQUENO ({cfg['tamanho']})")
+            self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Requisições: {cfg['requisicoes']}")
             self.print_e_salvar("="*60)
             
             self.print_e_salvar(f"\n[NGINX vs APACHE] Arquivo: {cfg['arquivo']}")
@@ -442,14 +435,14 @@ class TestadorCarga:
             self.teste_concorrente('apache', caminho, cfg['requisicoes'], cfg['usuarios'], nome_teste, execucao)
     
     def cenario_arquivo_medio(self, execucao=None):
-        #Cenarios 7-9: Arquivos Medios (100KB, 500KB, 700KB)
+        #Cenários 7-9: Arquivos Médios (100KB, 500KB, 700KB)
         for num, cfg_name in [(7, 'CENARIO_7_ARQUIVO_100KB'), 
                                (8, 'CENARIO_8_ARQUIVO_500KB'), 
                                (9, 'CENARIO_9_ARQUIVO_700KB')]:
             cfg = getattr(self, cfg_name)
             self.print_e_salvar("\n" + "="*60)
-            self.print_e_salvar(f"CENARIO {num}: ARQUIVO MEDIO ({cfg['tamanho']})")
-            self.print_e_salvar(f"Usuarios Virtuais: {cfg['usuarios']} | Requisicoes: {cfg['requisicoes']}")
+            self.print_e_salvar(f"CENÁRIO {num}: ARQUIVO MÉDIO ({cfg['tamanho']})")
+            self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Requisições: {cfg['requisicoes']}")
             self.print_e_salvar("="*60)
             
             self.print_e_salvar(f"\n[NGINX vs APACHE] Arquivo: {cfg['arquivo']}")
@@ -459,14 +452,14 @@ class TestadorCarga:
             self.teste_concorrente('apache', caminho, cfg['requisicoes'], cfg['usuarios'], nome_teste, execucao)
     
     def cenario_arquivo_grande(self, execucao=None):
-        #Cenarios 10-12: Arquivos Grandes (1MB, 5MB, 7MB)
+        #Cenários 10-12: Arquivos Grandes (1MB, 5MB, 7MB)
         for num, cfg_name in [(10, 'CENARIO_10_ARQUIVO_1MB'), 
                                (11, 'CENARIO_11_ARQUIVO_5MB'), 
                                (12, 'CENARIO_12_ARQUIVO_7MB')]:
             cfg = getattr(self, cfg_name)
             self.print_e_salvar("\n" + "="*60)
-            self.print_e_salvar(f"CENARIO {num}: ARQUIVO GRANDE ({cfg['tamanho']})")
-            self.print_e_salvar(f"Usuarios Virtuais: {cfg['usuarios']} | Requisicoes: {cfg['requisicoes']}")
+            self.print_e_salvar(f"CENÁRIO {num}: ARQUIVO GRANDE ({cfg['tamanho']})")
+            self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Requisições: {cfg['requisicoes']}")
             self.print_e_salvar("="*60)
             
             self.print_e_salvar(f"\n[NGINX vs APACHE] Arquivo: {cfg['arquivo']}")
@@ -476,19 +469,19 @@ class TestadorCarga:
             self.teste_concorrente('apache', caminho, cfg['requisicoes'], cfg['usuarios'], nome_teste, execucao)
     
     def executar_testes(self):
-        #Executa todos os cenarios de teste
+        #Executa todos os cenários de teste
         self.print_e_salvar("="*60)
         self.print_e_salvar("INICIO DOS TESTES DE CARGA")
         self.print_e_salvar(f"Data/Hora: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         self.print_e_salvar("="*60)
         
-        #Executar todos os cenarios (agora 12 no total)
-        self.cenario_baixa_carga()      #Cenario 1
-        self.cenario_media_carga()      #Cenario 2
-        self.cenario_alta_carga()       #Cenario 3
-        self.cenario_arquivo_pequeno()  #Cenarios 4-6
-        self.cenario_arquivo_medio()    #Cenarios 7-9
-        self.cenario_arquivo_grande()   #Cenarios 10-12
+        #Executar todos os cenários (agora 12 no total)
+        self.cenario_baixa_carga()      #Cenário 1
+        self.cenario_media_carga()      #Cenário 2
+        self.cenario_alta_carga()       #Cenário 3
+        self.cenario_arquivo_pequeno()  #Cenários 4-6
+        self.cenario_arquivo_medio()    #Cenários 7-9
+        self.cenario_arquivo_grande()   #Cenários 10-12
         
         self.print_e_salvar("\n" + "="*60)
         self.print_e_salvar("TESTES CONCLUIDOS!")
@@ -498,47 +491,47 @@ class TestadorCarga:
         self.print_e_salvar("="*60)
     
     def executar_testes(self, execucao=None):
-        #Executa todos os 15 cenarios de teste uma vez
-        #Executar TODOS os 12 cenarios
-        self.cenario_baixa_carga(execucao)      #Cenario 1
-        self.cenario_media_carga(execucao)      #Cenario 2
-        self.cenario_alta_carga(execucao)       #Cenario 3
-        self.cenario_arquivo_pequeno(execucao)  #Cenarios 4-6 (1KB, 10KB, 50KB)
-        self.cenario_arquivo_medio(execucao)    #Cenarios 7-9 (100KB, 500KB, 700KB)
-        self.cenario_arquivo_grande(execucao)   #Cenarios 10-12 (1MB, 5MB, 7MB)
+        #Executa todos os 15 cenários de teste uma vez
+        #Executar TODOS os 12 cenários
+        self.cenario_baixa_carga(execucao)      #Cenário 1
+        self.cenario_media_carga(execucao)      #Cenário 2
+        self.cenario_alta_carga(execucao)       #Cenário 3
+        self.cenario_arquivo_pequeno(execucao)  #Cenários 4-6 (1KB, 10KB, 50KB)
+        self.cenario_arquivo_medio(execucao)    #Cenários 7-9 (100KB, 500KB, 700KB)
+        self.cenario_arquivo_grande(execucao)   #Cenários 10-12 (1MB, 5MB, 7MB)
     
     def executar_todos_testes(self):
-        #Executa todos os 15 cenarios de teste multiplas vezes
+        #Executa todos os 15 cenários de teste múltiplas vezes
         self.print_e_salvar("="*70)
         self.print_e_salvar("TESTADOR DE CARGA - NGINX vs APACHE")
         self.print_e_salvar("Trabalho de Redes II - 2025.2")
         self.print_e_salvar("="*70)
         self.print_e_salvar(f"\nID Personalizado: {self.id_customizado}")
-        self.print_e_salvar(f"Numero de execucoes completas: {self.NUM_EXECUCOES}")
-        self.print_e_salvar(f"Cenarios por execucao: 12 (total de {self.NUM_EXECUCOES * 12} testes)")
+        self.print_e_salvar(f"Número de execuções completas: {self.NUM_EXECUCOES}")
+        self.print_e_salvar(f"Cenários por execução: 12 (total de {self.NUM_EXECUCOES * 12} testes)")
         
         tempo_inicio_total = time.time()
         
-        #Loop principal: executar todas as execucoes
+        #Loop principal: executar todas as execuções
         for execucao in range(1, self.NUM_EXECUCOES + 1):
             self.print_e_salvar("\n" + "="*80)
-            self.print_e_salvar(f"EXECUCAO {execucao}/{self.NUM_EXECUCOES} - RODADA COMPLETA DE TESTES")
+            self.print_e_salvar(f"EXECUÇÃO {execucao}/{self.NUM_EXECUCOES} - RODADA COMPLETA DE TESTES")
             self.print_e_salvar("="*80)
             
             tempo_inicio_execucao = time.time()
             
-            #Executar TODOS os 12 cenarios nesta execucao
+            #Executar TODOS os 12 cenários nesta execução
             self.executar_testes()
             
             tempo_execucao = time.time() - tempo_inicio_execucao
-            self.print_e_salvar(f"\nEXECUCAO {execucao} CONCLUIDA em {tempo_execucao/60:.2f} minutos")
+            self.print_e_salvar(f"\nEXECUÇÃO {execucao} CONCLUÍDA em {tempo_execucao/60:.2f} minutos")
         
         tempo_total = time.time() - tempo_inicio_total
         
         self.print_e_salvar("\n" + "="*70)
-        self.print_e_salvar("TESTES CONCLUIDOS")
+        self.print_e_salvar("TESTES CONCLUÍDOS")
         self.print_e_salvar("="*70)
-        self.print_e_salvar(f"Tempo total de execucao: {tempo_total/60:.2f} minutos")
+        self.print_e_salvar(f"Tempo total de execução: {tempo_total/60:.2f} minutos")
         
         #Exportar CSV
         print(f"\nExportando dados para CSV...")

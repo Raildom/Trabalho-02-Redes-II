@@ -69,19 +69,19 @@ class AnalisadorResultados:
         print(Cores.info("Gerando gráficos..."))
         
         #Gráficos individuais
-        print(Cores.info("  • Plotando throughput..."))
+        print(Cores.info("  - Plotando throughput..."))
         self.plotar_throughput_estatistico()
         
-        print(Cores.info("  • Plotando tempo de resposta..."))
+        print(Cores.info("  - Plotando tempo de resposta..."))
         self.plotar_tempo_resposta_estatistico()
         
-        print(Cores.info("  • Plotando taxa de sucesso..."))
+        print(Cores.info("  - Plotando taxa de sucesso..."))
         self.plotar_taxa_sucesso_estatistico()
         
-        print(Cores.info("  • Plotando tempo total (com desvio padrão)..."))
+        print(Cores.info("  - Plotando tempo total (com desvio padrão)..."))
         self.plotar_tempo_total_estatistico()
         
-        print(Cores.info("  • Plotando comparação de escalabilidade..."))
+        print(Cores.info("  - Plotando comparação de escalabilidade..."))
         self.plotar_comparacao_escalabilidade_estatistico()
         
         print(Cores.sucesso("Gráficos com estatísticas salvos em resultados/graficos/"))

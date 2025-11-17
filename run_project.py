@@ -1,5 +1,4 @@
 #Script principal para executar o projeto Redes II
-
 import subprocess
 import sys
 import os
@@ -85,10 +84,10 @@ class ProjetoRedes:
                 print(Cores.sucesso("Contêineres iniciados com sucesso!"))
                 print("")
                 print(f"{Cores.CIANO}Serviços disponíveis:{Cores.RESET}")
-                print(f"  {Cores.VERDE}• Nginx:      http://localhost:8080{Cores.RESET}")
-                print(f"  {Cores.VERDE}• Apache:     http://localhost:8081{Cores.RESET}")
-                print(f"  {Cores.VERDE}• Prometheus: http://localhost:9090{Cores.RESET}")
-                print(f"  {Cores.VERDE}• Grafana:    http://localhost:3000{Cores.RESET} (admin/admin)")
+                print(f"  {Cores.VERDE}- Nginx:      http://localhost:8080{Cores.RESET}")
+                print(f"  {Cores.VERDE}- Apache:     http://localhost:8081{Cores.RESET}")
+                print(f"  {Cores.VERDE}- Prometheus: http://localhost:9090{Cores.RESET}")
+                print(f"  {Cores.VERDE}- Grafana:    http://localhost:3000{Cores.RESET} (admin/admin)")
                 print("")
                 return True
             else:
@@ -192,11 +191,11 @@ class ProjetoRedes:
         print("=== Observabilidade e Análises ===" )
         print("")
         print(f"{Cores.CIANO}Acesse os serviços de observabilidade:{Cores.RESET}")
-        print(f"  {Cores.VERDE}• Prometheus: http://localhost:9090{Cores.RESET}")
+        print(f"  {Cores.VERDE}- Prometheus: http://localhost:9090{Cores.RESET}")
         print(f"    - Visualize métricas em tempo real")
         print(f"    - Query: rate(nginx_http_requests_total[1m])")
         print("")
-        print(f"  {Cores.VERDE}• Grafana: http://localhost:3000{Cores.RESET}")
+        print(f"  {Cores.VERDE}- Grafana: http://localhost:3000{Cores.RESET}")
         print(f"    - Login: admin / admin")
         print(f"    - Crie dashboards personalizados")
         print(f"    - Compare Nginx vs Apache")
@@ -258,7 +257,7 @@ class ProjetoRedes:
             return True
         except subprocess.CalledProcessError as e:
             print(Cores.erro(f"Falha ao entrar no contêiner: {e}"))
-            print(Cores.aviso("Verifique se o contêiner está rodando"))
+            print(Cores.info("Verifique se o contêiner está rodando"))
             return False
     
     def mostrar_menu(self):
@@ -377,7 +376,7 @@ def main():
     
     #Verifica Docker
     if not projeto.verificar_docker():
-        print("Não é possível continuar sem Docker funcionando")
+        print("Nao e possivel continuar sem Docker funcionando")
         if len(sys.argv) > 1:
             sys.exit(1)
         else:

@@ -7,12 +7,12 @@ global:
     matricula: '20239057601'
 
 scrape_configs:
-  # Auto-monitoramento do Prometheus
+  #Auto-monitoramento do Prometheus
   - job_name: 'prometheus'
     static_configs:
       - targets: ['localhost:9090']
 
-  # Exportador de Métricas do Nginx
+  #Exportador de Metricas do Nginx
   - job_name: 'nginx'
     static_configs:
       - targets: ['76.1.0.10:9113']
@@ -20,7 +20,7 @@ scrape_configs:
           servidor: 'nginx'
           tipo: 'servidor_web'
 
-  # Exportador de Métricas do Apache
+  #Exportador de Metricas do Apache
   - job_name: 'apache'
     static_configs:
       - targets: ['76.1.0.11:9117']

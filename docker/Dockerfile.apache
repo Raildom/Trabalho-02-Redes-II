@@ -1,9 +1,9 @@
 FROM ubuntu:22.04
 
-# Evitar prompts interativos durante instalação
+#Evitar prompts interativos durante instalacao
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Instalar Apache, Python3 e apache_exporter
+#Instalar Apache, Python3 e apache_exporter
 RUN apt-get update && \
     apt-get install -y apache2 wget python3 ca-certificates && \
     wget https://github.com/Lusitaniae/apache_exporter/releases/download/v1.0.7/apache_exporter-1.0.7.linux-amd64.tar.gz && \
@@ -14,13 +14,13 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Criar diretório para arquivos estáticos
+#Criar diretorio para arquivos estaticos
 RUN mkdir -p /var/www/html/estatico /var/www/html/api
 
-# Copiar página inicial
+#Copiar pagina inicial
 COPY Servidores/pagina_inicial_apache.html /var/www/html/index.html
 
-# Criar script Python para configurar Apache
+#Criar script Python para configurar Apache
 RUN echo 'import os' > /configurar.py && \
     echo 'import json' >> /configurar.py && \
     echo '' >> /configurar.py && \
@@ -35,7 +35,7 @@ RUN echo 'import os' > /configurar.py && \
     python3 /configurar.py && \
     rm /configurar.py
 
-# Habilitar módulos e criar configuração
+#Habilitar modulos e criar configuracao
 RUN a2enmod status headers rewrite && \
     echo '<VirtualHost *:80>' > /etc/apache2/sites-available/000-default.conf && \
     echo '    ServerAdmin webmaster@localhost' >> /etc/apache2/sites-available/000-default.conf && \
@@ -56,14 +56,17 @@ RUN a2enmod status headers rewrite && \
     echo '        Require all granted' >> /etc/apache2/sites-available/000-default.conf && \
     echo '    </Location>' >> /etc/apache2/sites-available/000-default.conf && \
     echo '' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '    # Echo do X-Custom-ID em todas as respostas' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '    Header always echo X-Custom-ID' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '' >> /etc/apache2/sites-available/000-default.conf && \
     echo '    ErrorLog ${APACHE_LOG_DIR}/error.log' >> /etc/apache2/sites-available/000-default.conf && \
     echo '    CustomLog ${APACHE_LOG_DIR}/access.log combined' >> /etc/apache2/sites-available/000-default.conf && \
     echo '</VirtualHost>' >> /etc/apache2/sites-available/000-default.conf
 
-# Expor portas: 80 (apache) e 9117 (metricas)
+#Expor portas: 80 (apache) e 9117 (metricas)
 EXPOSE 80 9117
 
-# Script Python embutido para inicialização
+#Script Python embutido para inicializacao
 RUN echo '#!/usr/bin/env python3' > /iniciar.py && \
     echo 'import subprocess' >> /iniciar.py && \
     echo 'import time' >> /iniciar.py && \

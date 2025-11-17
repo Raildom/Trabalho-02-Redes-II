@@ -78,10 +78,6 @@ def principal():
         ('grande-1mb.txt', 1 * 1024 * 1024),     #1 MB
         ('grande-5mb.txt', 5 * 1024 * 1024),     #5 MB
         ('grande-7mb.txt', 7 * 1024 * 1024),     #7 MB
-        ('enorme-10mb.txt', 10 * 1024 * 1024),   #10 MB
-        ('enorme-20mb.txt', 20 * 1024 * 1024),   #20 MB
-        ('enorme-50mb.txt', 50 * 1024 * 1024),   #50 MB
-        # ('enormosauro-1gb.txt', 1 * 1024 * 1024 * 1024)  #1 GB
     ]
     
     print(f"Criando arquivos em: {diretorio_estatico}/\n")
