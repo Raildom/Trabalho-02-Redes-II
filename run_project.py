@@ -1,3 +1,16 @@
+#limpar todos os contêiners
+# [ -n "$(docker ps -q)" ] && docker stop $(docker ps -q) || echo "Nenhum contêiner ativo para parar."; \
+# [ -n "$(docker ps -a -q)" ] && docker rm $(docker ps -a -q) || echo "Nenhum contêiner para remover."; \
+# [ -n "$(docker images -a -q)" ] && docker rmi $(docker images -a -q) -f || echo "Nenhuma imagem para remover."; \
+# docker image prune -f
+
+#zerar o contador de tempo do grafana
+# docker-compose stop
+
+# docker-compose down -v
+
+# docker-compose up -d
+
 #Script principal para executar o projeto Redes II
 import subprocess
 import sys

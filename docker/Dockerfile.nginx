@@ -6,10 +6,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 #Instalar Nginx, Python3 e nginx-prometheus-exporter
 RUN apt-get update && \
     apt-get install -y nginx wget python3 ca-certificates && \
-    wget https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v0.11.0/nginx-prometheus-exporter_0.11.0_linux_amd64.tar.gz && \
-    tar xzf nginx-prometheus-exporter_0.11.0_linux_amd64.tar.gz && \
+    wget https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v1.3.0/nginx-prometheus-exporter_1.3.0_linux_amd64.tar.gz && \
+    tar xzf nginx-prometheus-exporter_1.3.0_linux_amd64.tar.gz && \
     mv nginx-prometheus-exporter /usr/local/bin/ && \
-    rm nginx-prometheus-exporter_0.11.0_linux_amd64.tar.gz && \
+    rm nginx-prometheus-exporter_1.3.0_linux_amd64.tar.gz && \
     chmod +x /usr/local/bin/nginx-prometheus-exporter && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
