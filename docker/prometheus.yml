@@ -10,7 +10,7 @@ scrape_configs:
   #Auto-monitoramento do Prometheus
   - job_name: 'prometheus'
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: ['76.1.0.30:9090']
 
   #Exportador de Metricas do Nginx
   - job_name: 'nginx'

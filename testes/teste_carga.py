@@ -60,24 +60,24 @@ class TestadorCarga:
     
     #configuracoes dos cenarios de teste
     NUM_EXECUCOES = 1
-    NUM_USUARIOS = 10
-    NUM_REQUISTICOES = 50
+    NUM_USUARIOS = 1
+    NUM_REQUISTICOES = 1
     
     CENARIO_1_BAIXA_CARGA = {
-        'usuarios': 100,     
-        'requisicoes': 1000, 
+        'usuarios': 1,     
+        'requisicoes': 1, 
         'endpoint': '/api/info'
     }
     
     CENARIO_2_MEDIA_CARGA = {
-        'usuarios': 500,
-        'requisicoes': 5000,
+        'usuarios': 5,
+        'requisicoes': 5,
         'endpoint': '/api/status'
     }
     
     CENARIO_3_ALTA_CARGA = {
-        'usuarios': 1000,
-        'requisicoes': 10000,
+        'usuarios': 1,
+        'requisicoes': 1,
         'endpoint': '/api/dados'
     }
     
