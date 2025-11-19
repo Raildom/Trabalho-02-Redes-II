@@ -1,9 +1,3 @@
-#!/usr/bin/env python3
-"""
-Script de configuracao e inicializacao do servidor Nginx
-Gera configuracoes, cria arquivos estaticos e gerencia processos
-"""
-
 import json
 import subprocess
 import time
@@ -13,7 +7,7 @@ import urllib.request
 
 
 def criar_arquivos_api():
-    """Cria os arquivos JSON para os endpoints da API"""
+    #Cria os arquivos JSON para os endpoints da API
     print("Criando arquivos da API...")
     
     with open("/usr/share/nginx/html/api/pequeno", "w") as f:
@@ -29,7 +23,7 @@ def criar_arquivos_api():
 
 
 def criar_configuracao_nginx():
-    """Cria o arquivo de configuracao do Nginx"""
+    #Cria o arquivo de configuracao do Nginx
     print("Criando configuracao do Nginx...")
     
     config = """user www-data;
@@ -90,7 +84,7 @@ http {
 
 
 def iniciar_nginx():
-    """Inicia o servidor Nginx"""
+    #Inicia o servidor Nginx
     print("Iniciando Nginx...")
     sys.stdout.flush()
     
@@ -102,7 +96,7 @@ def iniciar_nginx():
 
 
 def aguardar_nginx_pronto():
-    """Aguarda o Nginx estar pronto para receber requisicoes"""
+    #Aguarda o Nginx estar pronto para receber requisicoes
     for i in range(30):
         try:
             urllib.request.urlopen("http://76.1.0.10:80/status_nginx", timeout=1)
@@ -118,7 +112,7 @@ def aguardar_nginx_pronto():
 
 
 def iniciar_exportador_metricas():
-    """Inicia o Nginx Prometheus Exporter"""
+    #Inicia o Nginx Prometheus Exporter
     time.sleep(1)
     
     print("Iniciando exportador de metricas...")
@@ -136,7 +130,7 @@ def iniciar_exportador_metricas():
 
 
 def iniciar_node_exporter():
-    """Inicia o Node Exporter"""
+    #Inicia o Node Exporter
     print("Iniciando Node Exporter...")
     sys.stdout.flush()
     
@@ -152,7 +146,7 @@ def iniciar_node_exporter():
 
 
 def criar_signal_handler(processos):
-    """Cria um handler para sinais de encerramento"""
+    #Cria um handler para sinais de encerramento
     def sinal_handler(sig, frame):
         print("Encerrando servicos...")
         for proc in processos:
@@ -164,12 +158,12 @@ def criar_signal_handler(processos):
 
 
 def main():
-    """Funcao principal"""
+    #Funcao principal
     print("=" * 70)
     print("CONFIGURANDO E INICIANDO SERVIDOR NGINX")
     print("=" * 70)
     
-    # Fase 1: Configuracao
+    #Fase 1: Configuracao
     try:
         criar_arquivos_api()
         criar_configuracao_nginx()
@@ -177,13 +171,13 @@ def main():
         print(f"ERRO durante a configuracao: {e}")
         sys.exit(1)
     
-    # Fase 2: Inicializacao
+    #Fase 2: Inicializacao
     nginx_proc = iniciar_nginx()
     aguardar_nginx_pronto()
     exportador = iniciar_exportador_metricas()
     node_exporter = iniciar_node_exporter()
     
-    # Configurar handler de sinais
+    #Configurar handler de sinais
     processos = [node_exporter, exportador, nginx_proc]
     handler = criar_signal_handler(processos)
     signal.signal(signal.SIGINT, handler)
@@ -193,7 +187,7 @@ def main():
     print("CONFIGURACAO E INICIALIZACAO CONCLUIDAS COM SUCESSO!")
     print("=" * 70)
     
-    # Aguardar processo principal
+    #Aguardar processo principal
     try:
         nginx_proc.wait()
     except KeyboardInterrupt:

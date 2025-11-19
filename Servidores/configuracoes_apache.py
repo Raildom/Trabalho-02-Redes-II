@@ -1,9 +1,3 @@
-#!/usr/bin/env python3
-"""
-Script de configuracao e inicializacao do servidor Apache
-Gera configuracoes, cria arquivos estaticos e gerencia processos
-"""
-
 import json
 import subprocess
 import time
@@ -12,7 +6,7 @@ import signal
 
 
 def criar_arquivos_api():
-    """Cria os arquivos JSON para os endpoints da API"""
+    #Cria os arquivos JSON para os endpoints da API
     print("Criando arquivos da API...")
     
     with open("/var/www/html/api/pequeno", "w") as f:
@@ -28,7 +22,7 @@ def criar_arquivos_api():
 
 
 def criar_configuracao_apache():
-    """Cria o arquivo de configuracao do Apache VirtualHost"""
+    #Cria o arquivo de configuracao do Apache VirtualHost
     print("Criando configuracao do Apache...")
     
     config = """<VirtualHost *:80>
@@ -65,7 +59,7 @@ def criar_configuracao_apache():
 
 
 def iniciar_exportador_metricas():
-    """Inicia o Apache Exporter"""
+    #Inicia o Apache Exporter
     print("Iniciando exportador de metricas...")
     sys.stdout.flush()
     
@@ -81,7 +75,7 @@ def iniciar_exportador_metricas():
 
 
 def iniciar_node_exporter():
-    """Inicia o Node Exporter"""
+    #Inicia o Node Exporter
     print("Iniciando Node Exporter...")
     sys.stdout.flush()
     
@@ -97,7 +91,7 @@ def iniciar_node_exporter():
 
 
 def iniciar_apache():
-    """Inicia o servidor Apache"""
+    #Inicia o servidor Apache
     time.sleep(2)
     
     print("Iniciando Apache...")
@@ -112,7 +106,7 @@ def iniciar_apache():
 
 
 def criar_signal_handler(processos):
-    """Cria um handler para sinais de encerramento"""
+    #Cria um handler para sinais de encerramento
     def sinal_handler(sig, frame):
         print("Encerrando servicos...")
         for proc in processos:
@@ -124,12 +118,12 @@ def criar_signal_handler(processos):
 
 
 def main():
-    """Funcao principal"""
+    #Funcao principal
     print("=" * 70)
     print("CONFIGURANDO E INICIANDO SERVIDOR APACHE")
     print("=" * 70)
     
-    # Fase 1: Configuracao
+    #Fase 1: Configuracao
     try:
         criar_arquivos_api()
         criar_configuracao_apache()
@@ -137,12 +131,12 @@ def main():
         print(f"ERRO durante a configuracao: {e}")
         sys.exit(1)
     
-    # Fase 2: Inicializacao
+    #Fase 2: Inicializacao
     exportador = iniciar_exportador_metricas()
     node_exporter = iniciar_node_exporter()
     apache_proc = iniciar_apache()
     
-    # Configurar handler de sinais
+    #Configurar handler de sinais
     processos = [apache_proc, node_exporter, exportador]
     handler = criar_signal_handler(processos)
     signal.signal(signal.SIGINT, handler)
@@ -152,7 +146,7 @@ def main():
     print("CONFIGURACAO E INICIALIZACAO CONCLUIDAS COM SUCESSO!")
     print("=" * 70)
     
-    # Aguardar processo principal
+    #Aguardar processo principal
     try:
         apache_proc.wait()
     except KeyboardInterrupt:
