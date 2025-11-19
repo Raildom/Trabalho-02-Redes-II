@@ -177,6 +177,11 @@ class TestadorCarga:
         self.txt_file.write(texto + '\n')
         self.txt_file.flush()
     
+    def salvar_apenas(self, texto):
+        #Salva apenas no arquivo TXT sem imprimir
+        self.txt_file.write(texto + '\n')
+        self.txt_file.flush()
+    
     def obter_metricas_container(self, servidor, inicio_teste=None, fim_teste=None, num_requisicoes=0, duracao=1.0):
         #obtem metricas de cpu dos servidores via prometheus
         import requests
@@ -257,8 +262,8 @@ class TestadorCarga:
     
     def teste_concorrente(self, servidor, caminho, num_requisicoes, num_threads, nome_teste="Teste", execucao=None):
         #Executa teste com requisicoes concorrentes
-        self.print_e_salvar(f"\n  Testando {servidor.upper()}: {caminho}")
-        self.print_e_salvar(f"  Requisicoes: {num_requisicoes}, Usuários: {num_threads}")
+        self.salvar_apenas(f"\n  Testando {servidor.upper()}: {caminho}")
+        self.salvar_apenas(f"  Requisicoes: {num_requisicoes}, Usuários: {num_threads}")
         
         resultados = []
         tempo_inicio = time.time()
@@ -275,7 +280,7 @@ class TestadorCarga:
                     resultado = futuro.result()
                     resultados.append(resultado)
                 except Exception as e:
-                    self.print_e_salvar(f"  [ERRO] Requisicao falhou: {e}")
+                    self.salvar_apenas(f"  [ERRO] Requisicao falhou: {e}")
                     resultados.append({'sucesso': False, 'tempo_resposta': 0})
         
         tempo_total = time.time() - tempo_inicio
@@ -302,16 +307,16 @@ class TestadorCarga:
             rps = len(resultados)/tempo_total
             taxa_erro = (falhas/len(resultados)*100) if len(resultados) > 0 else 0
             
-            self.print_e_salvar(f"\n  Resultados:")
-            self.print_e_salvar(f"    Total de requisicoes: {len(resultados)}")
-            self.print_e_salvar(f"    Sucessos: {len(sucessos)} ({len(sucessos)/len(resultados)*100:.1f}%)")
-            self.print_e_salvar(f"    Falhas: {falhas} ({taxa_erro:.1f}%)")
-            self.print_e_salvar(f"    Tempo total: {tempo_total:.2f}s")
-            self.print_e_salvar(f"    Requisicoes/segundo: {rps:.2f}")
-            self.print_e_salvar(f"    Latencia media: {latencia_media:.2f}ms")
+            self.salvar_apenas(f"\n  Resultados:")
+            self.salvar_apenas(f"    Total de requisicoes: {len(resultados)}")
+            self.salvar_apenas(f"    Sucessos: {len(sucessos)} ({len(sucessos)/len(resultados)*100:.1f}%)")
+            self.salvar_apenas(f"    Falhas: {falhas} ({taxa_erro:.1f}%)")
+            self.salvar_apenas(f"    Tempo total: {tempo_total:.2f}s")
+            self.salvar_apenas(f"    Requisicoes/segundo: {rps:.2f}")
+            self.salvar_apenas(f"    Latencia media: {latencia_media:.2f}ms")
             if len(tempos) > 1:
-                self.print_e_salvar(f"    Desvio padrao: {desvio_padrao:.2f}ms")
-            self.print_e_salvar(f"    CPU: {cpu_percent:.2f}%")
+                self.salvar_apenas(f"    Desvio padrao: {desvio_padrao:.2f}ms")
+            self.salvar_apenas(f"    CPU: {cpu_percent:.2f}%")
             
             #Salvar no CSV
             self.salvar_resultado_csv(
@@ -330,12 +335,12 @@ class TestadorCarga:
     def cenario_baixa_carga(self, execucao=None):
         #Cenário 1: Baixa Carga
         cfg = self.CENARIO_1_BAIXA_CARGA
-        self.print_e_salvar("\n" + "="*60)
-        self.print_e_salvar("CENÁRIO 1: BAIXA CARGA")
-        self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Requisições: {cfg['requisicoes']}")
-        self.print_e_salvar("="*60)
+        self.salvar_apenas("\n" + "="*60)
+        self.salvar_apenas("CENÁRIO 1: BAIXA CARGA")
+        self.salvar_apenas(f"Usuários Virtuais: {cfg['usuarios']} | Requisições: {cfg['requisicoes']}")
+        self.salvar_apenas("="*60)
         
-        self.print_e_salvar(f"\n[NGINX vs APACHE] Endpoint: {cfg['endpoint']}")
+        self.salvar_apenas(f"\n[NGINX vs APACHE] Endpoint: {cfg['endpoint']}")
         nome_teste = "Cenario1_BaixaCarga"
         self.teste_concorrente('nginx', cfg['endpoint'], cfg['requisicoes'], cfg['usuarios'], nome_teste, execucao)
         self.teste_concorrente('apache', cfg['endpoint'], cfg['requisicoes'], cfg['usuarios'], nome_teste, execucao)
@@ -343,12 +348,12 @@ class TestadorCarga:
     def cenario_media_carga(self, execucao=None):
         #Cenário 2: Média Carga
         cfg = self.CENARIO_2_MEDIA_CARGA
-        self.print_e_salvar("\n" + "="*60)
-        self.print_e_salvar("CENÁRIO 2: MÉDIA CARGA")
-        self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Requisições: {cfg['requisicoes']}")
-        self.print_e_salvar("="*60)
+        self.salvar_apenas("\n" + "="*60)
+        self.salvar_apenas("CENÁRIO 2: MÉDIA CARGA")
+        self.salvar_apenas(f"Usuários Virtuais: {cfg['usuarios']} | Requisições: {cfg['requisicoes']}")
+        self.salvar_apenas("="*60)
         
-        self.print_e_salvar(f"\n[NGINX vs APACHE] Endpoint: {cfg['endpoint']}")
+        self.salvar_apenas(f"\n[NGINX vs APACHE] Endpoint: {cfg['endpoint']}")
         nome_teste = "Cenario2_MediaCarga"
         self.teste_concorrente('nginx', cfg['endpoint'], cfg['requisicoes'], cfg['usuarios'], nome_teste, execucao)
         self.teste_concorrente('apache', cfg['endpoint'], cfg['requisicoes'], cfg['usuarios'], nome_teste, execucao)
@@ -356,12 +361,12 @@ class TestadorCarga:
     def cenario_alta_carga(self, execucao=None):
         #Cenário 3: Alta Carga
         cfg = self.CENARIO_3_ALTA_CARGA
-        self.print_e_salvar("\n" + "="*60)
-        self.print_e_salvar("CENÁRIO 3: ALTA CARGA")
-        self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Requisições: {cfg['requisicoes']}")
-        self.print_e_salvar("="*60)
+        self.salvar_apenas("\n" + "="*60)
+        self.salvar_apenas("CENÁRIO 3: ALTA CARGA")
+        self.salvar_apenas(f"Usuários Virtuais: {cfg['usuarios']} | Requisições: {cfg['requisicoes']}")
+        self.salvar_apenas("="*60)
         
-        self.print_e_salvar(f"\n[NGINX vs APACHE] Endpoint: {cfg['endpoint']}")
+        self.salvar_apenas(f"\n[NGINX vs APACHE] Endpoint: {cfg['endpoint']}")
         nome_teste = "Cenario3_AltaCarga"
         self.teste_concorrente('nginx', cfg['endpoint'], cfg['requisicoes'], cfg['usuarios'], nome_teste, execucao)
         self.teste_concorrente('apache', cfg['endpoint'], cfg['requisicoes'], cfg['usuarios'], nome_teste, execucao)
@@ -372,12 +377,12 @@ class TestadorCarga:
                                (5, 'CENARIO_5_ARQUIVO_10KB'), 
                                (6, 'CENARIO_6_ARQUIVO_50KB')]:
             cfg = getattr(self, cfg_name)
-            self.print_e_salvar("\n" + "="*60)
-            self.print_e_salvar(f"CENÁRIO {num}: ARQUIVO PEQUENO ({cfg['tamanho']})")
-            self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Requisições: {cfg['requisicoes']}")
-            self.print_e_salvar("="*60)
+            self.salvar_apenas("\n" + "="*60)
+            self.salvar_apenas(f"CENÁRIO {num}: ARQUIVO PEQUENO ({cfg['tamanho']})")
+            self.salvar_apenas(f"Usuários Virtuais: {cfg['usuarios']} | Requisições: {cfg['requisicoes']}")
+            self.salvar_apenas("="*60)
             
-            self.print_e_salvar(f"\n[NGINX vs APACHE] Arquivo: {cfg['arquivo']}")
+            self.salvar_apenas(f"\n[NGINX vs APACHE] Arquivo: {cfg['arquivo']}")
             caminho = f"/estatico/{cfg['arquivo']}"
             nome_teste = f"Cenario{num}_ArquivoPequeno"
             self.teste_concorrente('nginx', caminho, cfg['requisicoes'], cfg['usuarios'], nome_teste, execucao)
@@ -389,12 +394,12 @@ class TestadorCarga:
                                (8, 'CENARIO_8_ARQUIVO_500KB'), 
                                (9, 'CENARIO_9_ARQUIVO_700KB')]:
             cfg = getattr(self, cfg_name)
-            self.print_e_salvar("\n" + "="*60)
-            self.print_e_salvar(f"CENÁRIO {num}: ARQUIVO MÉDIO ({cfg['tamanho']})")
-            self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Requisições: {cfg['requisicoes']}")
-            self.print_e_salvar("="*60)
+            self.salvar_apenas("\n" + "="*60)
+            self.salvar_apenas(f"CENÁRIO {num}: ARQUIVO MÉDIO ({cfg['tamanho']})")
+            self.salvar_apenas(f"Usuários Virtuais: {cfg['usuarios']} | Requisições: {cfg['requisicoes']}")
+            self.salvar_apenas("="*60)
             
-            self.print_e_salvar(f"\n[NGINX vs APACHE] Arquivo: {cfg['arquivo']}")
+            self.salvar_apenas(f"\n[NGINX vs APACHE] Arquivo: {cfg['arquivo']}")
             caminho = f"/estatico/{cfg['arquivo']}"
             nome_teste = f"Cenario{num}_ArquivoMedio"
             self.teste_concorrente('nginx', caminho, cfg['requisicoes'], cfg['usuarios'], nome_teste, execucao)
@@ -406,12 +411,12 @@ class TestadorCarga:
                                (11, 'CENARIO_11_ARQUIVO_5MB'), 
                                (12, 'CENARIO_12_ARQUIVO_7MB')]:
             cfg = getattr(self, cfg_name)
-            self.print_e_salvar("\n" + "="*60)
-            self.print_e_salvar(f"CENÁRIO {num}: ARQUIVO GRANDE ({cfg['tamanho']})")
-            self.print_e_salvar(f"Usuários Virtuais: {cfg['usuarios']} | Requisições: {cfg['requisicoes']}")
-            self.print_e_salvar("="*60)
+            self.salvar_apenas("\n" + "="*60)
+            self.salvar_apenas(f"CENÁRIO {num}: ARQUIVO GRANDE ({cfg['tamanho']})")
+            self.salvar_apenas(f"Usuários Virtuais: {cfg['usuarios']} | Requisições: {cfg['requisicoes']}")
+            self.salvar_apenas("="*60)
             
-            self.print_e_salvar(f"\n[NGINX vs APACHE] Arquivo: {cfg['arquivo']}")
+            self.salvar_apenas(f"\n[NGINX vs APACHE] Arquivo: {cfg['arquivo']}")
             caminho = f"/estatico/{cfg['arquivo']}"
             nome_teste = f"Cenario{num}_ArquivoGrande"
             self.teste_concorrente('nginx', caminho, cfg['requisicoes'], cfg['usuarios'], nome_teste, execucao)
@@ -451,39 +456,63 @@ class TestadorCarga:
     
     def executar_todos_testes(self):
         #Executa todos os 15 cenários de teste múltiplas vezes
-        self.print_e_salvar("="*70)
-        self.print_e_salvar("TESTADOR DE CARGA - NGINX vs APACHE")
-        self.print_e_salvar("Trabalho de Redes II - 2025.2")
-        self.print_e_salvar("="*70)
-        self.print_e_salvar(f"\nID Personalizado: {self.id_customizado}")
-        self.print_e_salvar(f"Número de execuções completas: {self.NUM_EXECUCOES}")
-        self.print_e_salvar(f"Cenários por execução: 12 (total de {self.NUM_EXECUCOES * 12} testes)")
+        self.salvar_apenas("="*70)
+        self.salvar_apenas("TESTADOR DE CARGA - NGINX vs APACHE")
+        self.salvar_apenas("Trabalho de Redes II - 2025.2")
+        self.salvar_apenas("="*70)
+        self.salvar_apenas(f"\nID Personalizado: {self.id_customizado}")
+        self.salvar_apenas(f"Número de execuções completas: {self.NUM_EXECUCOES}")
+        self.salvar_apenas(f"Cenários por execução: 12 (total de {self.NUM_EXECUCOES * 12} testes)")
+        
+        # Imprimir apenas informação inicial no terminal
+        print(Cores.titulo("\n" + "="*70))
+        print(Cores.titulo("TESTADOR DE CARGA - NGINX vs APACHE"))
+        print(Cores.titulo("="*70))
+        print(Cores.info(f"ID Personalizado: {self.id_customizado}"))
+        print(Cores.info(f"Total de execuções: {self.NUM_EXECUCOES}"))
+        print(Cores.info(f"Cenários por execução: 12"))
+        print(Cores.aviso("Os detalhes dos testes serão salvos em: resultados/resultados_testes.txt"))
+        print()
         
         tempo_inicio_total = time.time()
         
         #Loop principal: executar todas as execuções
         for execucao in range(1, self.NUM_EXECUCOES + 1):
-            self.print_e_salvar("\n" + "="*80)
-            self.print_e_salvar(f"EXECUÇÃO {execucao}/{self.NUM_EXECUCOES} - RODADA COMPLETA DE TESTES")
-            self.print_e_salvar("="*80)
+            self.salvar_apenas("\n" + "="*80)
+            self.salvar_apenas(f"EXECUÇÃO {execucao}/{self.NUM_EXECUCOES} - RODADA COMPLETA DE TESTES")
+            self.salvar_apenas("="*80)
+            
+            # Imprimir apenas o número da execução no terminal
+            print(Cores.destaque(f"> Execução {execucao}/{self.NUM_EXECUCOES} em andamento..."), end='', flush=True)
             
             tempo_inicio_execucao = time.time()
             
             #Executar TODOS os 12 cenários nesta execução
-            self.executar_testes()
+            self.executar_testes(execucao)
             
             tempo_execucao = time.time() - tempo_inicio_execucao
-            self.print_e_salvar(f"\nEXECUÇÃO {execucao} CONCLUÍDA em {tempo_execucao/60:.2f} minutos")
+            self.salvar_apenas(f"\nEXECUÇÃO {execucao} CONCLUÍDA em {tempo_execucao/60:.2f} minutos")
+            
+            # Imprimir conclusão da execução
+            print(f" {Cores.VERDE}[OK] Concluída{Cores.RESET} ({tempo_execucao/60:.2f} min)")
         
         tempo_total = time.time() - tempo_inicio_total
         
-        self.print_e_salvar("\n" + "="*70)
-        self.print_e_salvar("TESTES CONCLUÍDOS")
-        self.print_e_salvar("="*70)
-        self.print_e_salvar(f"Tempo total de execução: {tempo_total/60:.2f} minutos")
+        self.salvar_apenas("\n" + "="*70)
+        self.salvar_apenas("TESTES CONCLUÍDOS")
+        self.salvar_apenas("="*70)
+        self.salvar_apenas(f"Tempo total de execução: {tempo_total/60:.2f} minutos")
+        
+        # Imprimir conclusão final
+        print()
+        print(Cores.sucesso("="*70))
+        print(Cores.sucesso("TESTES CONCLUÍDOS"))
+        print(Cores.sucesso("="*70))
+        print(Cores.info(f"Tempo total: {tempo_total/60:.2f} minutos"))
+        print()
         
         #Exportar CSV
-        print(f"\nExportando dados para CSV...")
+        print(Cores.info("Exportando dados para CSV..."))
         try:
             with open(self.arquivo_csv, 'w', newline='') as f:
                 if self.dados_csv:

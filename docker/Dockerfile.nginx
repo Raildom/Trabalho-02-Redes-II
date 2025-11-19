@@ -67,7 +67,7 @@ RUN echo 'user www-data;' > /etc/nginx/nginx.conf && \
     echo '' >> /etc/nginx/nginx.conf && \
     echo '    server {' >> /etc/nginx/nginx.conf && \
     echo '        listen 80;' >> /etc/nginx/nginx.conf && \
-    echo '        server_name localhost;' >> /etc/nginx/nginx.conf && \
+    echo '        server_name 76.1.0.10;' >> /etc/nginx/nginx.conf && \
     echo '' >> /etc/nginx/nginx.conf && \
     echo '        location / {' >> /etc/nginx/nginx.conf && \
     echo '            root /usr/share/nginx/html;' >> /etc/nginx/nginx.conf && \
@@ -111,7 +111,7 @@ RUN echo '#!/usr/bin/env python3' > /iniciar.py && \
     echo '# Aguardar Nginx estar pronto' >> /iniciar.py && \
     echo 'for i in range(30):' >> /iniciar.py && \
     echo '    try:' >> /iniciar.py && \
-    echo '        urllib.request.urlopen("http://localhost:80/status_nginx", timeout=1)' >> /iniciar.py && \
+    echo '        urllib.request.urlopen("http://76.1.0.10:80/status_nginx", timeout=1)' >> /iniciar.py && \
     echo '        print("Nginx pronto!")' >> /iniciar.py && \
     echo '        sys.stdout.flush()' >> /iniciar.py && \
     echo '        break' >> /iniciar.py && \
@@ -125,7 +125,7 @@ RUN echo '#!/usr/bin/env python3' > /iniciar.py && \
     echo '' >> /iniciar.py && \
     echo 'print("Iniciando exportador de métricas...")' >> /iniciar.py && \
     echo 'sys.stdout.flush()' >> /iniciar.py && \
-    echo 'exportador = subprocess.Popen(["/usr/local/bin/nginx-prometheus-exporter", "-nginx.scrape-uri=http://localhost:80/status_nginx"])' >> /iniciar.py && \
+    echo 'exportador = subprocess.Popen(["/usr/local/bin/nginx-prometheus-exporter", "-nginx.scrape-uri=http://76.1.0.10:80/status_nginx"])' >> /iniciar.py && \
     echo 'print("Exportador Prometheus iniciado na porta 9113")' >> /iniciar.py && \
     echo 'sys.stdout.flush()' >> /iniciar.py && \
     echo '' >> /iniciar.py && \

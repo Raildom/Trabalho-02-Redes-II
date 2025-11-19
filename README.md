@@ -128,7 +128,7 @@ docker-compose -f docker/docker-compose.yml down
 
 ## Endpoints Disponíveis
 
-### Nginx (http://localhost:8080)
+### Nginx (IP: 76.1.0.10 - mapeado em localhost:8080)
 
 | Endpoint | Método | Descrição | Tamanho |
 |----------|--------|-----------|---------|
@@ -142,7 +142,7 @@ docker-compose -f docker/docker-compose.yml down
 | `/estatico/enorme-10mb.txt` | GET | Arquivo 10MB | 10 MB |
 | `/status_nginx` | GET | Status (interno) | Restrito |
 
-### Apache (http://localhost:8081)
+### Apache (IP: 76.1.0.11 - mapeado em localhost:8081)
 
 | Endpoint | Método | Descrição | Tamanho |
 |----------|--------|-----------|---------|

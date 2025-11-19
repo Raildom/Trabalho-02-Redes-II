@@ -97,8 +97,8 @@ class ProjetoRedes:
                 print(Cores.sucesso("Contêineres iniciados com sucesso!"))
                 print("")
                 print(f"{Cores.CIANO}Serviços disponíveis:{Cores.RESET}")
-                print(f"  {Cores.VERDE}- Nginx:      http://localhost:8080{Cores.RESET}")
-                print(f"  {Cores.VERDE}- Apache:     http://localhost:8081{Cores.RESET}")
+                print(f"  {Cores.VERDE}- Nginx:      http://76.1.0.10:80{Cores.RESET}")
+                print(f"  {Cores.VERDE}- Apache:     http://76.1.0.11:80{Cores.RESET}")
                 print(f"  {Cores.VERDE}- Prometheus: http://localhost:9090{Cores.RESET}")
                 print(f"  {Cores.VERDE}- Grafana:    http://localhost:3000{Cores.RESET} (admin/admin)")
                 print("")
@@ -198,6 +198,38 @@ class ProjetoRedes:
             print(Cores.aviso("Testes interrompidos pelo usuário"))
             return False
     
+    def gerar_graficos(self):
+        #Gera gráficos de análise dos resultados
+        print("")
+        print("=== Gerando gráficos de análise ===")
+        
+        #Verifica se o arquivo CSV existe
+        if not os.path.exists('resultados/resultados_testes.csv'):
+            print(Cores.erro("Arquivo de resultados não encontrado!"))
+            print(Cores.aviso("Execute primeiro os testes de carga (opção 3)"))
+            return False
+        
+        print(Cores.info("Analisando resultados dos testes..."))
+        
+        try:
+            subprocess.run(['python3', 'testes/analisar_resultados.py'], check=True)
+            print("")
+            print(Cores.sucesso("Gráficos gerados com sucesso!"))
+            print(f"{Cores.VERDE}Localização: resultados/graficos/{Cores.RESET}")
+            print("")
+            print(f"{Cores.CIANO}Gráficos disponíveis:{Cores.RESET}")
+            print(f"  - Throughput (requisições/segundo)")
+            print(f"  - Latência média (ms)")
+            print(f"  - Taxa de sucesso (%)")
+            print(f"  - Uso de CPU (%)")
+            print(f"  - Tempo total de execução (s)")
+            print(f"  - Comparação geral (4 métricas)")
+            print("")
+            return True
+        except subprocess.CalledProcessError as e:
+            print(Cores.erro(f"Falha ao gerar gráficos: {e}"))
+            return False
+    
     def gerar_analises(self):
         #Acessa Grafana e Prometheus
         print("")
@@ -280,11 +312,12 @@ class ProjetoRedes:
         print("1) Iniciar contêineres (Nginx, Apache, Prometheus, Grafana)")
         print("2) Teste de conectividade")
         print("3) Executar testes de carga completos")
-        print("4) Acessar observabilidade (Prometheus/Grafana)")
-        print("5) Entrar no contêiner de teste (Shell)")
-        print("6) Gerar arquivos estáticos de teste")
-        print("7) Executar tudo (início ao fim)")
-        print("8) Parar contêineres")
+        print("4) Gerar gráficos de análise")
+        print("5) Acessar observabilidade (Prometheus/Grafana)")
+        print("6) Entrar no contêiner de teste (Shell)")
+        print("7) Gerar arquivos estáticos de teste")
+        print("8) Executar tudo (início ao fim)")
+        print("9) Parar contêineres")
         print("0) Sair")
         print("")
     
@@ -321,6 +354,8 @@ class ProjetoRedes:
             'teste-conectividade': self.teste_conectividade,
             'full-test': self.executar_testes_completos,
             'teste-completo': self.executar_testes_completos,
+            'graficos': self.gerar_graficos,
+            'gerar-graficos': self.gerar_graficos,
             'analyze': self.gerar_analises,
             'analisar': self.gerar_analises,
             'gerar-arquivos': self.gerar_arquivos_estaticos,
@@ -334,7 +369,7 @@ class ProjetoRedes:
             return comandos[comando]()
         else:
             print(f"Opção inválida: {comando}")
-            print("Opções: iniciar, conectividade, teste-completo, analisar, gerar-arquivos, shell, tudo")
+            print("Opções: iniciar, conectividade, teste-completo, graficos, analisar, gerar-arquivos, shell, tudo")
             return False
     
     def menu_interativo(self):
@@ -351,14 +386,16 @@ class ProjetoRedes:
                 elif escolha == '3':
                     self.executar_testes_completos()
                 elif escolha == '4':
-                    self.gerar_analises()
+                    self.gerar_graficos()
                 elif escolha == '5':
-                    self.entrar_conteiner_teste()
+                    self.gerar_analises()
                 elif escolha == '6':
-                    self.gerar_arquivos_estaticos()
+                    self.entrar_conteiner_teste()
                 elif escolha == '7':
-                    self.executar_tudo()
+                    self.gerar_arquivos_estaticos()
                 elif escolha == '8':
+                    self.executar_tudo()
+                elif escolha == '9':
                     self.parar_conteineres()
                 elif escolha == '0':
                     print("Saindo...")
@@ -401,8 +438,9 @@ def main():
         parser = argparse.ArgumentParser(description='Gerenciador do Projeto Redes II')
         parser.add_argument('comando', choices=[
             'start', 'iniciar', 'conectividade', 'teste-conectividade',
-            'full-test', 'teste-completo', 'analyze', 'analisar',
-            'gerar-arquivos', 'arquivos', 'shell', 'all', 'tudo'
+            'full-test', 'teste-completo', 'graficos', 'gerar-graficos',
+            'analyze', 'analisar', 'gerar-arquivos', 'arquivos', 
+            'shell', 'all', 'tudo'
         ], help='Comando para executar')
         
         args = parser.parse_args()
