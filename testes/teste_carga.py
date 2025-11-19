@@ -60,24 +60,24 @@ class TestadorCarga:
     
     #configuracoes dos cenarios de teste
     NUM_EXECUCOES = 10
-    NUM_USUARIOS = 10
-    NUM_REQUISTICOES = 50
+    NUM_USUARIOS = 1
+    NUM_REQUISTICOES = 51
     
     CENARIO_1_BAIXA_CARGA = {
-        'usuarios': 10,     
-        'requisicoes': 100, 
+        'usuarios': 1,     
+        'requisicoes': 1, 
         'endpoint': '/api/info'
     }
     
     CENARIO_2_MEDIA_CARGA = {
-        'usuarios': 50,
-        'requisicoes': 500,
+        'usuarios': 1,
+        'requisicoes': 5,
         'endpoint': '/api/status'
     }
     
     CENARIO_3_ALTA_CARGA = {
-        'usuarios': 100,
-        'requisicoes': 1000,
+        'usuarios': 1,
+        'requisicoes': 1,
         'endpoint': '/api/dados'
     }
     
@@ -178,7 +178,7 @@ class TestadorCarga:
         self.txt_file.flush()
     
     def obter_metricas_container(self, servidor, inicio_teste=None, fim_teste=None, num_requisicoes=0, duracao=1.0):
-        #obtem metricas de cpu dos exporters via prometheus
+        #obtem metricas de cpu dos servidores via prometheus
         import requests
         
         prometheus_url = "http://prometheus:9090"
@@ -186,13 +186,13 @@ class TestadorCarga:
         try:
             cpu_percent = 0.0
             
-            #usar métricas nativas de cada servidor
+            #Usar node_cpu_seconds_total de ambos os servidores (CPU do container)
             if servidor == 'nginx':
-                #nginx: conexões ativas como indicador de carga
-                query = 'nginx_connections_active'
+                job_name = 'nginx-node'
             else:
-                #apache: cpuload do mod_status
-                query = 'apache_cpuload'
+                job_name = 'apache-node'
+            
+            query = f'(1 - avg(rate(node_cpu_seconds_total{{job="{job_name}",mode="idle"}}[30s]))) * 100'
             
             response = requests.get(f'{prometheus_url}/api/v1/query',
                                    params={'query': query}, timeout=5)
@@ -201,14 +201,7 @@ class TestadorCarga:
                 data = response.json()
                 if data.get('data', {}).get('result'):
                     value = float(data['data']['result'][0]['value'][1])
-                    
-                    if servidor == 'nginx':
-                        #nginx: conexoes ativas (valor bruto, nao percentual)
-                        #normalizar para percentual: assumir ~100 conexoes = 1% cpu
-                        cpu_percent = (value / 100) * 1.0
-                    else:
-                        #apache: apache_cpuload ja e um percentual
-                        cpu_percent = value
+                    cpu_percent = value
             
             return {
                 'cpu_percent': round(cpu_percent, 2)

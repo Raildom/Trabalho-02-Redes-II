@@ -27,3 +27,19 @@ scrape_configs:
         labels:
           servidor: "apache"
           tipo: "servidor_web"
+
+  #Node Exporter do Nginx (métricas de sistema/processo)
+  - job_name: "nginx-node"
+    static_configs:
+      - targets: ["76.1.0.10:9100"]
+        labels:
+          servidor: "nginx"
+          tipo: "node_exporter"
+
+  #Node Exporter do Apache (métricas de sistema/processo)
+  - job_name: "apache-node"
+    static_configs:
+      - targets: ["76.1.0.11:9101"]
+        labels:
+          servidor: "apache"
+          tipo: "node_exporter"

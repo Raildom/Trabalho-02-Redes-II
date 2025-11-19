@@ -414,3 +414,155 @@ Trabalho-01-Redes-II/
 - `graficos/`: Gráficos PNG comparativos (throughput, tempo de resposta, taxa de sucesso)
 
 ---
+
+# Métricas Comparativas - Nginx vs Apache
+
+## Métricas Equivalentes
+
+### 1. Status do Servidor (UP/DOWN)
+
+**Nginx:**
+```promql
+nginx_up
+```
+
+**Apache:**
+```promql
+apache_up
+```
+
+**Query Comparativa (ambos em um gráfico):**
+```promql
+label_replace(nginx_up, "servidor", "nginx", "", "") or label_replace(apache_up, "servidor", "apache", "", "")
+```
+
+**Legend:** `{{servidor}} - Status`
+
+### 2. Total de Requisições
+
+**Nginx:**
+```promql
+nginx_http_requests_total
+```
+
+**Apache:**
+```promql
+apache_accesses_total
+```
+
+**Query Comparativa:**
+```promql
+label_replace(nginx_http_requests_total, "servidor", "nginx", "", "") or label_replace(apache_accesses_total, "servidor", "apache", "", "")
+```
+
+**Legend:** `{{servidor}} - Total`
+
+### 3. Taxa de Requisições (req/s)
+
+**Nginx:**
+```promql
+rate(nginx_http_requests_total[1m])
+```
+
+**Apache:**
+```promql
+rate(apache_accesses_total[1m])
+```
+
+**Query Comparativa:**
+```promql
+label_replace(rate(nginx_http_requests_total[1m]), "servidor", "nginx", "", "") or label_replace(rate(apache_accesses_total[1m]), "servidor", "apache", "", "")
+```
+
+### 4. Conexões/Workers Ativos
+
+**Nginx (conexões ativas):**
+```promql
+nginx_connections_active
+```
+
+**Apache (workers ocupados):**
+```promql
+apache_workers{state="busy"}
+```
+
+**Query Comparativa:**
+```promql
+label_replace(nginx_connections_active, "servidor", "nginx", "", "") or label_replace(apache_workers{state="busy"}, "servidor", "apache", "", "")
+```
+
+### 5. Uso de CPU (%)
+
+**Nginx (via Node Exporter - CPU do container):**
+```promql
+(1 - avg(rate(node_cpu_seconds_total{job="nginx-node",mode="idle"}[30s]))) * 100
+```
+
+**Apache (via Node Exporter - CPU do container):**
+```promql
+(1 - avg(rate(node_cpu_seconds_total{job="apache-node",mode="idle"}[30s]))) * 100
+```
+
+**Query Comparativa (ambos containers):**
+```promql
+label_replace((1 - avg(rate(node_cpu_seconds_total{job="nginx-node",mode="idle"}[30s]))) * 100, "servidor", "nginx", "", "") 
+or 
+label_replace((1 - avg(rate(node_cpu_seconds_total{job="apache-node",mode="idle"}[30s]))) * 100, "servidor", "apache", "", "")
+```
+
+**Configuração no Grafana:**
+- Legend: `{{servidor}} - CPU%`
+- Tipo: Time series
+- Unit: Percent (0-100)
+
+**Observação:** 
+- Mede CPU do CONTAINER completo (servidor web + exporters + sistema)
+
+### 6. Uso de Memória RAM (MB)
+
+**Nginx:**
+```promql
+process_resident_memory_bytes{job="nginx"} / (1024*1024)
+```
+
+**Apache:**
+```promql
+process_resident_memory_bytes{job="apache"} / (1024*1024)
+```
+
+**Query Comparativa em MB:**
+```promql
+label_replace(process_resident_memory_bytes{job="nginx"} / (1024*1024), "servidor", "nginx", "", "") or label_replace(process_resident_memory_bytes{job="apache"} / (1024*1024), "servidor", "apache", "", "")
+```
+
+### 7. Bytes Transferidos (MB)
+
+**Nginx (via Node Exporter - bytes transmitidos pela rede):**
+```promql
+rate(node_network_transmit_bytes_total{job="nginx-node",device="eth0"}[1m]) / (1024*1024)
+```
+
+**Apache (via Node Exporter - bytes transmitidos pela rede):**
+```promql
+rate(node_network_transmit_bytes_total{job="apache-node",device="eth0"}[1m]) / (1024*1024)
+```
+
+**Query Comparativa (MB/s):**
+```promql
+label_replace(rate(node_network_transmit_bytes_total{job="nginx-node",device="eth0"}[1m]) / (1024*1024), "servidor", "nginx", "", "")
+or
+label_replace(rate(node_network_transmit_bytes_total{job="apache-node",device="eth0"}[1m]) / (1024*1024), "servidor", "apache", "", "")
+```
+
+**Total Acumulado (MB):**
+```promql
+label_replace(node_network_transmit_bytes_total{job="nginx-node",device="eth0"} / (1024*1024), "servidor", "nginx", "", "")
+or
+label_replace(node_network_transmit_bytes_total{job="apache-node",device="eth0"} / (1024*1024), "servidor", "apache", "", "")
+```
+
+**Observação:** 
+- Mede bytes transmitidos pela interface de rede eth0
+- Inclui todo o tráfego do container (HTTP + overhead de protocolo)
+- Taxa (rate) mostra MB/s em tempo real
+- Total acumulado mostra MB totais desde o início

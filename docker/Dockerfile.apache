@@ -3,14 +3,19 @@ FROM ubuntu:22.04
 #Evitar prompts interativos durante instalacao
 ENV DEBIAN_FRONTEND=noninteractive
 
-#Instalar Apache, Python3 e apache_exporter
+#Instalar Apache, Python3, apache_exporter e node_exporter
 RUN apt-get update && \
-    apt-get install -y apache2 wget python3 ca-certificates && \
+    apt-get install -y apache2 wget python3 ca-certificates procps && \
     wget https://github.com/Lusitaniae/apache_exporter/releases/download/v1.0.7/apache_exporter-1.0.7.linux-amd64.tar.gz && \
     tar xzf apache_exporter-1.0.7.linux-amd64.tar.gz && \
     mv apache_exporter-1.0.7.linux-amd64/apache_exporter /usr/local/bin/ && \
     rm -rf apache_exporter-1.0.7.linux-amd64* && \
     chmod +x /usr/local/bin/apache_exporter && \
+    wget https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz && \
+    tar xzf node_exporter-1.8.2.linux-amd64.tar.gz && \
+    mv node_exporter-1.8.2.linux-amd64/node_exporter /usr/local/bin/ && \
+    rm -rf node_exporter-1.8.2.linux-amd64* && \
+    chmod +x /usr/local/bin/node_exporter && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -79,6 +84,12 @@ RUN echo '#!/usr/bin/env python3' > /iniciar.py && \
     echo 'print("Exportador Prometheus iniciado na porta 9117")' >> /iniciar.py && \
     echo 'sys.stdout.flush()' >> /iniciar.py && \
     echo '' >> /iniciar.py && \
+    echo 'print("Iniciando Node Exporter...")' >> /iniciar.py && \
+    echo 'sys.stdout.flush()' >> /iniciar.py && \
+    echo 'node_exporter = subprocess.Popen(["/usr/local/bin/node_exporter", "--web.listen-address=:9101"])' >> /iniciar.py && \
+    echo 'print("Node Exporter iniciado na porta 9101")' >> /iniciar.py && \
+    echo 'sys.stdout.flush()' >> /iniciar.py && \
+    echo '' >> /iniciar.py && \
     echo 'time.sleep(2)' >> /iniciar.py && \
     echo '' >> /iniciar.py && \
     echo 'print("Iniciando Apache...")' >> /iniciar.py && \
@@ -90,6 +101,7 @@ RUN echo '#!/usr/bin/env python3' > /iniciar.py && \
     echo 'def sinal_handler(sig, frame):' >> /iniciar.py && \
     echo '    print("Encerrando serviços...")' >> /iniciar.py && \
     echo '    apache_proc.terminate()' >> /iniciar.py && \
+    echo '    node_exporter.terminate()' >> /iniciar.py && \
     echo '    exportador.terminate()' >> /iniciar.py && \
     echo '    sys.exit(0)' >> /iniciar.py && \
     echo '' >> /iniciar.py && \

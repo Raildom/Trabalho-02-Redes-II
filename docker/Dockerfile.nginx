@@ -3,14 +3,19 @@ FROM ubuntu:22.04
 #Evitar prompts interativos durante instalacao
 ENV DEBIAN_FRONTEND=noninteractive
 
-#Instalar Nginx, Python3 e nginx-prometheus-exporter
+#Instalar Nginx, Python3, nginx-prometheus-exporter e procps (para obter PID do nginx)
 RUN apt-get update && \
-    apt-get install -y nginx wget python3 ca-certificates && \
+    apt-get install -y nginx wget python3 ca-certificates procps && \
     wget https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v1.3.0/nginx-prometheus-exporter_1.3.0_linux_amd64.tar.gz && \
     tar xzf nginx-prometheus-exporter_1.3.0_linux_amd64.tar.gz && \
     mv nginx-prometheus-exporter /usr/local/bin/ && \
     rm nginx-prometheus-exporter_1.3.0_linux_amd64.tar.gz && \
     chmod +x /usr/local/bin/nginx-prometheus-exporter && \
+    wget https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz && \
+    tar xzf node_exporter-1.8.2.linux-amd64.tar.gz && \
+    mv node_exporter-1.8.2.linux-amd64/node_exporter /usr/local/bin/ && \
+    rm -rf node_exporter-1.8.2.linux-amd64* && \
+    chmod +x /usr/local/bin/node_exporter && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -124,8 +129,15 @@ RUN echo '#!/usr/bin/env python3' > /iniciar.py && \
     echo 'print("Exportador Prometheus iniciado na porta 9113")' >> /iniciar.py && \
     echo 'sys.stdout.flush()' >> /iniciar.py && \
     echo '' >> /iniciar.py && \
+    echo 'print("Iniciando Node Exporter...")' >> /iniciar.py && \
+    echo 'sys.stdout.flush()' >> /iniciar.py && \
+    echo 'node_exporter = subprocess.Popen(["/usr/local/bin/node_exporter", "--web.listen-address=:9100"])' >> /iniciar.py && \
+    echo 'print("Node Exporter iniciado na porta 9100")' >> /iniciar.py && \
+    echo 'sys.stdout.flush()' >> /iniciar.py && \
+    echo '' >> /iniciar.py && \
     echo 'def sinal_handler(sig, frame):' >> /iniciar.py && \
     echo '    print("Encerrando serviços...")' >> /iniciar.py && \
+    echo '    node_exporter.terminate()' >> /iniciar.py && \
     echo '    exportador.terminate()' >> /iniciar.py && \
     echo '    nginx_proc.terminate()' >> /iniciar.py && \
     echo '    sys.exit(0)' >> /iniciar.py && \
