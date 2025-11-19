@@ -4,10 +4,10 @@ import socket
 import time
 import json
 import threading
-from configuracao import ID_CUSTOMIZADO, PORTA_SERVIDOR
+from gerador_hash import ID_CUSTOMIZADO
 
 class ClienteHTTP:
-    def __init__(self, host_servidor, porta_servidor=PORTA_SERVIDOR):
+    def __init__(self, host_servidor, porta_servidor=80):
         self.host = host_servidor
         self.porta = porta_servidor
     

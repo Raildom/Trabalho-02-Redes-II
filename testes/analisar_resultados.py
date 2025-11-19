@@ -52,9 +52,7 @@ class AnalisadorResultados:
         #Carrega os resultados dos testes do arquivo CSV
         try:
             self.df = pd.read_csv(self.arquivo_csv)
-            
             print(Cores.info(f"Dados carregados: {len(self.df)} registros encontrados"))
-            print(Cores.info(f"Colunas disponíveis: {', '.join(self.df.columns.tolist())}"))
         except FileNotFoundError:
             print(Cores.erro(f"Arquivo CSV não encontrado: {self.arquivo_csv}"))
             print("Execute primeiro os testes completos para gerar o arquivo CSV")
@@ -69,7 +67,6 @@ class AnalisadorResultados:
             print(Cores.erro("Nenhum resultado disponível para análise"))
             return
         
-        print(Cores.info("Configurando estilo dos gráficos..."))
         #Configura o estilo dos gráficos
         plt.style.use('default')
         plt.rcParams['figure.figsize'] = (12, 8)
@@ -80,23 +77,11 @@ class AnalisadorResultados:
         
         print(Cores.info("Gerando gráficos..."))
         
-        #Gráficos individuais por teste
-        print(Cores.info("  - Plotando throughput (req/s)..."))
         self.plotar_throughput()
-        
-        print(Cores.info("  - Plotando latência média..."))
         self.plotar_latencia()
-        
-        print(Cores.info("  - Plotando taxa de sucesso..."))
         self.plotar_taxa_sucesso()
-        
-        print(Cores.info("  - Plotando uso de CPU..."))
         self.plotar_cpu()
-        
-        print(Cores.info("  - Plotando tempo total de execução..."))
         self.plotar_tempo_total()
-        
-        print(Cores.info("  - Plotando comparação geral..."))
         self.plotar_comparacao_geral()
         
         print(Cores.sucesso("Gráficos salvos em resultados/graficos/"))
@@ -409,10 +394,10 @@ def main():
     analisador = AnalisadorResultados()
     if analisador.df is not None:
         analisador.gerar_todos_graficos()
-        print(Cores.sucesso("\n[OK] Análise concluída com sucesso!"))
-        print(Cores.info(f"[OK] Gráficos salvos em: resultados/graficos/\n"))
+        print(Cores.sucesso("\nAnálise concluída com sucesso!"))
+        print(Cores.info(f"Gráficos salvos em: resultados/graficos/\n"))
     else:
-        print(Cores.erro("\n[X] Não foi possível carregar os dados para análise\n"))
+        print(Cores.erro("\nNão foi possível carregar os dados para análise\n"))
 
 if __name__ == "__main__":
     main()

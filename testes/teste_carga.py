@@ -12,7 +12,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
 try:
     from cliente import ClienteHTTP
-    from configuracao import ID_CUSTOMIZADO
+    from gerador_hash import ID_CUSTOMIZADO
 except ImportError as e:
     print(f"[ERRO] Erro ao importar modulos: {e}")
     print("Certifique-se de estar no diretorio correto do projeto")
@@ -61,7 +61,7 @@ class TestadorCarga:
     #configuracoes dos cenarios de teste
     NUM_EXECUCOES = 10
     NUM_USUARIOS = 1
-    NUM_REQUISTICOES = 51
+    NUM_REQUISTICOES = 5
     
     CENARIO_1_BAIXA_CARGA = {
         'usuarios': 1,     
@@ -163,13 +163,6 @@ class TestadorCarga:
         
         self.txt_file = open(self.arquivo_txt, 'w', encoding='utf-8')
         self.dados_csv = []
-        
-        print(f"\n[INFO] Resultados serao salvos em:")
-        print(f"  - TXT: {self.arquivo_txt}")
-        print(f"  - CSV: {self.arquivo_csv}")
-        print(f"\n[INFO] Metricas de CPU/Memoria:")
-        print(f"  Coletadas via Prometheus (http://prometheus:9090)")
-        print(f"  Visualize em tempo real no Grafana (http://localhost:3000)")
     
     def print_e_salvar(self, texto):
         #Imprime no terminal e salva no arquivo TXT
@@ -512,7 +505,6 @@ class TestadorCarga:
         print()
         
         #Exportar CSV
-        print(Cores.info("Exportando dados para CSV..."))
         try:
             with open(self.arquivo_csv, 'w', newline='') as f:
                 if self.dados_csv:
@@ -520,14 +512,13 @@ class TestadorCarga:
                     writer = csv.DictWriter(f, fieldnames=campos)
                     writer.writeheader()
                     writer.writerows(self.dados_csv)
-                    print(Cores.sucesso(f"CSV salvo: {self.arquivo_csv}"))
+                    print(Cores.sucesso(f"Resultados salvos: {self.arquivo_csv}"))
         except Exception as e:
-            print(Cores.erro(f"Erro ao salvar CSV: {e}"))
+            print(Cores.erro(f"Erro ao salvar resultados: {e}"))
         
         #Fechar arquivo TXT
         if hasattr(self, 'txt_file') and self.txt_file:
             self.txt_file.close()
-            print(Cores.sucesso(f"TXT salvo: {self.arquivo_txt}"))
         
         print()  #Linha final no terminal
 

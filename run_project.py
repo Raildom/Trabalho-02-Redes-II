@@ -100,7 +100,7 @@ class ProjetoRedes:
                 print(f"  {Cores.VERDE}- Nginx:      http://76.1.0.10:80{Cores.RESET}")
                 print(f"  {Cores.VERDE}- Apache:     http://76.1.0.11:80{Cores.RESET}")
                 print(f"  {Cores.VERDE}- Prometheus: http://localhost:9090{Cores.RESET}")
-                print(f"  {Cores.VERDE}- Grafana:    http://localhost:3000{Cores.RESET} (admin/admin)")
+                print(f"  {Cores.VERDE}- Grafana:    http://localhost:3000{Cores.RESET}")
                 print("")
                 return True
             else:
