@@ -138,7 +138,7 @@ class AnalisadorResultados:
             plt.savefig('resultados/graficos/01_throughput.png', dpi=300, bbox_inches='tight')
             plt.close()
             
-            print(Cores.sucesso("  [OK] Gráfico de Throughput gerado"))
+            print(Cores.sucesso("Gráfico de Throughput gerado"))
             
         except Exception as e:
             print(Cores.erro(f"Erro ao plotar throughput: {e}"))
@@ -198,7 +198,7 @@ class AnalisadorResultados:
             plt.savefig('resultados/graficos/02_latencia.png', dpi=300, bbox_inches='tight')
             plt.close()
             
-            print(Cores.sucesso("  [OK] Gráfico de Latência gerado"))
+            print(Cores.sucesso("Gráfico de Latência gerado"))
             
         except Exception as e:
             print(Cores.erro(f"Erro ao plotar latência: {e}"))
@@ -258,7 +258,7 @@ class AnalisadorResultados:
             plt.savefig('resultados/graficos/03_tempo_total.png', dpi=300, bbox_inches='tight')
             plt.close()
             
-            print(Cores.sucesso("  [OK] Gráfico de Tempo Total gerado"))
+            print(Cores.sucesso("Gráfico de Tempo Total gerado"))
             
         except Exception as e:
             print(Cores.erro(f"Erro ao plotar tempo total: {e}"))
@@ -318,7 +318,7 @@ class AnalisadorResultados:
             plt.savefig('resultados/graficos/04_cpu.png', dpi=300, bbox_inches='tight')
             plt.close()
             
-            print(Cores.sucesso("  [OK] Gráfico de CPU gerado"))
+            print(Cores.sucesso("Gráfico de CPU gerado"))
             
         except Exception as e:
             print(Cores.erro(f"Erro ao plotar CPU: {e}"))
