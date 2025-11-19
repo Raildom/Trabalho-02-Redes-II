@@ -75,18 +75,18 @@ class AnalisadorResultados:
         #Cria diretório para gráficos
         os.makedirs('resultados/graficos', exist_ok=True)
         
-        print(Cores.info("Gerando gráficos separados..."))
+        print(Cores.info("Gerando gráficos"))
         
-        self.plotar_throughput_separado()
-        self.plotar_latencia_separado()
-        self.plotar_tempo_total_separado()
-        self.plotar_cpu_separado()
+        self.plotar_throughput()
+        self.plotar_latencia()
+        self.plotar_tempo_total()
+        self.plotar_cpu()
         
         print(Cores.sucesso("Gráficos salvos em resultados/graficos/"))
 
 
-    def plotar_throughput_separado(self):
-        #Plota gráfico de throughput separado
+    def plotar_throughput(self):
+        #Plota gráfico de throughput
         try:
             #Obter lista de todos os testes
             testes = sorted(self.df['teste'].unique(), key=lambda x: int(x.split('Cenario')[1].split('_')[0]))
@@ -145,8 +145,8 @@ class AnalisadorResultados:
             import traceback
             traceback.print_exc()
 
-    def plotar_latencia_separado(self):
-        #Plota gráfico de latência separado
+    def plotar_latencia(self):
+        #Plota gráfico de latência
         try:
             #Obter lista de todos os testes
             testes = sorted(self.df['teste'].unique(), key=lambda x: int(x.split('Cenario')[1].split('_')[0]))
@@ -205,8 +205,8 @@ class AnalisadorResultados:
             import traceback
             traceback.print_exc()
 
-    def plotar_tempo_total_separado(self):
-        #Plota gráfico de tempo total separado
+    def plotar_tempo_total(self):
+        #Plota gráfico de tempo total
         try:
             #Obter lista de todos os testes
             testes = sorted(self.df['teste'].unique(), key=lambda x: int(x.split('Cenario')[1].split('_')[0]))
@@ -265,8 +265,8 @@ class AnalisadorResultados:
             import traceback
             traceback.print_exc()
 
-    def plotar_cpu_separado(self):
-        #Plota gráfico de CPU separado
+    def plotar_cpu(self):
+        #Plota gráfico de CPU
         try:
             #Obter lista de todos os testes
             testes = sorted(self.df['teste'].unique(), key=lambda x: int(x.split('Cenario')[1].split('_')[0]))
