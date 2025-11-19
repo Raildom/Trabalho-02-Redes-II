@@ -69,320 +69,262 @@ class AnalisadorResultados:
         
         #Configura o estilo dos gráficos
         plt.style.use('default')
-        plt.rcParams['figure.figsize'] = (12, 8)
+        plt.rcParams['figure.figsize'] = (16, 10)
         plt.rcParams['font.size'] = 10
         
         #Cria diretório para gráficos
         os.makedirs('resultados/graficos', exist_ok=True)
         
-        print(Cores.info("Gerando gráficos..."))
+        print(Cores.info("Gerando gráficos separados..."))
         
-        self.plotar_throughput()
-        self.plotar_latencia()
-        self.plotar_taxa_sucesso()
-        self.plotar_cpu()
-        self.plotar_tempo_total()
-        self.plotar_comparacao_geral()
+        self.plotar_throughput_separado()
+        self.plotar_latencia_separado()
+        self.plotar_tempo_total_separado()
+        self.plotar_cpu_separado()
         
         print(Cores.sucesso("Gráficos salvos em resultados/graficos/"))
 
-    def plotar_throughput(self):
-        #Plota gráfico de throughput (requisições por segundo) para cada teste
-        try:
-            #Agrupar por teste e calcular estatísticas
-            testes = self.df['teste'].unique()
-            
-            for teste in testes:
-                plt.figure(figsize=(12, 8))
-                dados_teste = self.df[self.df['teste'] == teste]
-                
-                #Agrupar por servidor e calcular média e desvio padrão
-                stats = dados_teste.groupby('servidor')['requisicoes_por_segundo'].agg(['mean', 'std']).reset_index()
-                
-                servidores = stats['servidor'].tolist()
-                medias = stats['mean'].tolist()
-                desvios = stats['std'].fillna(0).tolist()
-                
-                x = np.arange(len(servidores))
-                width = 0.6
-                
-                cores = {'nginx': 'blue', 'apache': 'red'}
-                bars = plt.bar(x, medias, width, 
-                              color=[cores.get(s, 'gray') for s in servidores],
-                              alpha=0.8, edgecolor='black', linewidth=1.5,
-                              yerr=desvios, capsize=10)
-                
-                plt.title(f'Throughput - {teste}\n(Média +/- Desvio Padrão)', 
-                         fontsize=16, fontweight='bold', pad=20)
-                plt.xlabel('Servidor', fontsize=14, fontweight='bold')
-                plt.ylabel('Requisições por Segundo', fontsize=14, fontweight='bold')
-                plt.xticks(x, servidores, fontsize=12)
-                plt.grid(True, alpha=0.3, axis='y', linestyle='--')
-                plt.ylim(bottom=0)
-                
-                #Adicionar valores nas barras
-                for bar, media in zip(bars, medias):
-                    plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.1,
-                           f'{media:.2f}', ha='center', va='bottom', 
-                           fontsize=12, fontweight='bold')
-                
-                plt.tight_layout()
-                nome_arquivo = teste.replace(' ', '_').lower()
-                plt.savefig(f'resultados/graficos/throughput_{nome_arquivo}.png', 
-                           dpi=300, bbox_inches='tight')
-                plt.close()
-                
-        except Exception as e:
-            print(Cores.erro(f"Erro ao plotar throughput: {e}"))
 
-    def plotar_latencia(self):
-        #Plota gráfico de latência média para cada teste
+    def plotar_throughput_separado(self):
+        #Plota gráfico de throughput separado
         try:
-            testes = self.df['teste'].unique()
+            #Obter lista de todos os testes
+            testes = sorted(self.df['teste'].unique(), key=lambda x: int(x.split('Cenario')[1].split('_')[0]))
             
-            for teste in testes:
-                plt.figure(figsize=(12, 8))
-                dados_teste = self.df[self.df['teste'] == teste]
-                
-                #Agrupar por servidor e calcular média e desvio padrão
-                stats = dados_teste.groupby('servidor')['latencia_media_ms'].agg(['mean', 'std']).reset_index()
-                
-                servidores = stats['servidor'].tolist()
-                medias = stats['mean'].tolist()
-                desvios = stats['std'].fillna(0).tolist()
-                
-                x = np.arange(len(servidores))
-                width = 0.6
-                
-                cores = {'nginx': 'blue', 'apache': 'red'}
-                bars = plt.bar(x, medias, width,
-                              color=[cores.get(s, 'gray') for s in servidores],
-                              alpha=0.8, edgecolor='black', linewidth=1.5,
-                              yerr=desvios, capsize=10)
-                
-                plt.title(f'Latência Média - {teste}\n(Média +/- Desvio Padrão)', 
-                         fontsize=16, fontweight='bold', pad=20)
-                plt.xlabel('Servidor', fontsize=14, fontweight='bold')
-                plt.ylabel('Latência Média (ms)', fontsize=14, fontweight='bold')
-                plt.xticks(x, servidores, fontsize=12)
-                plt.grid(True, alpha=0.3, axis='y', linestyle='--')
-                plt.ylim(bottom=0)
-                
-                #Adicionar valores nas barras
-                for bar, media in zip(bars, medias):
-                    plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.1,
-                           f'{media:.2f}ms', ha='center', va='bottom',
-                           fontsize=12, fontweight='bold')
-                
-                plt.tight_layout()
-                nome_arquivo = teste.replace(' ', '_').lower()
-                plt.savefig(f'resultados/graficos/latencia_{nome_arquivo}.png',
-                           dpi=300, bbox_inches='tight')
-                plt.close()
-                
-        except Exception as e:
-            print(Cores.erro(f"Erro ao plotar latência: {e}"))
-
-    def plotar_taxa_sucesso(self):
-        #Plota gráfico de taxa de sucesso para cada teste
-        try:
-            testes = self.df['teste'].unique()
+            #Calcular médias por teste e servidor
+            stats = self.df.groupby(['teste', 'servidor']).agg({
+                'requisicoes_por_segundo': 'mean'
+            }).reset_index()
             
-            for teste in testes:
-                plt.figure(figsize=(12, 8))
-                dados_teste = self.df[self.df['teste'] == teste]
-                
-                #Agrupar por servidor e calcular média
-                stats = dados_teste.groupby('servidor')['taxa_sucesso_%'].agg(['mean', 'std']).reset_index()
-                
-                servidores = stats['servidor'].tolist()
-                medias = stats['mean'].tolist()
-                desvios = stats['std'].fillna(0).tolist()
-                
-                x = np.arange(len(servidores))
-                width = 0.6
-                
-                cores = {'nginx': 'blue', 'apache': 'red'}
-                bars = plt.bar(x, medias, width,
-                              color=[cores.get(s, 'gray') for s in servidores],
-                              alpha=0.8, edgecolor='black', linewidth=1.5,
-                              yerr=desvios, capsize=10)
-                
-                plt.title(f'Taxa de Sucesso - {teste}\n(Média +/- Desvio Padrão)',
-                         fontsize=16, fontweight='bold', pad=20)
-                plt.xlabel('Servidor', fontsize=14, fontweight='bold')
-                plt.ylabel('Taxa de Sucesso (%)', fontsize=14, fontweight='bold')
-                plt.xticks(x, servidores, fontsize=12)
-                plt.grid(True, alpha=0.3, axis='y', linestyle='--')
-                plt.ylim(0, 105)
-                
-                #Adicionar valores nas barras
-                for bar, media in zip(bars, medias):
-                    plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
-                           f'{media:.1f}%', ha='center', va='bottom',
-                           fontsize=12, fontweight='bold')
-                
-                plt.tight_layout()
-                nome_arquivo = teste.replace(' ', '_').lower()
-                plt.savefig(f'resultados/graficos/taxa_sucesso_{nome_arquivo}.png',
-                           dpi=300, bbox_inches='tight')
-                plt.close()
-                
-        except Exception as e:
-            print(Cores.erro(f"Erro ao plotar taxa de sucesso: {e}"))
-
-    def plotar_cpu(self):
-        #Plota gráfico de uso de CPU para cada teste
-        try:
-            testes = self.df['teste'].unique()
+            #Preparar dados para cada servidor
+            nginx_data = stats[stats['servidor'] == 'nginx'].sort_values('teste')
+            apache_data = stats[stats['servidor'] == 'apache'].sort_values('teste')
             
-            for teste in testes:
-                plt.figure(figsize=(12, 8))
-                dados_teste = self.df[self.df['teste'] == teste]
-                
-                #Agrupar por servidor e calcular média e desvio padrão
-                stats = dados_teste.groupby('servidor')['cpu_percent'].agg(['mean', 'std']).reset_index()
-                
-                servidores = stats['servidor'].tolist()
-                medias = stats['mean'].tolist()
-                desvios = stats['std'].fillna(0).tolist()
-                
-                x = np.arange(len(servidores))
-                width = 0.6
-                
-                cores = {'nginx': 'blue', 'apache': 'red'}
-                bars = plt.bar(x, medias, width,
-                              color=[cores.get(s, 'gray') for s in servidores],
-                              alpha=0.8, edgecolor='black', linewidth=1.5,
-                              yerr=desvios, capsize=10)
-                
-                plt.title(f'Uso de CPU - {teste}\n(Média +/- Desvio Padrão - CPU do Container)',
-                         fontsize=16, fontweight='bold', pad=20)
-                plt.xlabel('Servidor', fontsize=14, fontweight='bold')
-                plt.ylabel('Uso de CPU (%)', fontsize=14, fontweight='bold')
-                plt.xticks(x, servidores, fontsize=12)
-                plt.grid(True, alpha=0.3, axis='y', linestyle='--')
-                plt.ylim(bottom=0)
-                
-                #Adicionar valores nas barras
-                for bar, media in zip(bars, medias):
-                    plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.1,
-                           f'{media:.2f}%', ha='center', va='bottom',
-                           fontsize=12, fontweight='bold')
-                
-                plt.tight_layout()
-                nome_arquivo = teste.replace(' ', '_').lower()
-                plt.savefig(f'resultados/graficos/cpu_{nome_arquivo}.png',
-                           dpi=300, bbox_inches='tight')
-                plt.close()
-                
-        except Exception as e:
-            print(Cores.erro(f"Erro ao plotar CPU: {e}"))
-
-    def plotar_tempo_total(self):
-        #Plota gráfico de tempo total de execução para cada teste
-        try:
-            testes = self.df['teste'].unique()
+            #Criar figura
+            fig, ax = plt.subplots(figsize=(20, 10))
             
-            for teste in testes:
-                plt.figure(figsize=(12, 8))
-                dados_teste = self.df[self.df['teste'] == teste]
-                
-                #Agrupar por servidor e calcular média e desvio padrão
-                stats = dados_teste.groupby('servidor')['tempo_total_s'].agg(['mean', 'std']).reset_index()
-                
-                servidores = stats['servidor'].tolist()
-                medias = stats['mean'].tolist()
-                desvios = stats['std'].fillna(0).tolist()
-                
-                x = np.arange(len(servidores))
-                width = 0.6
-                
-                cores = {'nginx': 'blue', 'apache': 'red'}
-                bars = plt.bar(x, medias, width,
-                              color=[cores.get(s, 'gray') for s in servidores],
-                              alpha=0.8, edgecolor='black', linewidth=1.5,
-                              yerr=desvios, capsize=10)
-                
-                plt.title(f'Tempo Total de Execução - {teste}\n(Média +/- Desvio Padrão)',
-                         fontsize=16, fontweight='bold', pad=20)
-                plt.xlabel('Servidor', fontsize=14, fontweight='bold')
-                plt.ylabel('Tempo Total (segundos)', fontsize=14, fontweight='bold')
-                plt.xticks(x, servidores, fontsize=12)
-                plt.grid(True, alpha=0.3, axis='y', linestyle='--')
-                plt.ylim(bottom=0)
-                
-                #Adicionar valores nas barras
-                for bar, media in zip(bars, medias):
-                    plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.01,
-                           f'{media:.2f}s', ha='center', va='bottom',
-                           fontsize=12, fontweight='bold')
-                
-                plt.tight_layout()
-                nome_arquivo = teste.replace(' ', '_').lower()
-                plt.savefig(f'resultados/graficos/tempo_total_{nome_arquivo}.png',
-                           dpi=300, bbox_inches='tight')
-                plt.close()
-                
-        except Exception as e:
-            print(Cores.erro(f"Erro ao plotar tempo total: {e}"))
-
-    def plotar_comparacao_geral(self):
-        #Plota gráfico comparativo geral entre nginx e apache
-        try:
-            fig, axes = plt.subplots(2, 2, figsize=(16, 12))
-            fig.suptitle('Comparação Geral: Nginx vs Apache\n(Média de todos os testes)',
-                        fontsize=18, fontweight='bold', y=0.995)
+            x = np.arange(len(testes))
+            width = 0.35
             
-            #Calcular médias gerais por servidor
-            stats_throughput = self.df.groupby('servidor')['requisicoes_por_segundo'].mean()
-            stats_latencia = self.df.groupby('servidor')['latencia_media_ms'].mean()
-            stats_cpu = self.df.groupby('servidor')['cpu_percent'].mean()
-            stats_sucesso = self.df.groupby('servidor')['taxa_sucesso_%'].mean()
+            cores = {'nginx': '#0066CC', 'apache': '#CC0000'}
             
-            servidores = stats_throughput.index.tolist()
-            cores = {'nginx': 'blue', 'apache': 'red'}
-            cores_list = [cores.get(s, 'gray') for s in servidores]
+            bars_nginx = ax.bar(x - width/2, nginx_data['requisicoes_por_segundo'], 
+                               width, label='Nginx', color=cores['nginx'], 
+                               alpha=0.8, edgecolor='black', linewidth=1.2)
+            bars_apache = ax.bar(x + width/2, apache_data['requisicoes_por_segundo'], 
+                                width, label='Apache', color=cores['apache'], 
+                                alpha=0.8, edgecolor='black', linewidth=1.2)
             
-            #Gráfico 1: Throughput
-            axes[0, 0].bar(servidores, stats_throughput.values, color=cores_list, alpha=0.8, edgecolor='black')
-            axes[0, 0].set_title('Throughput Médio', fontsize=14, fontweight='bold')
-            axes[0, 0].set_ylabel('Req/s', fontsize=12)
-            axes[0, 0].grid(True, alpha=0.3, axis='y')
-            for i, (srv, val) in enumerate(zip(servidores, stats_throughput.values)):
-                axes[0, 0].text(i, val + 0.1, f'{val:.2f}', ha='center', va='bottom', fontweight='bold')
+            ax.set_title('Throughput (Requisições por Segundo)\nComparação: Nginx vs Apache', 
+                        fontsize=20, fontweight='bold', pad=20)
+            ax.set_ylabel('Requisições/s', fontsize=16, fontweight='bold')
+            ax.set_xlabel('Cenários de Teste', fontsize=16, fontweight='bold')
+            ax.set_xticks(x)
+            ax.set_xticklabels(testes, rotation=45, ha='right', fontsize=11)
+            ax.legend(loc='upper left', fontsize=14, framealpha=0.9)
+            ax.grid(True, alpha=0.3, axis='y', linestyle='--')
+            ax.set_ylim(bottom=0)
             
-            #Gráfico 2: Latência
-            axes[0, 1].bar(servidores, stats_latencia.values, color=cores_list, alpha=0.8, edgecolor='black')
-            axes[0, 1].set_title('Latência Média', fontsize=14, fontweight='bold')
-            axes[0, 1].set_ylabel('ms', fontsize=12)
-            axes[0, 1].grid(True, alpha=0.3, axis='y')
-            for i, (srv, val) in enumerate(zip(servidores, stats_latencia.values)):
-                axes[0, 1].text(i, val + 0.1, f'{val:.2f}', ha='center', va='bottom', fontweight='bold')
-            
-            #Gráfico 3: CPU
-            axes[1, 0].bar(servidores, stats_cpu.values, color=cores_list, alpha=0.8, edgecolor='black')
-            axes[1, 0].set_title('Uso Médio de CPU (Container)', fontsize=14, fontweight='bold')
-            axes[1, 0].set_ylabel('%', fontsize=12)
-            axes[1, 0].grid(True, alpha=0.3, axis='y')
-            for i, (srv, val) in enumerate(zip(servidores, stats_cpu.values)):
-                axes[1, 0].text(i, val + 0.1, f'{val:.2f}%', ha='center', va='bottom', fontweight='bold')
-            
-            #Gráfico 4: Taxa de Sucesso
-            axes[1, 1].bar(servidores, stats_sucesso.values, color=cores_list, alpha=0.8, edgecolor='black')
-            axes[1, 1].set_title('Taxa de Sucesso Média', fontsize=14, fontweight='bold')
-            axes[1, 1].set_ylabel('%', fontsize=12)
-            axes[1, 1].set_ylim(0, 105)
-            axes[1, 1].grid(True, alpha=0.3, axis='y')
-            for i, (srv, val) in enumerate(zip(servidores, stats_sucesso.values)):
-                axes[1, 1].text(i, val + 1, f'{val:.1f}%', ha='center', va='bottom', fontweight='bold')
+            #Adicionar valores nas barras
+            for bars in [bars_nginx, bars_apache]:
+                for bar in bars:
+                    height = bar.get_height()
+                    if height > 0:
+                        ax.text(bar.get_x() + bar.get_width()/2., height,
+                               f'{height:.1f}',
+                               ha='center', va='bottom', fontsize=10, fontweight='bold')
             
             plt.tight_layout()
-            plt.savefig('resultados/graficos/comparacao_geral.png', dpi=300, bbox_inches='tight')
+            plt.savefig('resultados/graficos/01_throughput.png', dpi=300, bbox_inches='tight')
             plt.close()
             
+            print(Cores.sucesso("  [OK] Gráfico de Throughput gerado"))
+            
         except Exception as e:
-            print(Cores.erro(f"Erro ao plotar comparação geral: {e}"))
+            print(Cores.erro(f"Erro ao plotar throughput: {e}"))
+            import traceback
+            traceback.print_exc()
+
+    def plotar_latencia_separado(self):
+        #Plota gráfico de latência separado
+        try:
+            #Obter lista de todos os testes
+            testes = sorted(self.df['teste'].unique(), key=lambda x: int(x.split('Cenario')[1].split('_')[0]))
+            
+            #Calcular médias por teste e servidor
+            stats = self.df.groupby(['teste', 'servidor']).agg({
+                'latencia_media_ms': 'mean'
+            }).reset_index()
+            
+            #Preparar dados para cada servidor
+            nginx_data = stats[stats['servidor'] == 'nginx'].sort_values('teste')
+            apache_data = stats[stats['servidor'] == 'apache'].sort_values('teste')
+            
+            #Criar figura
+            fig, ax = plt.subplots(figsize=(20, 10))
+            
+            x = np.arange(len(testes))
+            width = 0.35
+            
+            cores = {'nginx': '#0066CC', 'apache': '#CC0000'}
+            
+            bars_nginx = ax.bar(x - width/2, nginx_data['latencia_media_ms'], 
+                               width, label='Nginx', color=cores['nginx'], 
+                               alpha=0.8, edgecolor='black', linewidth=1.2)
+            bars_apache = ax.bar(x + width/2, apache_data['latencia_media_ms'], 
+                                width, label='Apache', color=cores['apache'], 
+                                alpha=0.8, edgecolor='black', linewidth=1.2)
+            
+            ax.set_title('Latência Média\nComparação: Nginx vs Apache', 
+                        fontsize=20, fontweight='bold', pad=20)
+            ax.set_ylabel('Latência (ms)', fontsize=16, fontweight='bold')
+            ax.set_xlabel('Cenários de Teste', fontsize=16, fontweight='bold')
+            ax.set_xticks(x)
+            ax.set_xticklabels(testes, rotation=45, ha='right', fontsize=11)
+            ax.legend(loc='upper left', fontsize=14, framealpha=0.9)
+            ax.grid(True, alpha=0.3, axis='y', linestyle='--')
+            ax.set_ylim(bottom=0)
+            
+            #Adicionar valores nas barras
+            for bars in [bars_nginx, bars_apache]:
+                for bar in bars:
+                    height = bar.get_height()
+                    if height > 0:
+                        ax.text(bar.get_x() + bar.get_width()/2., height,
+                               f'{height:.1f}',
+                               ha='center', va='bottom', fontsize=10, fontweight='bold')
+            
+            plt.tight_layout()
+            plt.savefig('resultados/graficos/02_latencia.png', dpi=300, bbox_inches='tight')
+            plt.close()
+            
+            print(Cores.sucesso("  [OK] Gráfico de Latência gerado"))
+            
+        except Exception as e:
+            print(Cores.erro(f"Erro ao plotar latência: {e}"))
+            import traceback
+            traceback.print_exc()
+
+    def plotar_tempo_total_separado(self):
+        #Plota gráfico de tempo total separado
+        try:
+            #Obter lista de todos os testes
+            testes = sorted(self.df['teste'].unique(), key=lambda x: int(x.split('Cenario')[1].split('_')[0]))
+            
+            #Calcular médias por teste e servidor
+            stats = self.df.groupby(['teste', 'servidor']).agg({
+                'tempo_total_s': 'mean'
+            }).reset_index()
+            
+            #Preparar dados para cada servidor
+            nginx_data = stats[stats['servidor'] == 'nginx'].sort_values('teste')
+            apache_data = stats[stats['servidor'] == 'apache'].sort_values('teste')
+            
+            #Criar figura
+            fig, ax = plt.subplots(figsize=(20, 10))
+            
+            x = np.arange(len(testes))
+            width = 0.35
+            
+            cores = {'nginx': '#0066CC', 'apache': '#CC0000'}
+            
+            bars_nginx = ax.bar(x - width/2, nginx_data['tempo_total_s'], 
+                               width, label='Nginx', color=cores['nginx'], 
+                               alpha=0.8, edgecolor='black', linewidth=1.2)
+            bars_apache = ax.bar(x + width/2, apache_data['tempo_total_s'], 
+                                width, label='Apache', color=cores['apache'], 
+                                alpha=0.8, edgecolor='black', linewidth=1.2)
+            
+            ax.set_title('Tempo Total de Execução\nComparação: Nginx vs Apache', 
+                        fontsize=20, fontweight='bold', pad=20)
+            ax.set_ylabel('Tempo (segundos)', fontsize=16, fontweight='bold')
+            ax.set_xlabel('Cenários de Teste', fontsize=16, fontweight='bold')
+            ax.set_xticks(x)
+            ax.set_xticklabels(testes, rotation=45, ha='right', fontsize=11)
+            ax.legend(loc='upper left', fontsize=14, framealpha=0.9)
+            ax.grid(True, alpha=0.3, axis='y', linestyle='--')
+            ax.set_ylim(bottom=0)
+            
+            #Adicionar valores nas barras
+            for bars in [bars_nginx, bars_apache]:
+                for bar in bars:
+                    height = bar.get_height()
+                    if height > 0:
+                        ax.text(bar.get_x() + bar.get_width()/2., height,
+                               f'{height:.1f}',
+                               ha='center', va='bottom', fontsize=10, fontweight='bold')
+            
+            plt.tight_layout()
+            plt.savefig('resultados/graficos/03_tempo_total.png', dpi=300, bbox_inches='tight')
+            plt.close()
+            
+            print(Cores.sucesso("  [OK] Gráfico de Tempo Total gerado"))
+            
+        except Exception as e:
+            print(Cores.erro(f"Erro ao plotar tempo total: {e}"))
+            import traceback
+            traceback.print_exc()
+
+    def plotar_cpu_separado(self):
+        #Plota gráfico de CPU separado
+        try:
+            #Obter lista de todos os testes
+            testes = sorted(self.df['teste'].unique(), key=lambda x: int(x.split('Cenario')[1].split('_')[0]))
+            
+            #Calcular médias por teste e servidor
+            stats = self.df.groupby(['teste', 'servidor']).agg({
+                'cpu_percent': 'mean'
+            }).reset_index()
+            
+            #Preparar dados para cada servidor
+            nginx_data = stats[stats['servidor'] == 'nginx'].sort_values('teste')
+            apache_data = stats[stats['servidor'] == 'apache'].sort_values('teste')
+            
+            #Criar figura
+            fig, ax = plt.subplots(figsize=(20, 10))
+            
+            x = np.arange(len(testes))
+            width = 0.35
+            
+            cores = {'nginx': '#0066CC', 'apache': '#CC0000'}
+            
+            bars_nginx = ax.bar(x - width/2, nginx_data['cpu_percent'], 
+                               width, label='Nginx', color=cores['nginx'], 
+                               alpha=0.8, edgecolor='black', linewidth=1.2)
+            bars_apache = ax.bar(x + width/2, apache_data['cpu_percent'], 
+                                width, label='Apache', color=cores['apache'], 
+                                alpha=0.8, edgecolor='black', linewidth=1.2)
+            
+            ax.set_title('Uso de CPU (Container)\nComparação: Nginx vs Apache', 
+                        fontsize=20, fontweight='bold', pad=20)
+            ax.set_ylabel('CPU (%)', fontsize=16, fontweight='bold')
+            ax.set_xlabel('Cenários de Teste', fontsize=16, fontweight='bold')
+            ax.set_xticks(x)
+            ax.set_xticklabels(testes, rotation=45, ha='right', fontsize=11)
+            ax.legend(loc='upper left', fontsize=14, framealpha=0.9)
+            ax.grid(True, alpha=0.3, axis='y', linestyle='--')
+            ax.set_ylim(bottom=0)
+            
+            #Adicionar valores nas barras
+            for bars in [bars_nginx, bars_apache]:
+                for bar in bars:
+                    height = bar.get_height()
+                    if height > 0:
+                        ax.text(bar.get_x() + bar.get_width()/2., height,
+                               f'{height:.1f}',
+                               ha='center', va='bottom', fontsize=10, fontweight='bold')
+            
+            plt.tight_layout()
+            plt.savefig('resultados/graficos/04_cpu.png', dpi=300, bbox_inches='tight')
+            plt.close()
+            
+            print(Cores.sucesso("  [OK] Gráfico de CPU gerado"))
+            
+        except Exception as e:
+            print(Cores.erro(f"Erro ao plotar CPU: {e}"))
+            import traceback
+            traceback.print_exc()
+
 
 
 def main():
@@ -395,9 +337,15 @@ def main():
     if analisador.df is not None:
         analisador.gerar_todos_graficos()
         print(Cores.sucesso("\nAnálise concluída com sucesso!"))
-        print(Cores.info(f"Gráficos salvos em: resultados/graficos/\n"))
+        print(Cores.info(f"Gráficos salvos em: resultados/graficos/"))
+        print(Cores.info(f"  - 01_throughput.png"))
+        print(Cores.info(f"  - 02_latencia.png"))
+        print(Cores.info(f"  - 03_tempo_total.png"))
+        print(Cores.info(f"  - 04_cpu.png\n"))
     else:
         print(Cores.erro("\nNão foi possível carregar os dados para análise\n"))
 
 if __name__ == "__main__":
     main()
+
+

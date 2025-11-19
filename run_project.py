@@ -217,13 +217,11 @@ class ProjetoRedes:
             print(Cores.sucesso("Gráficos gerados com sucesso!"))
             print(f"{Cores.VERDE}Localização: resultados/graficos/{Cores.RESET}")
             print("")
-            print(f"{Cores.CIANO}Gráficos disponíveis:{Cores.RESET}")
-            print(f"  - Throughput (requisições/segundo)")
-            print(f"  - Latência média (ms)")
-            print(f"  - Taxa de sucesso (%)")
-            print(f"  - Uso de CPU (%)")
-            print(f"  - Tempo total de execução (s)")
-            print(f"  - Comparação geral (4 métricas)")
+            print(f"{Cores.CIANO}Gráficos gerados:{Cores.RESET}")
+            print(f"  1. Throughput (Requisições/segundo)")
+            print(f"  2. Latência Média (ms)")
+            print(f"  3. Tempo Total de Execução (s)")
+            print(f"  4. Uso de CPU (%)")
             print("")
             return True
         except subprocess.CalledProcessError as e:

@@ -184,17 +184,18 @@ Cada cenário é testado em **ambos os servidores** (Nginx e Apache).
 
 1. **Requisições por Segundo (RPS)**
 2. **Latência Média** (milissegundos)
-3. **Desvio Padrão**
-4. **Taxa de Sucesso** (%)
-5. **Taxa de Erro** (%)
-6. **Tempo Total** (segundos)
-7. **CPU do Container** (%)
+3. **Tempo Total** (segundos)
+4. **CPU do Container** (%)
 
 ### Arquivos de Resultado
 
 - `resultados_testes.txt` - Relatório completo em texto
 - `resultados_testes.csv` - Dados detalhados com todas as métricas
-- `graficos/` - Gráficos comparativos gerados
+- `graficos/` - 4 gráficos comparativos:
+  - `01_throughput.png` - Requisições por segundo
+  - `02_latencia.png` - Latência média
+  - `03_tempo_total.png` - Tempo total de execução
+  - `04_cpu.png` - Uso de CPU do container
 
 ---
 
