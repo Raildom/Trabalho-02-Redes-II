@@ -11,7 +11,7 @@
 
 # docker-compose up -d
 
-#Script principal para executar o projeto Redes II
+#Script principal para executar o projeto
 import subprocess
 import sys
 import os

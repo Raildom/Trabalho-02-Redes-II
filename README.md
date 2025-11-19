@@ -155,24 +155,24 @@ Trabalho-02-Redes-II/
 O sistema executa **10 execuções completas** com **12 cenários cada** (120 testes totais):
 
 ### Cenários de API (3 cenários)
-1. **Baixa Carga** - /api/info (1 usuário, 1 requisição)
-2. **Média Carga** - /api/status (1 usuário, 5 requisições)
-3. **Alta Carga** - /api/dados (1 usuário, 1 requisição)
+1. **Baixa Carga** - /api/info (10 usuários, 100 requisições)
+2. **Média Carga** - /api/status (10 usuários, 500 requisições)
+3. **Alta Carga** - /api/dados (100 usuários, 1000 requisições)
 
 ### Arquivos Pequenos (3 cenários)
-4. **1KB** - pequeno-1kb.txt (1 usuário, 5 requisições)
-5. **10KB** - pequeno-10kb.txt (1 usuário, 5 requisições)
-6. **50KB** - pequeno-50kb.txt (1 usuário, 5 requisições)
+4. **1KB** - pequeno-1kb.txt (10 usuários, 50 requisições)
+5. **10KB** - pequeno-10kb.txt (10 usuários, 50 requisições)
+6. **50KB** - pequeno-50kb.txt (10 usuários, 50 requisições)
 
 ### Arquivos Médios (3 cenários)
-7. **100KB** - medio-100kb.txt (1 usuário, 5 requisições)
-8. **500KB** - medio-500kb.txt (1 usuário, 5 requisições)
-9. **700KB** - medio-700kb.txt (1 usuário, 5 requisições)
+7. **100KB** - medio-100kb.txt (10 usuários, 50 requisições)
+8. **500KB** - medio-500kb.txt (10 usuários, 50 requisições)
+9. **700KB** - medio-700kb.txt (10 usuários, 50 requisições)
 
 ### Arquivos Grandes (3 cenários)
-10. **1MB** - grande-1mb.txt (1 usuário, 5 requisições)
-11. **5MB** - grande-5mb.txt (1 usuário, 5 requisições)
-12. **7MB** - grande-7mb.txt (1 usuário, 5 requisições)
+10. **1MB** - grande-1mb.txt (10 usuários, 50 requisições)
+11. **5MB** - grande-5mb.txt (10 usuários, 50 requisições)
+12. **7MB** - grande-7mb.txt (10 usuários, 50 requisições)
 
 Cada cenário é testado em **ambos os servidores** (Nginx e Apache).
 
@@ -220,21 +220,27 @@ label_replace(nginx_up, "servidor", "nginx", "", "") or label_replace(apache_up,
 
 **Query Comparativa:**
 ```promql
-label_replace(nginx_http_requests_total, "servidor", "nginx", "", "") or label_replace(apache_accesses_total, "servidor", "apache", "", "")
+label_replace(nginx_http_requests_total, "servidor", "nginx", "", "") 
+or 
+label_replace(apache_accesses_total, "servidor", "apache", "", "")
 ```
 
 ### 3. Taxa de Requisições (req/s)
 
 **Query Comparativa:**
 ```promql
-label_replace(rate(nginx_http_requests_total[1m]), "servidor", "nginx", "", "") or label_replace(rate(apache_accesses_total[1m]), "servidor", "apache", "", "")
+label_replace(rate(nginx_http_requests_total[1m]), "servidor", "nginx", "", "") 
+or 
+label_replace(rate(apache_accesses_total[1m]), "servidor", "apache", "", "")
 ```
 
 ### 4. Conexões/Workers Ativos
 
 **Query Comparativa:**
 ```promql
-label_replace(nginx_connections_active, "servidor", "nginx", "", "") or label_replace(apache_workers{state="busy"}, "servidor", "apache", "", "")
+label_replace(nginx_connections_active, "servidor", "nginx", "", "") 
+or 
+label_replace(apache_workers{state="busy"}, "servidor", "apache", "", "")
 ```
 
 ### 5. Uso de CPU (%)

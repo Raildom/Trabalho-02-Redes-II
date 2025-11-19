@@ -13,397 +13,401 @@ EXECUÇÃO 1/10 - RODADA COMPLETA DE TESTES
 
 ============================================================
 CENÁRIO 1: BAIXA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 10 | Requisições: 100
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/info
 
   Testando NGINX: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 366.54
-    Latencia media: 1.10ms
-    CPU: 24.50%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 4077.88
+    Latencia media: 1.85ms
+    Desvio padrao: 0.83ms
+    CPU: 6.09%
 
   Testando APACHE: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 411.77
-    Latencia media: 1.79ms
-    CPU: 23.73%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 5499.72
+    Latencia media: 1.54ms
+    Desvio padrao: 0.65ms
+    CPU: 6.00%
 
 ============================================================
 CENÁRIO 2: MÉDIA CARGA
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 500
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/status
 
   Testando NGINX: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 2249.92
-    Latencia media: 0.36ms
-    Desvio padrao: 0.13ms
-    CPU: 24.45%
+    Tempo total: 0.08s
+    Requisicoes/segundo: 6045.15
+    Latencia media: 1.57ms
+    Desvio padrao: 0.90ms
+    CPU: 6.09%
 
   Testando APACHE: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1018.88
-    Latencia media: 0.86ms
-    Desvio padrao: 0.18ms
-    CPU: 23.69%
+    Tempo total: 0.08s
+    Requisicoes/segundo: 6096.44
+    Latencia media: 1.56ms
+    Desvio padrao: 0.81ms
+    CPU: 6.00%
 
 ============================================================
 CENÁRIO 3: ALTA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 100 | Requisições: 1000
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/dados
 
   Testando NGINX: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1134.52
-    Latencia media: 0.52ms
-    CPU: 24.41%
+    Tempo total: 0.18s
+    Requisicoes/segundo: 5637.98
+    Latencia media: 6.88ms
+    Desvio padrao: 4.06ms
+    CPU: 6.09%
 
   Testando APACHE: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 926.51
-    Latencia media: 0.72ms
-    CPU: 23.66%
+    Tempo total: 0.19s
+    Requisicoes/segundo: 5178.73
+    Latencia media: 7.03ms
+    Desvio padrao: 3.84ms
+    CPU: 6.57%
 
 ============================================================
 CENÁRIO 4: ARQUIVO PEQUENO (1KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-1kb.txt
 
   Testando NGINX: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 2664.07
-    Latencia media: 0.29ms
-    Desvio padrao: 0.12ms
-    CPU: 24.38%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 3172.60
+    Latencia media: 2.67ms
+    Desvio padrao: 2.48ms
+    CPU: 6.09%
 
   Testando APACHE: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1921.70
-    Latencia media: 0.45ms
-    Desvio padrao: 0.13ms
-    CPU: 23.63%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4800.29
+    Latencia media: 1.45ms
+    Desvio padrao: 0.57ms
+    CPU: 6.57%
 
 ============================================================
 CENÁRIO 5: ARQUIVO PEQUENO (10KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-10kb.txt
 
   Testando NGINX: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
-    Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 3180.39
-    Latencia media: 0.26ms
-    Desvio padrao: 0.09ms
-    CPU: 24.35%
-
-  Testando APACHE: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
-
-  Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
     Tempo total: 0.01s
-    Requisicoes/segundo: 918.31
-    Latencia media: 0.95ms
-    Desvio padrao: 0.34ms
-    CPU: 23.59%
+    Requisicoes/segundo: 4337.80
+    Latencia media: 1.85ms
+    Desvio padrao: 0.67ms
+    CPU: 6.09%
+
+  Testando APACHE: /estatico/pequeno-10kb.txt
+  Requisicoes: 50, Usuários: 10
+
+  Resultados:
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4301.50
+    Latencia media: 1.83ms
+    Desvio padrao: 0.68ms
+    CPU: 6.57%
 
 ============================================================
 CENÁRIO 6: ARQUIVO PEQUENO (50KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-50kb.txt
 
   Testando NGINX: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1520.56
-    Latencia media: 0.57ms
-    Desvio padrao: 0.31ms
-    CPU: 24.30%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 2318.04
+    Latencia media: 3.81ms
+    Desvio padrao: 1.43ms
+    CPU: 6.09%
 
   Testando APACHE: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 686.26
-    Latencia media: 1.31ms
-    Desvio padrao: 0.20ms
-    CPU: 23.54%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 2077.21
+    Latencia media: 4.24ms
+    Desvio padrao: 1.40ms
+    CPU: 6.57%
 
 ============================================================
 CENÁRIO 7: ARQUIVO MÉDIO (100KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-100kb.txt
 
   Testando NGINX: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 578.60
-    Latencia media: 1.54ms
-    Desvio padrao: 0.17ms
-    CPU: 24.23%
+    Tempo total: 0.04s
+    Requisicoes/segundo: 1186.90
+    Latencia media: 7.54ms
+    Desvio padrao: 2.11ms
+    CPU: 6.22%
 
   Testando APACHE: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 618.70
-    Latencia media: 1.46ms
-    Desvio padrao: 0.57ms
-    CPU: 23.46%
+    Tempo total: 0.05s
+    Requisicoes/segundo: 1021.92
+    Latencia media: 8.91ms
+    Desvio padrao: 2.34ms
+    CPU: 6.57%
 
 ============================================================
 CENÁRIO 8: ARQUIVO MÉDIO (500KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-500kb.txt
 
   Testando NGINX: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.04s
-    Requisicoes/segundo: 124.26
-    Latencia media: 7.77ms
-    Desvio padrao: 7.13ms
-    CPU: 24.05%
+    Tempo total: 0.65s
+    Requisicoes/segundo: 76.96
+    Latencia media: 122.19ms
+    Desvio padrao: 28.33ms
+    CPU: 6.76%
 
   Testando APACHE: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.03s
-    Requisicoes/segundo: 178.30
-    Latencia media: 5.34ms
-    Desvio padrao: 0.78ms
-    CPU: 23.22%
+    Tempo total: 0.44s
+    Requisicoes/segundo: 112.97
+    Latencia media: 81.16ms
+    Desvio padrao: 24.51ms
+    CPU: 7.04%
 
 ============================================================
 CENÁRIO 9: ARQUIVO MÉDIO (700KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-700kb.txt
 
   Testando NGINX: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.06s
-    Requisicoes/segundo: 90.67
-    Latencia media: 10.70ms
-    Desvio padrao: 7.18ms
-    CPU: 23.77%
+    Tempo total: 1.04s
+    Requisicoes/segundo: 48.24
+    Latencia media: 194.08ms
+    Desvio padrao: 45.82ms
+    CPU: 7.51%
 
   Testando APACHE: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.04s
-    Requisicoes/segundo: 125.34
-    Latencia media: 7.67ms
-    Desvio padrao: 0.78ms
-    CPU: 22.90%
+    Tempo total: 0.94s
+    Requisicoes/segundo: 52.93
+    Latencia media: 176.89ms
+    Desvio padrao: 52.22ms
+    CPU: 7.75%
 
 ============================================================
 CENÁRIO 10: ARQUIVO GRANDE (1MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-1mb.txt
 
   Testando NGINX: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.11s
-    Requisicoes/segundo: 45.79
-    Latencia media: 21.49ms
-    Desvio padrao: 18.05ms
-    CPU: 23.28%
+    Tempo total: 1.68s
+    Requisicoes/segundo: 29.68
+    Latencia media: 317.92ms
+    Desvio padrao: 68.80ms
+    CPU: 8.13%
 
   Testando APACHE: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.07s
-    Requisicoes/segundo: 67.82
-    Latencia media: 14.29ms
-    Desvio padrao: 1.05ms
-    CPU: 22.31%
+    Tempo total: 1.61s
+    Requisicoes/segundo: 31.12
+    Latencia media: 299.38ms
+    Desvio padrao: 96.67ms
+    CPU: 8.86%
 
 ============================================================
 CENÁRIO 11: ARQUIVO GRANDE (5MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-5mb.txt
 
   Testando NGINX: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 4.88s
-    Requisicoes/segundo: 1.02
-    Latencia media: 974.78ms
-    Desvio padrao: 689.82ms
-    CPU: 9.17%
+    Tempo total: 52.55s
+    Requisicoes/segundo: 0.95
+    Latencia media: 10280.45ms
+    Desvio padrao: 5572.56ms
+    CPU: 11.45%
 
   Testando APACHE: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.32s
-    Requisicoes/segundo: 1.50
-    Latencia media: 662.92ms
-    Desvio padrao: 12.49ms
-    CPU: 9.73%
+    Tempo total: 39.35s
+    Requisicoes/segundo: 1.27
+    Latencia media: 7607.05ms
+    Desvio padrao: 653.12ms
+    CPU: 10.30%
 
 ============================================================
 CENÁRIO 12: ARQUIVO GRANDE (7MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-7mb.txt
 
   Testando NGINX: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 8.18s
-    Requisicoes/segundo: 0.61
-    Latencia media: 1634.53ms
-    Desvio padrao: 725.57ms
-    CPU: 11.88%
+    Tempo total: 87.47s
+    Requisicoes/segundo: 0.57
+    Latencia media: 17225.32ms
+    Desvio padrao: 5494.36ms
+    CPU: 11.41%
 
   Testando APACHE: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 6.88s
-    Requisicoes/segundo: 0.73
-    Latencia media: 1374.00ms
-    Desvio padrao: 29.57ms
-    CPU: 14.91%
+    Tempo total: 75.63s
+    Requisicoes/segundo: 0.66
+    Latencia media: 14785.78ms
+    Desvio padrao: 1272.64ms
+    CPU: 10.03%
 
-EXECUÇÃO 1 CONCLUÍDA em 0.40 minutos
+EXECUÇÃO 1 CONCLUÍDA em 4.37 minutos
 
 ================================================================================
 EXECUÇÃO 2/10 - RODADA COMPLETA DE TESTES
@@ -411,397 +415,401 @@ EXECUÇÃO 2/10 - RODADA COMPLETA DE TESTES
 
 ============================================================
 CENÁRIO 1: BAIXA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 10 | Requisições: 100
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/info
 
   Testando NGINX: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 362.01
-    Latencia media: 0.87ms
-    CPU: 14.73%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 4157.63
+    Latencia media: 2.04ms
+    Desvio padrao: 1.47ms
+    CPU: 9.94%
 
   Testando APACHE: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 635.50
-    Latencia media: 1.09ms
-    CPU: 16.63%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 5262.28
+    Latencia media: 1.60ms
+    Desvio padrao: 0.69ms
+    CPU: 10.03%
 
 ============================================================
 CENÁRIO 2: MÉDIA CARGA
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 500
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/status
 
   Testando NGINX: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1245.78
-    Latencia media: 0.67ms
-    Desvio padrao: 0.21ms
-    CPU: 14.73%
+    Tempo total: 0.10s
+    Requisicoes/segundo: 5238.36
+    Latencia media: 1.74ms
+    Desvio padrao: 1.02ms
+    CPU: 9.94%
 
   Testando APACHE: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1515.28
-    Latencia media: 0.56ms
-    Desvio padrao: 0.33ms
-    CPU: 16.68%
+    Tempo total: 0.09s
+    Requisicoes/segundo: 5742.21
+    Latencia media: 1.65ms
+    Desvio padrao: 1.16ms
+    CPU: 10.03%
 
 ============================================================
 CENÁRIO 3: ALTA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 100 | Requisições: 1000
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/dados
 
   Testando NGINX: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 898.33
-    Latencia media: 0.64ms
-    CPU: 14.73%
+    Tempo total: 0.17s
+    Requisicoes/segundo: 5793.31
+    Latencia media: 6.17ms
+    Desvio padrao: 3.34ms
+    CPU: 9.94%
 
   Testando APACHE: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 865.16
-    Latencia media: 0.77ms
-    CPU: 16.71%
+    Tempo total: 0.19s
+    Requisicoes/segundo: 5393.96
+    Latencia media: 6.26ms
+    Desvio padrao: 3.39ms
+    CPU: 10.18%
 
 ============================================================
 CENÁRIO 4: ARQUIVO PEQUENO (1KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-1kb.txt
 
   Testando NGINX: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1932.15
-    Latencia media: 0.42ms
-    Desvio padrao: 0.14ms
-    CPU: 14.73%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 5011.24
+    Latencia media: 1.34ms
+    Desvio padrao: 0.50ms
+    CPU: 11.80%
 
   Testando APACHE: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1215.88
-    Latencia media: 0.72ms
-    Desvio padrao: 0.14ms
-    CPU: 16.75%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 5166.67
+    Latencia media: 1.53ms
+    Desvio padrao: 0.62ms
+    CPU: 10.18%
 
 ============================================================
 CENÁRIO 5: ARQUIVO PEQUENO (10KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-10kb.txt
 
   Testando NGINX: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1840.90
-    Latencia media: 0.44ms
-    Desvio padrao: 0.20ms
-    CPU: 14.73%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4590.56
+    Latencia media: 1.67ms
+    Desvio padrao: 0.49ms
+    CPU: 11.87%
 
   Testando APACHE: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1174.61
-    Latencia media: 0.69ms
-    Desvio padrao: 0.14ms
-    CPU: 16.79%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4162.09
+    Latencia media: 1.87ms
+    Desvio padrao: 0.66ms
+    CPU: 10.18%
 
 ============================================================
 CENÁRIO 6: ARQUIVO PEQUENO (50KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-50kb.txt
 
   Testando NGINX: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1211.46
-    Latencia media: 0.73ms
-    Desvio padrao: 0.17ms
-    CPU: 14.73%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 2246.69
+    Latencia media: 3.93ms
+    Desvio padrao: 1.33ms
+    CPU: 10.24%
 
   Testando APACHE: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 920.97
-    Latencia media: 0.97ms
-    Desvio padrao: 0.25ms
-    CPU: 16.84%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 2189.51
+    Latencia media: 4.02ms
+    Desvio padrao: 1.28ms
+    CPU: 10.18%
 
 ============================================================
 CENÁRIO 7: ARQUIVO MÉDIO (100KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-100kb.txt
 
   Testando NGINX: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 973.88
-    Latencia media: 0.93ms
-    Desvio padrao: 0.24ms
-    CPU: 14.73%
+    Tempo total: 0.04s
+    Requisicoes/segundo: 1327.17
+    Latencia media: 6.82ms
+    Desvio padrao: 1.79ms
+    CPU: 10.24%
 
   Testando APACHE: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 528.26
-    Latencia media: 1.76ms
-    Desvio padrao: 0.59ms
-    CPU: 15.09%
+    Tempo total: 0.04s
+    Requisicoes/segundo: 1234.59
+    Latencia media: 7.36ms
+    Desvio padrao: 1.80ms
+    CPU: 10.18%
 
 ============================================================
 CENÁRIO 8: ARQUIVO MÉDIO (500KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-500kb.txt
 
   Testando NGINX: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.02s
-    Requisicoes/segundo: 207.70
-    Latencia media: 4.67ms
-    Desvio padrao: 1.17ms
-    CPU: 14.73%
+    Tempo total: 0.49s
+    Requisicoes/segundo: 101.81
+    Latencia media: 93.81ms
+    Desvio padrao: 19.67ms
+    CPU: 10.24%
 
   Testando APACHE: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.03s
-    Requisicoes/segundo: 163.10
-    Latencia media: 5.97ms
-    Desvio padrao: 2.10ms
-    CPU: 15.09%
+    Tempo total: 0.42s
+    Requisicoes/segundo: 117.84
+    Latencia media: 78.33ms
+    Desvio padrao: 30.01ms
+    CPU: 10.51%
 
 ============================================================
 CENÁRIO 9: ARQUIVO MÉDIO (700KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-700kb.txt
 
   Testando NGINX: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.03s
-    Requisicoes/segundo: 154.45
-    Latencia media: 6.33ms
-    Desvio padrao: 0.42ms
-    CPU: 15.19%
+    Tempo total: 0.77s
+    Requisicoes/segundo: 64.52
+    Latencia media: 143.89ms
+    Desvio padrao: 32.50ms
+    CPU: 10.52%
 
   Testando APACHE: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.04s
-    Requisicoes/segundo: 140.90
-    Latencia media: 6.96ms
-    Desvio padrao: 1.20ms
-    CPU: 15.09%
+    Tempo total: 0.76s
+    Requisicoes/segundo: 65.95
+    Latencia media: 141.72ms
+    Desvio padrao: 46.19ms
+    CPU: 10.79%
 
 ============================================================
 CENÁRIO 10: ARQUIVO GRANDE (1MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-1mb.txt
 
   Testando NGINX: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.06s
-    Requisicoes/segundo: 84.98
-    Latencia media: 11.61ms
-    Desvio padrao: 0.73ms
-    CPU: 15.19%
+    Tempo total: 1.48s
+    Requisicoes/segundo: 33.85
+    Latencia media: 277.20ms
+    Desvio padrao: 63.83ms
+    CPU: 11.14%
 
   Testando APACHE: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.07s
-    Requisicoes/segundo: 69.76
-    Latencia media: 14.16ms
-    Desvio padrao: 2.29ms
-    CPU: 15.09%
+    Tempo total: 1.21s
+    Requisicoes/segundo: 41.31
+    Latencia media: 223.51ms
+    Desvio padrao: 70.58ms
+    CPU: 11.34%
 
 ============================================================
 CENÁRIO 11: ARQUIVO GRANDE (5MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-5mb.txt
 
   Testando NGINX: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.35s
-    Requisicoes/segundo: 1.49
-    Latencia media: 668.08ms
-    Desvio padrao: 12.05ms
-    CPU: 16.28%
+    Tempo total: 39.17s
+    Requisicoes/segundo: 1.28
+    Latencia media: 7694.30ms
+    Desvio padrao: 335.03ms
+    CPU: 11.25%
 
   Testando APACHE: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.36s
-    Requisicoes/segundo: 1.49
-    Latencia media: 669.62ms
-    Desvio padrao: 15.20ms
-    CPU: 16.69%
+    Tempo total: 38.50s
+    Requisicoes/segundo: 1.30
+    Latencia media: 7328.11ms
+    Desvio padrao: 1087.09ms
+    CPU: 10.89%
 
 ============================================================
 CENÁRIO 12: ARQUIVO GRANDE (7MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-7mb.txt
 
   Testando NGINX: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 6.86s
-    Requisicoes/segundo: 0.73
-    Latencia media: 1369.59ms
-    Desvio padrao: 89.47ms
-    CPU: 17.22%
+    Tempo total: 74.08s
+    Requisicoes/segundo: 0.67
+    Latencia media: 14574.05ms
+    Desvio padrao: 606.63ms
+    CPU: 10.86%
 
   Testando APACHE: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 6.66s
-    Requisicoes/segundo: 0.75
-    Latencia media: 1328.56ms
-    Desvio padrao: 16.47ms
-    CPU: 16.99%
+    Tempo total: 75.64s
+    Requisicoes/segundo: 0.66
+    Latencia media: 14854.49ms
+    Desvio padrao: 1032.97ms
+    CPU: 10.42%
 
-EXECUÇÃO 2 CONCLUÍDA em 0.34 minutos
+EXECUÇÃO 2 CONCLUÍDA em 3.89 minutos
 
 ================================================================================
 EXECUÇÃO 3/10 - RODADA COMPLETA DE TESTES
@@ -809,397 +817,401 @@ EXECUÇÃO 3/10 - RODADA COMPLETA DE TESTES
 
 ============================================================
 CENÁRIO 1: BAIXA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 10 | Requisições: 100
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/info
 
   Testando NGINX: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 683.78
-    Latencia media: 0.85ms
-    CPU: 16.99%
+    Tempo total: 0.04s
+    Requisicoes/segundo: 2711.04
+    Latencia media: 3.34ms
+    Desvio padrao: 3.27ms
+    CPU: 10.35%
 
   Testando APACHE: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 522.59
-    Latencia media: 1.05ms
-    CPU: 16.99%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 5038.69
+    Latencia media: 1.63ms
+    Desvio padrao: 0.81ms
+    CPU: 10.42%
 
 ============================================================
 CENÁRIO 2: MÉDIA CARGA
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 500
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/status
 
   Testando NGINX: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 2037.85
-    Latencia media: 0.35ms
-    Desvio padrao: 0.15ms
-    CPU: 16.99%
+    Tempo total: 0.09s
+    Requisicoes/segundo: 5766.57
+    Latencia media: 1.67ms
+    Desvio padrao: 0.99ms
+    CPU: 10.41%
 
   Testando APACHE: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1136.30
-    Latencia media: 0.78ms
-    Desvio padrao: 0.10ms
-    CPU: 16.99%
+    Tempo total: 0.08s
+    Requisicoes/segundo: 5961.95
+    Latencia media: 1.57ms
+    Desvio padrao: 0.80ms
+    CPU: 10.42%
 
 ============================================================
 CENÁRIO 3: ALTA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 100 | Requisições: 1000
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/dados
 
   Testando NGINX: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 970.90
-    Latencia media: 0.50ms
-    CPU: 16.99%
+    Tempo total: 0.18s
+    Requisicoes/segundo: 5666.99
+    Latencia media: 6.10ms
+    Desvio padrao: 3.70ms
+    CPU: 10.43%
 
   Testando APACHE: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 989.92
-    Latencia media: 0.65ms
-    CPU: 16.99%
+    Tempo total: 0.19s
+    Requisicoes/segundo: 5155.09
+    Latencia media: 7.23ms
+    Desvio padrao: 4.43ms
+    CPU: 10.42%
 
 ============================================================
 CENÁRIO 4: ARQUIVO PEQUENO (1KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-1kb.txt
 
   Testando NGINX: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 2805.93
-    Latencia media: 0.28ms
-    Desvio padrao: 0.16ms
-    CPU: 16.99%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4307.24
+    Latencia media: 1.60ms
+    Desvio padrao: 0.59ms
+    CPU: 10.43%
 
   Testando APACHE: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1708.06
-    Latencia media: 0.51ms
-    Desvio padrao: 0.11ms
-    CPU: 16.99%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4163.00
+    Latencia media: 1.75ms
+    Desvio padrao: 0.76ms
+    CPU: 10.42%
 
 ============================================================
 CENÁRIO 5: ARQUIVO PEQUENO (10KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-10kb.txt
 
   Testando NGINX: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1781.63
-    Latencia media: 0.44ms
-    Desvio padrao: 0.23ms
-    CPU: 16.99%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 3965.49
+    Latencia media: 2.00ms
+    Desvio padrao: 0.75ms
+    CPU: 10.43%
 
   Testando APACHE: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1560.03
-    Latencia media: 0.55ms
-    Desvio padrao: 0.17ms
-    CPU: 16.99%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 3991.08
+    Latencia media: 1.91ms
+    Desvio padrao: 0.58ms
+    CPU: 10.42%
 
 ============================================================
 CENÁRIO 6: ARQUIVO PEQUENO (50KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-50kb.txt
 
   Testando NGINX: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1709.73
-    Latencia media: 0.50ms
-    Desvio padrao: 0.15ms
-    CPU: 16.99%
+    Tempo total: 0.03s
+    Requisicoes/segundo: 1556.91
+    Latencia media: 5.82ms
+    Desvio padrao: 1.87ms
+    CPU: 10.43%
 
   Testando APACHE: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1008.88
-    Latencia media: 0.90ms
-    Desvio padrao: 0.17ms
-    CPU: 16.99%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 2108.62
+    Latencia media: 4.06ms
+    Desvio padrao: 1.29ms
+    CPU: 10.42%
 
 ============================================================
 CENÁRIO 7: ARQUIVO MÉDIO (100KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-100kb.txt
 
   Testando NGINX: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 912.80
-    Latencia media: 1.00ms
-    Desvio padrao: 0.26ms
-    CPU: 16.99%
+    Tempo total: 0.04s
+    Requisicoes/segundo: 1258.47
+    Latencia media: 6.98ms
+    Desvio padrao: 1.89ms
+    CPU: 10.43%
 
   Testando APACHE: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 819.94
-    Latencia media: 1.12ms
-    Desvio padrao: 0.24ms
-    CPU: 16.99%
+    Tempo total: 0.04s
+    Requisicoes/segundo: 1139.78
+    Latencia media: 7.87ms
+    Desvio padrao: 2.64ms
+    CPU: 10.42%
 
 ============================================================
 CENÁRIO 8: ARQUIVO MÉDIO (500KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-500kb.txt
 
   Testando NGINX: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.02s
-    Requisicoes/segundo: 239.10
-    Latencia media: 4.06ms
-    Desvio padrao: 0.29ms
-    CPU: 16.99%
+    Tempo total: 0.40s
+    Requisicoes/segundo: 126.13
+    Latencia media: 73.58ms
+    Desvio padrao: 24.97ms
+    CPU: 10.89%
 
   Testando APACHE: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.03s
-    Requisicoes/segundo: 192.30
-    Latencia media: 5.06ms
-    Desvio padrao: 1.69ms
-    CPU: 16.99%
+    Tempo total: 0.45s
+    Requisicoes/segundo: 112.31
+    Latencia media: 82.76ms
+    Desvio padrao: 23.22ms
+    CPU: 10.83%
 
 ============================================================
 CENÁRIO 9: ARQUIVO MÉDIO (700KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-700kb.txt
 
   Testando NGINX: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.04s
-    Requisicoes/segundo: 118.58
-    Latencia media: 8.28ms
-    Desvio padrao: 4.65ms
-    CPU: 16.99%
+    Tempo total: 0.78s
+    Requisicoes/segundo: 64.35
+    Latencia media: 144.56ms
+    Desvio padrao: 37.02ms
+    CPU: 11.14%
 
   Testando APACHE: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.04s
-    Requisicoes/segundo: 120.12
-    Latencia media: 8.18ms
-    Desvio padrao: 3.68ms
-    CPU: 16.99%
+    Tempo total: 0.78s
+    Requisicoes/segundo: 64.00
+    Latencia media: 146.23ms
+    Desvio padrao: 42.42ms
+    CPU: 11.27%
 
 ============================================================
 CENÁRIO 10: ARQUIVO GRANDE (1MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-1mb.txt
 
   Testando NGINX: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.06s
-    Requisicoes/segundo: 83.63
-    Latencia media: 11.81ms
-    Desvio padrao: 0.79ms
-    CPU: 16.99%
+    Tempo total: 1.47s
+    Requisicoes/segundo: 34.01
+    Latencia media: 279.04ms
+    Desvio padrao: 73.13ms
+    CPU: 11.43%
 
   Testando APACHE: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.06s
-    Requisicoes/segundo: 78.54
-    Latencia media: 12.60ms
-    Desvio padrao: 1.55ms
-    CPU: 18.79%
+    Tempo total: 1.38s
+    Requisicoes/segundo: 36.14
+    Latencia media: 260.62ms
+    Desvio padrao: 87.50ms
+    CPU: 11.46%
 
 ============================================================
 CENÁRIO 11: ARQUIVO GRANDE (5MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-5mb.txt
 
   Testando NGINX: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.52s
-    Requisicoes/segundo: 1.42
-    Latencia media: 702.41ms
-    Desvio padrao: 41.72ms
-    CPU: 17.33%
+    Tempo total: 38.78s
+    Requisicoes/segundo: 1.29
+    Latencia media: 7549.98ms
+    Desvio padrao: 507.01ms
+    CPU: 11.64%
 
   Testando APACHE: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.40s
-    Requisicoes/segundo: 1.47
-    Latencia media: 677.14ms
-    Desvio padrao: 13.22ms
-    CPU: 16.90%
+    Tempo total: 38.68s
+    Requisicoes/segundo: 1.29
+    Latencia media: 7551.03ms
+    Desvio padrao: 515.48ms
+    CPU: 10.37%
 
 ============================================================
 CENÁRIO 12: ARQUIVO GRANDE (7MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-7mb.txt
 
   Testando NGINX: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 6.66s
-    Requisicoes/segundo: 0.75
-    Latencia media: 1329.80ms
-    Desvio padrao: 13.80ms
-    CPU: 16.48%
+    Tempo total: 74.25s
+    Requisicoes/segundo: 0.67
+    Latencia media: 14650.11ms
+    Desvio padrao: 596.89ms
+    CPU: 11.12%
 
   Testando APACHE: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 6.70s
-    Requisicoes/segundo: 0.75
-    Latencia media: 1337.52ms
-    Desvio padrao: 36.37ms
-    CPU: 17.01%
+    Tempo total: 74.45s
+    Requisicoes/segundo: 0.67
+    Latencia media: 14652.64ms
+    Desvio padrao: 1059.00ms
+    CPU: 11.31%
 
-EXECUÇÃO 3 CONCLUÍDA em 0.34 minutos
+EXECUÇÃO 3 CONCLUÍDA em 3.87 minutos
 
 ================================================================================
 EXECUÇÃO 4/10 - RODADA COMPLETA DE TESTES
@@ -1207,397 +1219,401 @@ EXECUÇÃO 4/10 - RODADA COMPLETA DE TESTES
 
 ============================================================
 CENÁRIO 1: BAIXA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 10 | Requisições: 100
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/info
 
   Testando NGINX: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 761.63
-    Latencia media: 0.79ms
-    CPU: 16.95%
+    Tempo total: 0.03s
+    Requisicoes/segundo: 3491.99
+    Latencia media: 2.43ms
+    Desvio padrao: 1.50ms
+    CPU: 11.16%
 
   Testando APACHE: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 516.41
-    Latencia media: 1.20ms
-    CPU: 17.01%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 5337.69
+    Latencia media: 1.62ms
+    Desvio padrao: 0.56ms
+    CPU: 11.31%
 
 ============================================================
 CENÁRIO 2: MÉDIA CARGA
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 500
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/status
 
   Testando NGINX: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1740.81
-    Latencia media: 0.45ms
-    Desvio padrao: 0.26ms
-    CPU: 16.95%
+    Tempo total: 0.09s
+    Requisicoes/segundo: 5494.62
+    Latencia media: 1.75ms
+    Desvio padrao: 0.99ms
+    CPU: 11.16%
 
   Testando APACHE: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 862.67
-    Latencia media: 1.00ms
-    Desvio padrao: 0.21ms
-    CPU: 17.01%
+    Tempo total: 0.08s
+    Requisicoes/segundo: 6003.70
+    Latencia media: 1.58ms
+    Desvio padrao: 0.91ms
+    CPU: 11.31%
 
 ============================================================
 CENÁRIO 3: ALTA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 100 | Requisições: 1000
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/dados
 
   Testando NGINX: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 676.61
-    Latencia media: 0.79ms
-    CPU: 16.95%
+    Tempo total: 0.17s
+    Requisicoes/segundo: 5823.55
+    Latencia media: 5.83ms
+    Desvio padrao: 3.15ms
+    CPU: 11.16%
 
   Testando APACHE: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 575.35
-    Latencia media: 1.09ms
-    CPU: 17.01%
+    Tempo total: 0.20s
+    Requisicoes/segundo: 5100.92
+    Latencia media: 7.68ms
+    Desvio padrao: 4.80ms
+    CPU: 11.21%
 
 ============================================================
 CENÁRIO 4: ARQUIVO PEQUENO (1KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-1kb.txt
 
   Testando NGINX: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
-    Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1511.68
-    Latencia media: 0.51ms
-    Desvio padrao: 0.20ms
-    CPU: 16.95%
-
-  Testando APACHE: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
-
-  Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
     Tempo total: 0.01s
-    Requisicoes/segundo: 886.33
-    Latencia media: 0.96ms
-    Desvio padrao: 0.28ms
-    CPU: 17.01%
+    Requisicoes/segundo: 5001.32
+    Latencia media: 1.52ms
+    Desvio padrao: 0.78ms
+    CPU: 11.16%
+
+  Testando APACHE: /estatico/pequeno-1kb.txt
+  Requisicoes: 50, Usuários: 10
+
+  Resultados:
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.01s
+    Requisicoes/segundo: 5115.75
+    Latencia media: 1.57ms
+    Desvio padrao: 0.67ms
+    CPU: 13.00%
 
 ============================================================
 CENÁRIO 5: ARQUIVO PEQUENO (10KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-10kb.txt
 
   Testando NGINX: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1021.31
-    Latencia media: 0.81ms
-    Desvio padrao: 0.11ms
-    CPU: 16.95%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 3944.02
+    Latencia media: 1.96ms
+    Desvio padrao: 0.59ms
+    CPU: 11.16%
 
   Testando APACHE: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1116.52
-    Latencia media: 0.74ms
-    Desvio padrao: 0.16ms
-    CPU: 17.01%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4036.87
+    Latencia media: 2.06ms
+    Desvio padrao: 1.00ms
+    CPU: 11.55%
 
 ============================================================
 CENÁRIO 6: ARQUIVO PEQUENO (50KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-50kb.txt
 
   Testando NGINX: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 926.96
-    Latencia media: 0.91ms
-    Desvio padrao: 0.46ms
-    CPU: 16.95%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 2265.94
+    Latencia media: 3.69ms
+    Desvio padrao: 1.07ms
+    CPU: 11.16%
 
   Testando APACHE: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 873.81
-    Latencia media: 1.03ms
-    Desvio padrao: 0.16ms
-    CPU: 17.01%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 2168.52
+    Latencia media: 3.89ms
+    Desvio padrao: 1.18ms
+    CPU: 11.55%
 
 ============================================================
 CENÁRIO 7: ARQUIVO MÉDIO (100KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-100kb.txt
 
   Testando NGINX: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1028.42
-    Latencia media: 0.87ms
-    Desvio padrao: 0.28ms
-    CPU: 16.95%
+    Tempo total: 0.04s
+    Requisicoes/segundo: 1331.59
+    Latencia media: 6.78ms
+    Desvio padrao: 1.91ms
+    CPU: 11.16%
 
   Testando APACHE: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 807.84
-    Latencia media: 1.15ms
-    Desvio padrao: 0.28ms
-    CPU: 17.01%
+    Tempo total: 0.04s
+    Requisicoes/segundo: 1220.96
+    Latencia media: 7.34ms
+    Desvio padrao: 1.90ms
+    CPU: 11.55%
 
 ============================================================
 CENÁRIO 8: ARQUIVO MÉDIO (500KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-500kb.txt
 
   Testando NGINX: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.02s
-    Requisicoes/segundo: 251.70
-    Latencia media: 3.87ms
-    Desvio padrao: 0.12ms
-    CPU: 16.95%
+    Tempo total: 0.39s
+    Requisicoes/segundo: 129.47
+    Latencia media: 71.83ms
+    Desvio padrao: 28.01ms
+    CPU: 11.64%
 
   Testando APACHE: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.02s
-    Requisicoes/segundo: 200.96
-    Latencia media: 4.85ms
-    Desvio padrao: 0.48ms
-    CPU: 17.01%
+    Tempo total: 0.42s
+    Requisicoes/segundo: 119.87
+    Latencia media: 77.40ms
+    Desvio padrao: 27.84ms
+    CPU: 11.89%
 
 ============================================================
 CENÁRIO 9: ARQUIVO MÉDIO (700KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-700kb.txt
 
   Testando NGINX: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.04s
-    Requisicoes/segundo: 142.20
-    Latencia media: 6.89ms
-    Desvio padrao: 0.93ms
-    CPU: 16.95%
+    Tempo total: 0.77s
+    Requisicoes/segundo: 64.89
+    Latencia media: 144.32ms
+    Desvio padrao: 30.11ms
+    CPU: 11.83%
 
   Testando APACHE: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.04s
-    Requisicoes/segundo: 140.04
-    Latencia media: 7.00ms
-    Desvio padrao: 1.14ms
-    CPU: 17.01%
+    Tempo total: 0.74s
+    Requisicoes/segundo: 67.81
+    Latencia media: 137.90ms
+    Desvio padrao: 48.76ms
+    CPU: 12.04%
 
 ============================================================
 CENÁRIO 10: ARQUIVO GRANDE (1MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-1mb.txt
 
   Testando NGINX: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.07s
-    Requisicoes/segundo: 76.91
-    Latencia media: 12.87ms
-    Desvio padrao: 3.98ms
-    CPU: 16.95%
+    Tempo total: 1.51s
+    Requisicoes/segundo: 33.13
+    Latencia media: 283.98ms
+    Desvio padrao: 59.96ms
+    CPU: 12.13%
 
   Testando APACHE: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.06s
-    Requisicoes/segundo: 77.34
-    Latencia media: 12.76ms
-    Desvio padrao: 0.78ms
-    CPU: 17.01%
+    Tempo total: 1.33s
+    Requisicoes/segundo: 37.67
+    Latencia media: 249.41ms
+    Desvio padrao: 77.27ms
+    CPU: 12.09%
 
 ============================================================
 CENÁRIO 11: ARQUIVO GRANDE (5MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-5mb.txt
 
   Testando NGINX: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.51s
-    Requisicoes/segundo: 1.42
-    Latencia media: 700.10ms
-    Desvio padrao: 44.54ms
-    CPU: 16.70%
+    Tempo total: 38.72s
+    Requisicoes/segundo: 1.29
+    Latencia media: 7535.31ms
+    Desvio padrao: 517.51ms
+    CPU: 11.01%
 
   Testando APACHE: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.47s
-    Requisicoes/segundo: 1.44
-    Latencia media: 692.01ms
-    Desvio padrao: 20.81ms
-    CPU: 16.88%
+    Tempo total: 38.82s
+    Requisicoes/segundo: 1.29
+    Latencia media: 7587.34ms
+    Desvio padrao: 829.85ms
+    CPU: 10.23%
 
 ============================================================
 CENÁRIO 12: ARQUIVO GRANDE (7MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-7mb.txt
 
   Testando NGINX: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 6.73s
-    Requisicoes/segundo: 0.74
-    Latencia media: 1342.76ms
-    Desvio padrao: 25.16ms
-    CPU: 16.99%
+    Tempo total: 74.59s
+    Requisicoes/segundo: 0.67
+    Latencia media: 14673.87ms
+    Desvio padrao: 591.80ms
+    CPU: 10.65%
 
   Testando APACHE: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 6.68s
-    Requisicoes/segundo: 0.75
-    Latencia media: 1332.75ms
-    Desvio padrao: 16.52ms
-    CPU: 16.92%
+    Tempo total: 75.67s
+    Requisicoes/segundo: 0.66
+    Latencia media: 14892.94ms
+    Desvio padrao: 1393.71ms
+    CPU: 11.17%
 
-EXECUÇÃO 4 CONCLUÍDA em 0.35 minutos
+EXECUÇÃO 4 CONCLUÍDA em 3.90 minutos
 
 ================================================================================
 EXECUÇÃO 5/10 - RODADA COMPLETA DE TESTES
@@ -1605,397 +1621,401 @@ EXECUÇÃO 5/10 - RODADA COMPLETA DE TESTES
 
 ============================================================
 CENÁRIO 1: BAIXA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 10 | Requisições: 100
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/info
 
   Testando NGINX: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 999.12
-    Latencia media: 0.61ms
-    CPU: 17.01%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 4246.41
+    Latencia media: 2.03ms
+    Desvio padrao: 1.61ms
+    CPU: 11.11%
 
   Testando APACHE: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 577.49
-    Latencia media: 1.19ms
-    CPU: 16.92%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 5574.57
+    Latencia media: 1.55ms
+    Desvio padrao: 0.67ms
+    CPU: 11.17%
 
 ============================================================
 CENÁRIO 2: MÉDIA CARGA
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 500
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/status
 
   Testando NGINX: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1786.18
-    Latencia media: 0.44ms
-    Desvio padrao: 0.28ms
-    CPU: 17.01%
+    Tempo total: 0.08s
+    Requisicoes/segundo: 6335.21
+    Latencia media: 1.48ms
+    Desvio padrao: 0.85ms
+    CPU: 11.11%
 
   Testando APACHE: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1853.59
-    Latencia media: 0.45ms
-    Desvio padrao: 0.09ms
-    CPU: 16.92%
+    Tempo total: 0.09s
+    Requisicoes/segundo: 5507.50
+    Latencia media: 1.72ms
+    Desvio padrao: 1.23ms
+    CPU: 11.17%
 
 ============================================================
 CENÁRIO 3: ALTA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 100 | Requisições: 1000
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/dados
 
   Testando NGINX: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 786.92
-    Latencia media: 0.76ms
-    CPU: 17.01%
+    Tempo total: 0.18s
+    Requisicoes/segundo: 5550.84
+    Latencia media: 7.02ms
+    Desvio padrao: 4.18ms
+    CPU: 11.11%
 
   Testando APACHE: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 538.49
-    Latencia media: 1.26ms
-    CPU: 16.92%
+    Tempo total: 0.20s
+    Requisicoes/segundo: 5095.07
+    Latencia media: 6.87ms
+    Desvio padrao: 3.83ms
+    CPU: 11.17%
 
 ============================================================
 CENÁRIO 4: ARQUIVO PEQUENO (1KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-1kb.txt
 
   Testando NGINX: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1145.48
-    Latencia media: 0.72ms
-    Desvio padrao: 0.14ms
-    CPU: 16.92%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 3409.39
+    Latencia media: 2.14ms
+    Desvio padrao: 1.05ms
+    CPU: 11.11%
 
   Testando APACHE: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1046.90
-    Latencia media: 0.80ms
-    Desvio padrao: 0.21ms
-    CPU: 16.92%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4242.58
+    Latencia media: 1.80ms
+    Desvio padrao: 0.78ms
+    CPU: 11.17%
 
 ============================================================
 CENÁRIO 5: ARQUIVO PEQUENO (10KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-10kb.txt
 
   Testando NGINX: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1909.97
-    Latencia media: 0.42ms
-    Desvio padrao: 0.16ms
-    CPU: 16.92%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4387.26
+    Latencia media: 1.71ms
+    Desvio padrao: 0.63ms
+    CPU: 11.11%
 
   Testando APACHE: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1083.80
-    Latencia media: 0.79ms
-    Desvio padrao: 0.24ms
-    CPU: 16.92%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 3569.86
+    Latencia media: 2.07ms
+    Desvio padrao: 0.78ms
+    CPU: 11.17%
 
 ============================================================
 CENÁRIO 6: ARQUIVO PEQUENO (50KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-50kb.txt
 
   Testando NGINX: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1729.90
-    Latencia media: 0.50ms
-    Desvio padrao: 0.11ms
-    CPU: 16.92%
+    Tempo total: 0.03s
+    Requisicoes/segundo: 1973.44
+    Latencia media: 4.36ms
+    Desvio padrao: 1.43ms
+    CPU: 11.11%
 
   Testando APACHE: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1235.95
-    Latencia media: 0.72ms
-    Desvio padrao: 0.14ms
-    CPU: 16.92%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 2061.81
+    Latencia media: 4.33ms
+    Desvio padrao: 1.25ms
+    CPU: 11.22%
 
 ============================================================
 CENÁRIO 7: ARQUIVO MÉDIO (100KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-100kb.txt
 
   Testando NGINX: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1183.29
-    Latencia media: 0.76ms
-    Desvio padrao: 0.08ms
-    CPU: 16.92%
+    Tempo total: 0.05s
+    Requisicoes/segundo: 1106.93
+    Latencia media: 8.30ms
+    Desvio padrao: 2.04ms
+    CPU: 11.11%
 
   Testando APACHE: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 606.48
-    Latencia media: 1.52ms
-    Desvio padrao: 0.21ms
-    CPU: 16.92%
+    Tempo total: 0.04s
+    Requisicoes/segundo: 1263.55
+    Latencia media: 7.16ms
+    Desvio padrao: 1.80ms
+    CPU: 11.59%
 
 ============================================================
 CENÁRIO 8: ARQUIVO MÉDIO (500KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-500kb.txt
 
   Testando NGINX: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.02s
-    Requisicoes/segundo: 234.63
-    Latencia media: 4.15ms
-    Desvio padrao: 0.46ms
-    CPU: 16.92%
+    Tempo total: 0.39s
+    Requisicoes/segundo: 126.72
+    Latencia media: 72.75ms
+    Desvio padrao: 25.58ms
+    CPU: 11.58%
 
   Testando APACHE: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.03s
-    Requisicoes/segundo: 177.82
-    Latencia media: 5.50ms
-    Desvio padrao: 2.32ms
-    CPU: 16.92%
+    Tempo total: 0.42s
+    Requisicoes/segundo: 119.64
+    Latencia media: 78.75ms
+    Desvio padrao: 32.45ms
+    CPU: 11.59%
 
 ============================================================
 CENÁRIO 9: ARQUIVO MÉDIO (700KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-700kb.txt
 
   Testando NGINX: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.03s
-    Requisicoes/segundo: 147.19
-    Latencia media: 6.67ms
-    Desvio padrao: 0.65ms
-    CPU: 16.92%
+    Tempo total: 0.81s
+    Requisicoes/segundo: 61.87
+    Latencia media: 153.62ms
+    Desvio padrao: 29.05ms
+    CPU: 11.81%
 
   Testando APACHE: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.05s
-    Requisicoes/segundo: 109.22
-    Latencia media: 9.00ms
-    Desvio padrao: 3.07ms
-    CPU: 16.92%
+    Tempo total: 0.62s
+    Requisicoes/segundo: 80.86
+    Latencia media: 113.74ms
+    Desvio padrao: 40.94ms
+    CPU: 11.94%
 
 ============================================================
 CENÁRIO 10: ARQUIVO GRANDE (1MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-1mb.txt
 
   Testando NGINX: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.07s
-    Requisicoes/segundo: 71.03
-    Latencia media: 13.91ms
-    Desvio padrao: 5.16ms
-    CPU: 16.92%
+    Tempo total: 1.50s
+    Requisicoes/segundo: 33.30
+    Latencia media: 284.76ms
+    Desvio padrao: 54.28ms
+    CPU: 12.24%
 
   Testando APACHE: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.07s
-    Requisicoes/segundo: 70.95
-    Latencia media: 13.95ms
-    Desvio padrao: 4.32ms
-    CPU: 16.92%
+    Tempo total: 1.38s
+    Requisicoes/segundo: 36.35
+    Latencia media: 258.93ms
+    Desvio padrao: 86.03ms
+    CPU: 12.59%
 
 ============================================================
 CENÁRIO 11: ARQUIVO GRANDE (5MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-5mb.txt
 
   Testando NGINX: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.38s
-    Requisicoes/segundo: 1.48
-    Latencia media: 674.62ms
-    Desvio padrao: 13.23ms
-    CPU: 16.80%
+    Tempo total: 39.03s
+    Requisicoes/segundo: 1.28
+    Latencia media: 7606.55ms
+    Desvio padrao: 566.90ms
+    CPU: 10.83%
 
   Testando APACHE: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.36s
-    Requisicoes/segundo: 1.49
-    Latencia media: 669.29ms
-    Desvio padrao: 6.49ms
-    CPU: 16.38%
+    Tempo total: 39.10s
+    Requisicoes/segundo: 1.28
+    Latencia media: 7727.41ms
+    Desvio padrao: 530.22ms
+    CPU: 10.29%
 
 ============================================================
 CENÁRIO 12: ARQUIVO GRANDE (7MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-7mb.txt
 
   Testando NGINX: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 6.93s
-    Requisicoes/segundo: 0.72
-    Latencia media: 1383.76ms
-    Desvio padrao: 101.89ms
-    CPU: 18.23%
+    Tempo total: 74.37s
+    Requisicoes/segundo: 0.67
+    Latencia media: 14574.44ms
+    Desvio padrao: 1121.38ms
+    CPU: 9.98%
 
   Testando APACHE: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 6.81s
-    Requisicoes/segundo: 0.73
-    Latencia media: 1358.44ms
-    Desvio padrao: 23.53ms
-    CPU: 16.00%
+    Tempo total: 75.81s
+    Requisicoes/segundo: 0.66
+    Latencia media: 14749.94ms
+    Desvio padrao: 1436.49ms
+    CPU: 11.04%
 
-EXECUÇÃO 5 CONCLUÍDA em 0.35 minutos
+EXECUÇÃO 5 CONCLUÍDA em 3.91 minutos
 
 ================================================================================
 EXECUÇÃO 6/10 - RODADA COMPLETA DE TESTES
@@ -2003,397 +2023,401 @@ EXECUÇÃO 6/10 - RODADA COMPLETA DE TESTES
 
 ============================================================
 CENÁRIO 1: BAIXA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 10 | Requisições: 100
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/info
 
   Testando NGINX: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1057.03
-    Latencia media: 0.61ms
-    CPU: 16.06%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 4267.40
+    Latencia media: 1.99ms
+    Desvio padrao: 1.25ms
+    CPU: 11.05%
 
   Testando APACHE: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 546.63
-    Latencia media: 0.91ms
-    CPU: 16.00%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 5642.74
+    Latencia media: 1.49ms
+    Desvio padrao: 0.66ms
+    CPU: 11.04%
 
 ============================================================
 CENÁRIO 2: MÉDIA CARGA
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 500
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/status
 
   Testando NGINX: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1117.11
-    Latencia media: 0.74ms
-    Desvio padrao: 0.22ms
-    CPU: 16.06%
+    Tempo total: 0.09s
+    Requisicoes/segundo: 5387.95
+    Latencia media: 1.76ms
+    Desvio padrao: 0.99ms
+    CPU: 11.05%
 
   Testando APACHE: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1470.34
-    Latencia media: 0.58ms
-    Desvio padrao: 0.17ms
-    CPU: 16.00%
+    Tempo total: 0.09s
+    Requisicoes/segundo: 5350.66
+    Latencia media: 1.70ms
+    Desvio padrao: 1.38ms
+    CPU: 11.04%
 
 ============================================================
 CENÁRIO 3: ALTA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 100 | Requisições: 1000
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/dados
 
   Testando NGINX: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 882.45
-    Latencia media: 0.68ms
-    CPU: 16.06%
+    Tempo total: 0.18s
+    Requisicoes/segundo: 5643.95
+    Latencia media: 6.51ms
+    Desvio padrao: 3.90ms
+    CPU: 11.05%
 
   Testando APACHE: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 707.78
-    Latencia media: 0.95ms
-    CPU: 16.00%
+    Tempo total: 0.20s
+    Requisicoes/segundo: 5084.39
+    Latencia media: 6.92ms
+    Desvio padrao: 3.92ms
+    CPU: 11.22%
 
 ============================================================
 CENÁRIO 4: ARQUIVO PEQUENO (1KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-1kb.txt
 
   Testando NGINX: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1897.02
-    Latencia media: 0.42ms
-    Desvio padrao: 0.18ms
-    CPU: 16.06%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4755.12
+    Latencia media: 1.58ms
+    Desvio padrao: 0.64ms
+    CPU: 11.03%
 
   Testando APACHE: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1108.20
-    Latencia media: 0.79ms
-    Desvio padrao: 0.19ms
-    CPU: 16.00%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4869.51
+    Latencia media: 1.54ms
+    Desvio padrao: 0.64ms
+    CPU: 11.22%
 
 ============================================================
 CENÁRIO 5: ARQUIVO PEQUENO (10KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-10kb.txt
 
   Testando NGINX: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1873.29
-    Latencia media: 0.44ms
-    Desvio padrao: 0.15ms
-    CPU: 16.06%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4084.59
+    Latencia media: 1.95ms
+    Desvio padrao: 0.71ms
+    CPU: 11.03%
 
   Testando APACHE: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1165.47
-    Latencia media: 0.73ms
-    Desvio padrao: 0.21ms
-    CPU: 16.00%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4037.41
+    Latencia media: 1.95ms
+    Desvio padrao: 0.83ms
+    CPU: 11.22%
 
 ============================================================
 CENÁRIO 6: ARQUIVO PEQUENO (50KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-50kb.txt
 
   Testando NGINX: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1605.54
-    Latencia media: 0.54ms
-    Desvio padrao: 0.14ms
-    CPU: 15.97%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 2168.09
+    Latencia media: 3.98ms
+    Desvio padrao: 1.21ms
+    CPU: 11.03%
 
   Testando APACHE: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 937.11
-    Latencia media: 0.92ms
-    Desvio padrao: 0.20ms
-    CPU: 16.00%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 2148.06
+    Latencia media: 4.00ms
+    Desvio padrao: 1.28ms
+    CPU: 11.22%
 
 ============================================================
 CENÁRIO 7: ARQUIVO MÉDIO (100KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-100kb.txt
 
   Testando NGINX: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1162.18
-    Latencia media: 0.74ms
-    Desvio padrao: 0.15ms
-    CPU: 15.97%
+    Tempo total: 0.05s
+    Requisicoes/segundo: 1049.65
+    Latencia media: 8.63ms
+    Desvio padrao: 2.07ms
+    CPU: 11.37%
 
   Testando APACHE: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 704.64
-    Latencia media: 1.30ms
-    Desvio padrao: 0.30ms
-    CPU: 16.00%
+    Tempo total: 0.04s
+    Requisicoes/segundo: 1255.39
+    Latencia media: 7.32ms
+    Desvio padrao: 2.53ms
+    CPU: 11.22%
 
 ============================================================
 CENÁRIO 8: ARQUIVO MÉDIO (500KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-500kb.txt
 
   Testando NGINX: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.02s
-    Requisicoes/segundo: 212.76
-    Latencia media: 4.55ms
-    Desvio padrao: 1.29ms
-    CPU: 15.95%
+    Tempo total: 0.41s
+    Requisicoes/segundo: 122.57
+    Latencia media: 76.42ms
+    Desvio padrao: 24.65ms
+    CPU: 11.37%
 
   Testando APACHE: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.03s
-    Requisicoes/segundo: 179.89
-    Latencia media: 5.40ms
-    Desvio padrao: 0.73ms
-    CPU: 16.00%
+    Tempo total: 0.47s
+    Requisicoes/segundo: 105.92
+    Latencia media: 88.61ms
+    Desvio padrao: 22.45ms
+    CPU: 11.58%
 
 ============================================================
 CENÁRIO 9: ARQUIVO MÉDIO (700KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-700kb.txt
 
   Testando NGINX: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.03s
-    Requisicoes/segundo: 148.95
-    Latencia media: 6.56ms
-    Desvio padrao: 1.05ms
-    CPU: 15.95%
+    Tempo total: 0.76s
+    Requisicoes/segundo: 65.60
+    Latencia media: 143.26ms
+    Desvio padrao: 37.79ms
+    CPU: 11.59%
 
   Testando APACHE: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.03s
-    Requisicoes/segundo: 144.82
-    Latencia media: 6.76ms
-    Desvio padrao: 0.72ms
-    CPU: 16.00%
+    Tempo total: 0.73s
+    Requisicoes/segundo: 68.09
+    Latencia media: 137.81ms
+    Desvio padrao: 45.51ms
+    CPU: 11.75%
 
 ============================================================
 CENÁRIO 10: ARQUIVO GRANDE (1MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-1mb.txt
 
   Testando NGINX: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.06s
-    Requisicoes/segundo: 79.17
-    Latencia media: 12.48ms
-    Desvio padrao: 1.71ms
-    CPU: 15.95%
+    Tempo total: 1.45s
+    Requisicoes/segundo: 34.42
+    Latencia media: 275.56ms
+    Desvio padrao: 67.37ms
+    CPU: 12.05%
 
   Testando APACHE: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.07s
-    Requisicoes/segundo: 68.13
-    Latencia media: 14.48ms
-    Desvio padrao: 4.59ms
-    CPU: 16.00%
+    Tempo total: 1.35s
+    Requisicoes/segundo: 37.07
+    Latencia media: 251.78ms
+    Desvio padrao: 86.61ms
+    CPU: 12.42%
 
 ============================================================
 CENÁRIO 11: ARQUIVO GRANDE (5MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-5mb.txt
 
   Testando NGINX: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.43s
-    Requisicoes/segundo: 1.46
-    Latencia media: 684.37ms
-    Desvio padrao: 10.06ms
-    CPU: 16.06%
+    Tempo total: 39.01s
+    Requisicoes/segundo: 1.28
+    Latencia media: 7536.82ms
+    Desvio padrao: 480.52ms
+    CPU: 10.24%
 
   Testando APACHE: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.38s
-    Requisicoes/segundo: 1.48
-    Latencia media: 673.77ms
-    Desvio padrao: 22.44ms
-    CPU: 15.95%
+    Tempo total: 38.75s
+    Requisicoes/segundo: 1.29
+    Latencia media: 7501.86ms
+    Desvio padrao: 605.53ms
+    CPU: 11.10%
 
 ============================================================
 CENÁRIO 12: ARQUIVO GRANDE (7MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-7mb.txt
 
   Testando NGINX: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 6.70s
-    Requisicoes/segundo: 0.75
-    Latencia media: 1336.08ms
-    Desvio padrao: 20.72ms
-    CPU: 16.12%
+    Tempo total: 73.96s
+    Requisicoes/segundo: 0.68
+    Latencia media: 14594.90ms
+    Desvio padrao: 521.78ms
+    CPU: 10.02%
 
   Testando APACHE: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 6.79s
-    Requisicoes/segundo: 0.74
-    Latencia media: 1354.93ms
-    Desvio padrao: 43.44ms
-    CPU: 15.69%
+    Tempo total: 75.46s
+    Requisicoes/segundo: 0.66
+    Latencia media: 14940.23ms
+    Desvio padrao: 641.91ms
+    CPU: 10.78%
 
-EXECUÇÃO 6 CONCLUÍDA em 0.35 minutos
+EXECUÇÃO 6 CONCLUÍDA em 3.89 minutos
 
 ================================================================================
 EXECUÇÃO 7/10 - RODADA COMPLETA DE TESTES
@@ -2401,397 +2425,401 @@ EXECUÇÃO 7/10 - RODADA COMPLETA DE TESTES
 
 ============================================================
 CENÁRIO 1: BAIXA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 10 | Requisições: 100
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/info
 
   Testando NGINX: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 613.20
-    Latencia media: 0.99ms
-    CPU: 15.67%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 4248.34
+    Latencia media: 2.03ms
+    Desvio padrao: 1.29ms
+    CPU: 10.77%
 
   Testando APACHE: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 714.53
-    Latencia media: 0.78ms
-    CPU: 15.69%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 4843.08
+    Latencia media: 1.71ms
+    Desvio padrao: 0.72ms
+    CPU: 10.78%
 
 ============================================================
 CENÁRIO 2: MÉDIA CARGA
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 500
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/status
 
   Testando NGINX: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 2045.60
-    Latencia media: 0.37ms
-    Desvio padrao: 0.24ms
-    CPU: 15.67%
+    Tempo total: 0.09s
+    Requisicoes/segundo: 5421.49
+    Latencia media: 1.70ms
+    Desvio padrao: 1.07ms
+    CPU: 10.77%
 
   Testando APACHE: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1296.46
-    Latencia media: 0.64ms
-    Desvio padrao: 0.27ms
-    CPU: 15.69%
+    Tempo total: 0.08s
+    Requisicoes/segundo: 5968.76
+    Latencia media: 1.56ms
+    Desvio padrao: 0.90ms
+    CPU: 12.60%
 
 ============================================================
 CENÁRIO 3: ALTA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 100 | Requisições: 1000
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/dados
 
   Testando NGINX: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 732.63
-    Latencia media: 0.79ms
-    CPU: 15.67%
+    Tempo total: 0.18s
+    Requisicoes/segundo: 5711.72
+    Latencia media: 6.46ms
+    Desvio padrao: 3.79ms
+    CPU: 10.95%
 
   Testando APACHE: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 616.99
-    Latencia media: 1.02ms
-    CPU: 15.69%
+    Tempo total: 0.19s
+    Requisicoes/segundo: 5235.81
+    Latencia media: 7.12ms
+    Desvio padrao: 4.17ms
+    CPU: 10.80%
 
 ============================================================
 CENÁRIO 4: ARQUIVO PEQUENO (1KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-1kb.txt
 
   Testando NGINX: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1851.46
-    Latencia media: 0.44ms
-    Desvio padrao: 0.16ms
-    CPU: 15.67%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 5250.49
+    Latencia media: 1.28ms
+    Desvio padrao: 0.43ms
+    CPU: 10.95%
 
   Testando APACHE: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1411.65
-    Latencia media: 0.63ms
-    Desvio padrao: 0.20ms
-    CPU: 15.69%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 5230.46
+    Latencia media: 1.39ms
+    Desvio padrao: 0.59ms
+    CPU: 10.80%
 
 ============================================================
 CENÁRIO 5: ARQUIVO PEQUENO (10KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-10kb.txt
 
   Testando NGINX: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
-    Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 2310.66
-    Latencia media: 0.34ms
-    Desvio padrao: 0.14ms
-    CPU: 15.67%
-
-  Testando APACHE: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
-
-  Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
     Tempo total: 0.01s
-    Requisicoes/segundo: 836.45
-    Latencia media: 1.03ms
-    Desvio padrao: 0.28ms
-    CPU: 15.69%
+    Requisicoes/segundo: 4389.09
+    Latencia media: 1.76ms
+    Desvio padrao: 0.70ms
+    CPU: 10.95%
+
+  Testando APACHE: /estatico/pequeno-10kb.txt
+  Requisicoes: 50, Usuários: 10
+
+  Resultados:
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4264.15
+    Latencia media: 1.84ms
+    Desvio padrao: 0.69ms
+    CPU: 10.80%
 
 ============================================================
 CENÁRIO 6: ARQUIVO PEQUENO (50KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-50kb.txt
 
   Testando NGINX: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1094.83
-    Latencia media: 0.77ms
-    Desvio padrao: 0.37ms
-    CPU: 15.67%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 2261.71
+    Latencia media: 3.90ms
+    Desvio padrao: 1.06ms
+    CPU: 10.95%
 
   Testando APACHE: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 847.30
-    Latencia media: 1.04ms
-    Desvio padrao: 0.40ms
-    CPU: 15.60%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 2215.64
+    Latencia media: 3.96ms
+    Desvio padrao: 1.08ms
+    CPU: 10.80%
 
 ============================================================
 CENÁRIO 7: ARQUIVO MÉDIO (100KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-100kb.txt
 
   Testando NGINX: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1291.83
-    Latencia media: 0.69ms
-    Desvio padrao: 0.13ms
-    CPU: 15.67%
+    Tempo total: 0.04s
+    Requisicoes/segundo: 1189.41
+    Latencia media: 7.40ms
+    Desvio padrao: 2.16ms
+    CPU: 10.95%
 
   Testando APACHE: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 842.33
-    Latencia media: 0.99ms
-    Desvio padrao: 0.22ms
-    CPU: 15.60%
+    Tempo total: 0.04s
+    Requisicoes/segundo: 1309.14
+    Latencia media: 6.86ms
+    Desvio padrao: 1.94ms
+    CPU: 10.80%
 
 ============================================================
 CENÁRIO 8: ARQUIVO MÉDIO (500KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-500kb.txt
 
   Testando NGINX: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.02s
-    Requisicoes/segundo: 242.05
-    Latencia media: 3.99ms
-    Desvio padrao: 0.52ms
-    CPU: 15.67%
+    Tempo total: 0.39s
+    Requisicoes/segundo: 127.22
+    Latencia media: 74.32ms
+    Desvio padrao: 26.35ms
+    CPU: 10.95%
 
   Testando APACHE: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.02s
-    Requisicoes/segundo: 222.43
-    Latencia media: 4.36ms
-    Desvio padrao: 0.37ms
-    CPU: 15.54%
+    Tempo total: 0.45s
+    Requisicoes/segundo: 111.59
+    Latencia media: 83.74ms
+    Desvio padrao: 29.70ms
+    CPU: 11.27%
 
 ============================================================
 CENÁRIO 9: ARQUIVO MÉDIO (700KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-700kb.txt
 
   Testando NGINX: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.03s
-    Requisicoes/segundo: 149.70
-    Latencia media: 6.54ms
-    Desvio padrao: 0.68ms
-    CPU: 15.67%
+    Tempo total: 0.72s
+    Requisicoes/segundo: 69.03
+    Latencia media: 138.97ms
+    Desvio padrao: 35.63ms
+    CPU: 11.29%
 
   Testando APACHE: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.04s
-    Requisicoes/segundo: 130.42
-    Latencia media: 7.51ms
-    Desvio padrao: 0.67ms
-    CPU: 15.54%
+    Tempo total: 0.71s
+    Requisicoes/segundo: 70.54
+    Latencia media: 133.81ms
+    Desvio padrao: 54.48ms
+    CPU: 11.45%
 
 ============================================================
 CENÁRIO 10: ARQUIVO GRANDE (1MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-1mb.txt
 
   Testando NGINX: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.07s
-    Requisicoes/segundo: 75.71
-    Latencia media: 13.05ms
-    Desvio padrao: 3.54ms
-    CPU: 15.67%
+    Tempo total: 1.41s
+    Requisicoes/segundo: 35.40
+    Latencia media: 267.03ms
+    Desvio padrao: 70.68ms
+    CPU: 12.19%
 
   Testando APACHE: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.07s
-    Requisicoes/segundo: 75.38
-    Latencia media: 13.11ms
-    Desvio padrao: 2.63ms
-    CPU: 15.54%
+    Tempo total: 1.33s
+    Requisicoes/segundo: 37.63
+    Latencia media: 250.06ms
+    Desvio padrao: 75.98ms
+    CPU: 12.39%
 
 ============================================================
 CENÁRIO 11: ARQUIVO GRANDE (5MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-5mb.txt
 
   Testando NGINX: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.38s
-    Requisicoes/segundo: 1.48
-    Latencia media: 674.50ms
-    Desvio padrao: 11.86ms
-    CPU: 15.76%
+    Tempo total: 38.54s
+    Requisicoes/segundo: 1.30
+    Latencia media: 7441.88ms
+    Desvio padrao: 709.31ms
+    CPU: 10.41%
 
   Testando APACHE: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.39s
-    Requisicoes/segundo: 1.48
-    Latencia media: 674.87ms
-    Desvio padrao: 12.39ms
-    CPU: 15.41%
+    Tempo total: 38.41s
+    Requisicoes/segundo: 1.30
+    Latencia media: 7303.18ms
+    Desvio padrao: 939.78ms
+    CPU: 11.38%
 
 ============================================================
 CENÁRIO 12: ARQUIVO GRANDE (7MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-7mb.txt
 
   Testando NGINX: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 6.68s
-    Requisicoes/segundo: 0.75
-    Latencia media: 1332.60ms
-    Desvio padrao: 15.74ms
-    CPU: 15.41%
+    Tempo total: 73.68s
+    Requisicoes/segundo: 0.68
+    Latencia media: 14600.40ms
+    Desvio padrao: 542.88ms
+    CPU: 10.15%
 
   Testando APACHE: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 6.58s
-    Requisicoes/segundo: 0.76
-    Latencia media: 1312.96ms
-    Desvio padrao: 29.80ms
-    CPU: 15.50%
+    Tempo total: 74.70s
+    Requisicoes/segundo: 0.67
+    Latencia media: 14826.10ms
+    Desvio padrao: 879.11ms
+    CPU: 10.06%
 
-EXECUÇÃO 7 CONCLUÍDA em 0.34 minutos
+EXECUÇÃO 7 CONCLUÍDA em 3.85 minutos
 
 ================================================================================
 EXECUÇÃO 8/10 - RODADA COMPLETA DE TESTES
@@ -2799,397 +2827,401 @@ EXECUÇÃO 8/10 - RODADA COMPLETA DE TESTES
 
 ============================================================
 CENÁRIO 1: BAIXA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 10 | Requisições: 100
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/info
 
   Testando NGINX: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 647.07
-    Latencia media: 0.92ms
-    CPU: 15.47%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 4485.69
+    Latencia media: 1.93ms
+    Desvio padrao: 1.24ms
+    CPU: 10.13%
 
   Testando APACHE: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 735.20
-    Latencia media: 0.94ms
-    CPU: 15.50%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 5423.48
+    Latencia media: 1.54ms
+    Desvio padrao: 0.60ms
+    CPU: 10.04%
 
 ============================================================
 CENÁRIO 2: MÉDIA CARGA
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 500
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/status
 
   Testando NGINX: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1452.82
-    Latencia media: 0.57ms
-    Desvio padrao: 0.19ms
-    CPU: 15.47%
+    Tempo total: 0.09s
+    Requisicoes/segundo: 5350.03
+    Latencia media: 1.80ms
+    Desvio padrao: 1.42ms
+    CPU: 10.13%
 
   Testando APACHE: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1259.02
-    Latencia media: 0.69ms
-    Desvio padrao: 0.29ms
-    CPU: 15.50%
+    Tempo total: 0.08s
+    Requisicoes/segundo: 6071.63
+    Latencia media: 1.53ms
+    Desvio padrao: 0.71ms
+    CPU: 10.04%
 
 ============================================================
 CENÁRIO 3: ALTA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 100 | Requisições: 1000
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/dados
 
   Testando NGINX: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 760.11
-    Latencia media: 0.80ms
-    CPU: 15.47%
+    Tempo total: 0.17s
+    Requisicoes/segundo: 5756.81
+    Latencia media: 6.36ms
+    Desvio padrao: 3.47ms
+    CPU: 10.22%
 
   Testando APACHE: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 661.46
-    Latencia media: 1.07ms
-    CPU: 15.50%
+    Tempo total: 0.19s
+    Requisicoes/segundo: 5256.04
+    Latencia media: 6.78ms
+    Desvio padrao: 4.14ms
+    CPU: 10.04%
 
 ============================================================
 CENÁRIO 4: ARQUIVO PEQUENO (1KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-1kb.txt
 
   Testando NGINX: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 2064.94
-    Latencia media: 0.38ms
-    Desvio padrao: 0.11ms
-    CPU: 15.47%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4310.34
+    Latencia media: 1.78ms
+    Desvio padrao: 0.87ms
+    CPU: 10.22%
 
   Testando APACHE: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1063.46
-    Latencia media: 0.82ms
-    Desvio padrao: 0.11ms
-    CPU: 15.50%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 5083.39
+    Latencia media: 1.41ms
+    Desvio padrao: 0.56ms
+    CPU: 10.04%
 
 ============================================================
 CENÁRIO 5: ARQUIVO PEQUENO (10KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-10kb.txt
 
   Testando NGINX: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1917.31
-    Latencia media: 0.43ms
-    Desvio padrao: 0.12ms
-    CPU: 15.47%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4482.91
+    Latencia media: 1.67ms
+    Desvio padrao: 0.72ms
+    CPU: 10.22%
 
   Testando APACHE: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1156.79
-    Latencia media: 0.76ms
-    Desvio padrao: 0.16ms
-    CPU: 15.50%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4010.31
+    Latencia media: 1.96ms
+    Desvio padrao: 0.71ms
+    CPU: 10.04%
 
 ============================================================
 CENÁRIO 6: ARQUIVO PEQUENO (50KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-50kb.txt
 
   Testando NGINX: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 852.50
-    Latencia media: 1.04ms
-    Desvio padrao: 0.10ms
-    CPU: 15.47%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 2256.41
+    Latencia media: 3.87ms
+    Desvio padrao: 1.19ms
+    CPU: 10.22%
 
   Testando APACHE: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 997.22
-    Latencia media: 0.91ms
-    Desvio padrao: 0.33ms
-    CPU: 15.50%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 2234.41
+    Latencia media: 3.96ms
+    Desvio padrao: 1.25ms
+    CPU: 10.04%
 
 ============================================================
 CENÁRIO 7: ARQUIVO MÉDIO (100KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-100kb.txt
 
   Testando NGINX: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 879.94
-    Latencia media: 1.04ms
-    Desvio padrao: 0.24ms
-    CPU: 15.47%
+    Tempo total: 0.04s
+    Requisicoes/segundo: 1405.81
+    Latencia media: 6.26ms
+    Desvio padrao: 1.71ms
+    CPU: 10.22%
 
   Testando APACHE: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 795.88
-    Latencia media: 1.17ms
-    Desvio padrao: 0.22ms
-    CPU: 15.50%
+    Tempo total: 0.04s
+    Requisicoes/segundo: 1216.27
+    Latencia media: 7.51ms
+    Desvio padrao: 1.78ms
+    CPU: 10.04%
 
 ============================================================
 CENÁRIO 8: ARQUIVO MÉDIO (500KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-500kb.txt
 
   Testando NGINX: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.02s
-    Requisicoes/segundo: 230.41
-    Latencia media: 4.19ms
-    Desvio padrao: 0.33ms
-    CPU: 15.47%
+    Tempo total: 0.42s
+    Requisicoes/segundo: 119.51
+    Latencia media: 77.85ms
+    Desvio padrao: 18.87ms
+    CPU: 10.18%
 
   Testando APACHE: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.03s
-    Requisicoes/segundo: 180.38
-    Latencia media: 5.43ms
-    Desvio padrao: 2.29ms
-    CPU: 15.50%
+    Tempo total: 0.46s
+    Requisicoes/segundo: 108.31
+    Latencia media: 87.19ms
+    Desvio padrao: 26.35ms
+    CPU: 10.47%
 
 ============================================================
 CENÁRIO 9: ARQUIVO MÉDIO (700KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-700kb.txt
 
   Testando NGINX: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.04s
-    Requisicoes/segundo: 127.68
-    Latencia media: 7.68ms
-    Desvio padrao: 3.11ms
-    CPU: 15.47%
+    Tempo total: 0.71s
+    Requisicoes/segundo: 69.97
+    Latencia media: 134.06ms
+    Desvio padrao: 39.11ms
+    CPU: 10.81%
 
   Testando APACHE: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.04s
-    Requisicoes/segundo: 142.08
-    Latencia media: 6.89ms
-    Desvio padrao: 1.19ms
-    CPU: 15.50%
+    Tempo total: 0.59s
+    Requisicoes/segundo: 84.19
+    Latencia media: 111.33ms
+    Desvio padrao: 30.67ms
+    CPU: 12.49%
 
 ============================================================
 CENÁRIO 10: ARQUIVO GRANDE (1MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-1mb.txt
 
   Testando NGINX: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.07s
-    Requisicoes/segundo: 75.23
-    Latencia media: 13.10ms
-    Desvio padrao: 3.84ms
-    CPU: 15.47%
+    Tempo total: 1.49s
+    Requisicoes/segundo: 33.64
+    Latencia media: 281.94ms
+    Desvio padrao: 66.37ms
+    CPU: 11.64%
 
   Testando APACHE: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.06s
-    Requisicoes/segundo: 78.07
-    Latencia media: 12.64ms
-    Desvio padrao: 0.54ms
-    CPU: 15.50%
+    Tempo total: 1.36s
+    Requisicoes/segundo: 36.78
+    Latencia media: 255.95ms
+    Desvio padrao: 80.60ms
+    CPU: 11.94%
 
 ============================================================
 CENÁRIO 11: ARQUIVO GRANDE (5MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-5mb.txt
 
   Testando NGINX: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.36s
-    Requisicoes/segundo: 1.49
-    Latencia media: 670.02ms
-    Desvio padrao: 10.92ms
-    CPU: 15.41%
+    Tempo total: 38.46s
+    Requisicoes/segundo: 1.30
+    Latencia media: 7529.91ms
+    Desvio padrao: 426.37ms
+    CPU: 10.34%
 
   Testando APACHE: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.40s
-    Requisicoes/segundo: 1.47
-    Latencia media: 678.06ms
-    Desvio padrao: 20.05ms
-    CPU: 15.03%
+    Tempo total: 38.94s
+    Requisicoes/segundo: 1.28
+    Latencia media: 7623.99ms
+    Desvio padrao: 779.60ms
+    CPU: 11.49%
 
 ============================================================
 CENÁRIO 12: ARQUIVO GRANDE (7MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-7mb.txt
 
   Testando NGINX: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 7.39s
-    Requisicoes/segundo: 0.68
-    Latencia media: 1474.32ms
-    Desvio padrao: 173.78ms
-    CPU: 16.92%
+    Tempo total: 74.21s
+    Requisicoes/segundo: 0.67
+    Latencia media: 14615.45ms
+    Desvio padrao: 648.98ms
+    CPU: 10.93%
 
   Testando APACHE: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 6.86s
-    Requisicoes/segundo: 0.73
-    Latencia media: 1369.54ms
-    Desvio padrao: 23.73ms
-    CPU: 17.06%
+    Tempo total: 75.39s
+    Requisicoes/segundo: 0.66
+    Latencia media: 14826.64ms
+    Desvio padrao: 905.10ms
+    CPU: 10.06%
 
-EXECUÇÃO 8 CONCLUÍDA em 0.36 minutos
+EXECUÇÃO 8 CONCLUÍDA em 3.88 minutos
 
 ================================================================================
 EXECUÇÃO 9/10 - RODADA COMPLETA DE TESTES
@@ -3197,397 +3229,401 @@ EXECUÇÃO 9/10 - RODADA COMPLETA DE TESTES
 
 ============================================================
 CENÁRIO 1: BAIXA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 10 | Requisições: 100
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/info
 
   Testando NGINX: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 762.46
-    Latencia media: 0.68ms
-    CPU: 16.96%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 4532.91
+    Latencia media: 1.91ms
+    Desvio padrao: 1.18ms
+    CPU: 10.11%
 
   Testando APACHE: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 954.55
-    Latencia media: 0.63ms
-    CPU: 17.06%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 5567.09
+    Latencia media: 1.50ms
+    Desvio padrao: 0.66ms
+    CPU: 10.06%
 
 ============================================================
 CENÁRIO 2: MÉDIA CARGA
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 500
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/status
 
   Testando NGINX: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1433.75
-    Latencia media: 0.56ms
-    Desvio padrao: 0.31ms
-    CPU: 16.96%
+    Tempo total: 0.10s
+    Requisicoes/segundo: 5203.77
+    Latencia media: 1.85ms
+    Desvio padrao: 1.10ms
+    CPU: 10.11%
 
   Testando APACHE: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1611.58
-    Latencia media: 0.52ms
-    Desvio padrao: 0.09ms
-    CPU: 17.06%
+    Tempo total: 0.08s
+    Requisicoes/segundo: 5964.49
+    Latencia media: 1.59ms
+    Desvio padrao: 1.04ms
+    CPU: 10.05%
 
 ============================================================
 CENÁRIO 3: ALTA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 100 | Requisições: 1000
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/dados
 
   Testando NGINX: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1550.57
-    Latencia media: 0.37ms
-    CPU: 16.96%
+    Tempo total: 0.18s
+    Requisicoes/segundo: 5617.76
+    Latencia media: 6.57ms
+    Desvio padrao: 3.82ms
+    CPU: 10.20%
 
   Testando APACHE: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 685.68
-    Latencia media: 1.01ms
-    CPU: 17.06%
+    Tempo total: 0.19s
+    Requisicoes/segundo: 5184.66
+    Latencia media: 6.90ms
+    Desvio padrao: 4.04ms
+    CPU: 10.05%
 
 ============================================================
 CENÁRIO 4: ARQUIVO PEQUENO (1KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-1kb.txt
 
   Testando NGINX: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
-    Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1570.08
-    Latencia media: 0.51ms
-    Desvio padrao: 0.17ms
-    CPU: 16.96%
-
-  Testando APACHE: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
-
-  Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
     Tempo total: 0.01s
-    Requisicoes/segundo: 900.84
-    Latencia media: 0.96ms
-    Desvio padrao: 0.16ms
-    CPU: 17.06%
+    Requisicoes/segundo: 5057.77
+    Latencia media: 1.29ms
+    Desvio padrao: 0.57ms
+    CPU: 10.20%
+
+  Testando APACHE: /estatico/pequeno-1kb.txt
+  Requisicoes: 50, Usuários: 10
+
+  Resultados:
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4960.86
+    Latencia media: 1.39ms
+    Desvio padrao: 0.51ms
+    CPU: 10.05%
 
 ============================================================
 CENÁRIO 5: ARQUIVO PEQUENO (10KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-10kb.txt
 
   Testando NGINX: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
-    Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1176.65
-    Latencia media: 0.70ms
-    Desvio padrao: 0.23ms
-    CPU: 16.96%
-
-  Testando APACHE: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
-
-  Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
     Tempo total: 0.01s
-    Requisicoes/segundo: 965.36
-    Latencia media: 0.87ms
-    Desvio padrao: 0.36ms
-    CPU: 17.06%
+    Requisicoes/segundo: 4229.15
+    Latencia media: 1.79ms
+    Desvio padrao: 0.64ms
+    CPU: 10.20%
+
+  Testando APACHE: /estatico/pequeno-10kb.txt
+  Requisicoes: 50, Usuários: 10
+
+  Resultados:
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
+    Falhas: 0 (0.0%)
+    Tempo total: 0.01s
+    Requisicoes/segundo: 3934.32
+    Latencia media: 1.89ms
+    Desvio padrao: 0.61ms
+    CPU: 10.05%
 
 ============================================================
 CENÁRIO 6: ARQUIVO PEQUENO (50KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-50kb.txt
 
   Testando NGINX: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1250.69
-    Latencia media: 0.67ms
-    Desvio padrao: 0.30ms
-    CPU: 16.96%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 2242.15
+    Latencia media: 3.85ms
+    Desvio padrao: 1.28ms
+    CPU: 10.20%
 
   Testando APACHE: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 799.46
-    Latencia media: 1.12ms
-    Desvio padrao: 0.10ms
-    CPU: 17.06%
+    Tempo total: 0.03s
+    Requisicoes/segundo: 1892.80
+    Latencia media: 4.59ms
+    Desvio padrao: 1.76ms
+    CPU: 10.05%
 
 ============================================================
 CENÁRIO 7: ARQUIVO MÉDIO (100KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-100kb.txt
 
   Testando NGINX: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 624.56
-    Latencia media: 1.48ms
-    Desvio padrao: 0.25ms
-    CPU: 16.96%
+    Tempo total: 0.04s
+    Requisicoes/segundo: 1139.31
+    Latencia media: 7.91ms
+    Desvio padrao: 2.00ms
+    CPU: 10.20%
 
   Testando APACHE: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 608.86
-    Latencia media: 1.53ms
-    Desvio padrao: 0.13ms
-    CPU: 17.06%
+    Tempo total: 0.04s
+    Requisicoes/segundo: 1141.91
+    Latencia media: 7.88ms
+    Desvio padrao: 1.83ms
+    CPU: 10.05%
 
 ============================================================
 CENÁRIO 8: ARQUIVO MÉDIO (500KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-500kb.txt
 
   Testando NGINX: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.02s
-    Requisicoes/segundo: 219.13
-    Latencia media: 4.42ms
-    Desvio padrao: 0.75ms
-    CPU: 16.96%
+    Tempo total: 0.39s
+    Requisicoes/segundo: 126.93
+    Latencia media: 73.96ms
+    Desvio padrao: 21.14ms
+    CPU: 10.20%
 
   Testando APACHE: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.03s
-    Requisicoes/segundo: 178.67
-    Latencia media: 5.45ms
-    Desvio padrao: 2.21ms
-    CPU: 17.06%
+    Tempo total: 0.40s
+    Requisicoes/segundo: 123.59
+    Latencia media: 75.43ms
+    Desvio padrao: 30.58ms
+    CPU: 10.47%
 
 ============================================================
 CENÁRIO 9: ARQUIVO MÉDIO (700KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-700kb.txt
 
   Testando NGINX: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.03s
-    Requisicoes/segundo: 156.32
-    Latencia media: 6.27ms
-    Desvio padrao: 0.08ms
-    CPU: 16.96%
+    Tempo total: 0.79s
+    Requisicoes/segundo: 63.31
+    Latencia media: 150.71ms
+    Desvio padrao: 39.56ms
+    CPU: 10.75%
 
   Testando APACHE: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.04s
-    Requisicoes/segundo: 131.54
-    Latencia media: 7.43ms
-    Desvio padrao: 0.52ms
-    CPU: 17.02%
+    Tempo total: 0.71s
+    Requisicoes/segundo: 70.02
+    Latencia media: 134.87ms
+    Desvio padrao: 41.25ms
+    CPU: 10.92%
 
 ============================================================
 CENÁRIO 10: ARQUIVO GRANDE (1MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-1mb.txt
 
   Testando NGINX: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.06s
-    Requisicoes/segundo: 78.34
-    Latencia media: 12.60ms
-    Desvio padrao: 1.18ms
-    CPU: 16.96%
+    Tempo total: 1.48s
+    Requisicoes/segundo: 33.79
+    Latencia media: 280.58ms
+    Desvio padrao: 56.50ms
+    CPU: 11.12%
 
   Testando APACHE: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.07s
-    Requisicoes/segundo: 71.93
-    Latencia media: 13.73ms
-    Desvio padrao: 2.86ms
-    CPU: 16.99%
+    Tempo total: 1.38s
+    Requisicoes/segundo: 36.23
+    Latencia media: 258.93ms
+    Desvio padrao: 78.06ms
+    CPU: 11.34%
 
 ============================================================
 CENÁRIO 11: ARQUIVO GRANDE (5MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-5mb.txt
 
   Testando NGINX: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.58s
-    Requisicoes/segundo: 1.40
-    Latencia media: 713.05ms
-    Desvio padrao: 51.19ms
-    CPU: 17.20%
+    Tempo total: 38.73s
+    Requisicoes/segundo: 1.29
+    Latencia media: 7632.43ms
+    Desvio padrao: 359.18ms
+    CPU: 10.69%
 
   Testando APACHE: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.59s
-    Requisicoes/segundo: 1.39
-    Latencia media: 715.79ms
-    Desvio padrao: 48.73ms
-    CPU: 18.05%
+    Tempo total: 38.95s
+    Requisicoes/segundo: 1.28
+    Latencia media: 7575.88ms
+    Desvio padrao: 794.84ms
+    CPU: 11.22%
 
 ============================================================
 CENÁRIO 12: ARQUIVO GRANDE (7MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-7mb.txt
 
   Testando NGINX: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 6.77s
-    Requisicoes/segundo: 0.74
-    Latencia media: 1351.63ms
-    Desvio padrao: 12.09ms
-    CPU: 18.28%
+    Tempo total: 74.15s
+    Requisicoes/segundo: 0.67
+    Latencia media: 14606.92ms
+    Desvio padrao: 701.57ms
+    CPU: 10.93%
 
   Testando APACHE: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 6.89s
-    Requisicoes/segundo: 0.73
-    Latencia media: 1374.73ms
-    Desvio padrao: 24.84ms
-    CPU: 16.47%
+    Tempo total: 74.79s
+    Requisicoes/segundo: 0.67
+    Latencia media: 14728.32ms
+    Desvio padrao: 922.73ms
+    CPU: 10.06%
 
-EXECUÇÃO 9 CONCLUÍDA em 0.35 minutos
+EXECUÇÃO 9 CONCLUÍDA em 3.88 minutos
 
 ================================================================================
 EXECUÇÃO 10/10 - RODADA COMPLETA DE TESTES
@@ -3595,399 +3631,403 @@ EXECUÇÃO 10/10 - RODADA COMPLETA DE TESTES
 
 ============================================================
 CENÁRIO 1: BAIXA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 10 | Requisições: 100
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/info
 
   Testando NGINX: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 643.89
-    Latencia media: 0.89ms
-    CPU: 16.40%
+    Tempo total: 0.03s
+    Requisicoes/segundo: 3751.28
+    Latencia media: 2.12ms
+    Desvio padrao: 1.16ms
+    CPU: 10.01%
 
   Testando APACHE: /api/info
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 100, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 100
+    Sucessos: 100 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 448.40
-    Latencia media: 1.39ms
-    CPU: 16.47%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 5266.91
+    Latencia media: 1.62ms
+    Desvio padrao: 0.65ms
+    CPU: 10.06%
 
 ============================================================
 CENÁRIO 2: MÉDIA CARGA
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 500
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/status
 
   Testando NGINX: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1773.64
-    Latencia media: 0.45ms
-    Desvio padrao: 0.24ms
-    CPU: 16.40%
+    Tempo total: 0.09s
+    Requisicoes/segundo: 5418.45
+    Latencia media: 1.76ms
+    Desvio padrao: 1.00ms
+    CPU: 10.01%
 
   Testando APACHE: /api/status
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 500, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 500
+    Sucessos: 500 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 825.88
-    Latencia media: 1.03ms
-    Desvio padrao: 0.49ms
-    CPU: 16.47%
+    Tempo total: 0.08s
+    Requisicoes/segundo: 5902.76
+    Latencia media: 1.61ms
+    Desvio padrao: 0.95ms
+    CPU: 10.06%
 
 ============================================================
 CENÁRIO 3: ALTA CARGA
-Usuários Virtuais: 1 | Requisições: 1
+Usuários Virtuais: 100 | Requisições: 1000
 ============================================================
 
 [NGINX vs APACHE] Endpoint: /api/dados
 
   Testando NGINX: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 670.77
-    Latencia media: 0.69ms
-    CPU: 16.40%
+    Tempo total: 0.18s
+    Requisicoes/segundo: 5709.95
+    Latencia media: 5.98ms
+    Desvio padrao: 3.40ms
+    CPU: 10.01%
 
   Testando APACHE: /api/dados
-  Requisicoes: 1, Usuários: 1
+  Requisicoes: 1000, Usuários: 100
 
   Resultados:
-    Total de requisicoes: 1
-    Sucessos: 1 (100.0%)
+    Total de requisicoes: 1000
+    Sucessos: 1000 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 659.48
-    Latencia media: 0.92ms
-    CPU: 16.67%
+    Tempo total: 0.19s
+    Requisicoes/segundo: 5282.11
+    Latencia media: 6.78ms
+    Desvio padrao: 3.79ms
+    CPU: 10.22%
 
 ============================================================
 CENÁRIO 4: ARQUIVO PEQUENO (1KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-1kb.txt
 
   Testando NGINX: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 2699.73
-    Latencia media: 0.30ms
-    Desvio padrao: 0.11ms
-    CPU: 16.40%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4597.00
+    Latencia media: 1.50ms
+    Desvio padrao: 0.57ms
+    CPU: 10.00%
 
   Testando APACHE: /estatico/pequeno-1kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1289.13
-    Latencia media: 0.67ms
-    Desvio padrao: 0.11ms
-    CPU: 16.67%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4587.65
+    Latencia media: 1.69ms
+    Desvio padrao: 0.71ms
+    CPU: 10.22%
 
 ============================================================
 CENÁRIO 5: ARQUIVO PEQUENO (10KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-10kb.txt
 
   Testando NGINX: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 2092.13
-    Latencia media: 0.40ms
-    Desvio padrao: 0.09ms
-    CPU: 16.40%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4327.68
+    Latencia media: 1.77ms
+    Desvio padrao: 0.83ms
+    CPU: 10.40%
 
   Testando APACHE: /estatico/pequeno-10kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1526.09
-    Latencia media: 0.57ms
-    Desvio padrao: 0.11ms
-    CPU: 16.67%
+    Tempo total: 0.01s
+    Requisicoes/segundo: 4105.94
+    Latencia media: 1.95ms
+    Desvio padrao: 0.67ms
+    CPU: 10.22%
 
 ============================================================
 CENÁRIO 6: ARQUIVO PEQUENO (50KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: pequeno-50kb.txt
 
   Testando NGINX: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 2204.05
-    Latencia media: 0.39ms
-    Desvio padrao: 0.10ms
-    CPU: 16.40%
+    Tempo total: 0.02s
+    Requisicoes/segundo: 2207.48
+    Latencia media: 3.96ms
+    Desvio padrao: 1.24ms
+    CPU: 10.40%
 
   Testando APACHE: /estatico/pequeno-50kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 932.90
-    Latencia media: 0.97ms
-    Desvio padrao: 0.21ms
-    CPU: 16.67%
+    Tempo total: 0.03s
+    Requisicoes/segundo: 1932.57
+    Latencia media: 4.59ms
+    Desvio padrao: 1.38ms
+    CPU: 10.22%
 
 ============================================================
 CENÁRIO 7: ARQUIVO MÉDIO (100KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-100kb.txt
 
   Testando NGINX: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.00s
-    Requisicoes/segundo: 1181.29
-    Latencia media: 0.76ms
-    Desvio padrao: 0.25ms
-    CPU: 16.40%
+    Tempo total: 0.05s
+    Requisicoes/segundo: 1053.92
+    Latencia media: 8.68ms
+    Desvio padrao: 2.10ms
+    CPU: 10.40%
 
   Testando APACHE: /estatico/medio-100kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.01s
-    Requisicoes/segundo: 662.21
-    Latencia media: 1.38ms
-    Desvio padrao: 0.23ms
-    CPU: 16.67%
+    Tempo total: 0.05s
+    Requisicoes/segundo: 1043.32
+    Latencia media: 8.63ms
+    Desvio padrao: 1.76ms
+    CPU: 10.22%
 
 ============================================================
 CENÁRIO 8: ARQUIVO MÉDIO (500KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-500kb.txt
 
   Testando NGINX: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.02s
-    Requisicoes/segundo: 218.59
-    Latencia media: 4.44ms
-    Desvio padrao: 1.10ms
-    CPU: 16.40%
+    Tempo total: 0.35s
+    Requisicoes/segundo: 142.69
+    Latencia media: 64.70ms
+    Desvio padrao: 20.89ms
+    CPU: 10.40%
 
   Testando APACHE: /estatico/medio-500kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.03s
-    Requisicoes/segundo: 172.68
-    Latencia media: 5.65ms
-    Desvio padrao: 2.18ms
-    CPU: 16.67%
+    Tempo total: 0.46s
+    Requisicoes/segundo: 108.19
+    Latencia media: 87.29ms
+    Desvio padrao: 24.02ms
+    CPU: 10.62%
 
 ============================================================
 CENÁRIO 9: ARQUIVO MÉDIO (700KB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: medio-700kb.txt
 
   Testando NGINX: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.03s
-    Requisicoes/segundo: 155.26
-    Latencia media: 6.28ms
-    Desvio padrao: 0.62ms
-    CPU: 16.45%
+    Tempo total: 0.74s
+    Requisicoes/segundo: 67.67
+    Latencia media: 137.56ms
+    Desvio padrao: 37.57ms
+    CPU: 10.65%
 
   Testando APACHE: /estatico/medio-700kb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.04s
-    Requisicoes/segundo: 131.60
-    Latencia media: 7.46ms
-    Desvio padrao: 2.38ms
-    CPU: 16.67%
+    Tempo total: 0.78s
+    Requisicoes/segundo: 64.39
+    Latencia media: 146.76ms
+    Desvio padrao: 45.37ms
+    CPU: 10.73%
 
 ============================================================
 CENÁRIO 10: ARQUIVO GRANDE (1MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-1mb.txt
 
   Testando NGINX: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.06s
-    Requisicoes/segundo: 86.44
-    Latencia media: 11.44ms
-    Desvio padrao: 0.16ms
-    CPU: 16.78%
+    Tempo total: 1.51s
+    Requisicoes/segundo: 33.08
+    Latencia media: 287.91ms
+    Desvio padrao: 70.21ms
+    CPU: 12.85%
 
   Testando APACHE: /estatico/grande-1mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 0.07s
-    Requisicoes/segundo: 74.68
-    Latencia media: 13.24ms
-    Desvio padrao: 2.81ms
-    CPU: 16.67%
+    Tempo total: 1.27s
+    Requisicoes/segundo: 39.46
+    Latencia media: 237.09ms
+    Desvio padrao: 72.02ms
+    CPU: 11.36%
 
 ============================================================
 CENÁRIO 11: ARQUIVO GRANDE (5MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-5mb.txt
 
   Testando NGINX: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.57s
-    Requisicoes/segundo: 1.40
-    Latencia media: 710.57ms
-    Desvio padrao: 37.46ms
-    CPU: 17.14%
+    Tempo total: 38.60s
+    Requisicoes/segundo: 1.30
+    Latencia media: 7571.85ms
+    Desvio padrao: 534.22ms
+    CPU: 11.58%
 
   Testando APACHE: /estatico/grande-5mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 3.51s
-    Requisicoes/segundo: 1.42
-    Latencia media: 700.19ms
-    Desvio padrao: 14.42ms
-    CPU: 17.18%
+    Tempo total: 38.38s
+    Requisicoes/segundo: 1.30
+    Latencia media: 7551.35ms
+    Desvio padrao: 1149.86ms
+    CPU: 10.94%
 
 ============================================================
 CENÁRIO 12: ARQUIVO GRANDE (7MB)
-Usuários Virtuais: 1 | Requisições: 5
+Usuários Virtuais: 10 | Requisições: 50
 ============================================================
 
 [NGINX vs APACHE] Arquivo: grande-7mb.txt
 
   Testando NGINX: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 6.95s
-    Requisicoes/segundo: 0.72
-    Latencia media: 1386.08ms
-    Desvio padrao: 75.68ms
-    CPU: 16.89%
+    Tempo total: 74.13s
+    Requisicoes/segundo: 0.67
+    Latencia media: 14703.89ms
+    Desvio padrao: 570.01ms
+    CPU: 11.15%
 
   Testando APACHE: /estatico/grande-7mb.txt
-  Requisicoes: 5, Usuários: 1
+  Requisicoes: 50, Usuários: 10
 
   Resultados:
-    Total de requisicoes: 5
-    Sucessos: 5 (100.0%)
+    Total de requisicoes: 50
+    Sucessos: 50 (100.0%)
     Falhas: 0 (0.0%)
-    Tempo total: 6.66s
-    Requisicoes/segundo: 0.75
-    Latencia media: 1329.10ms
-    Desvio padrao: 10.17ms
-    CPU: 16.80%
+    Tempo total: 74.80s
+    Requisicoes/segundo: 0.67
+    Latencia media: 14803.53ms
+    Desvio padrao: 709.40ms
+    CPU: 10.75%
 
-EXECUÇÃO 10 CONCLUÍDA em 0.35 minutos
+EXECUÇÃO 10 CONCLUÍDA em 3.87 minutos
 
 ======================================================================
 TESTES CONCLUÍDOS
 ======================================================================
-Tempo total de execução: 3.53 minutos
+Tempo total de execução: 39.30 minutos
