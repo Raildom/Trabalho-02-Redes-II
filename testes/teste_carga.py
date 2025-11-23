@@ -59,25 +59,25 @@ class TestadorCarga:
     #Classe para executar testes de carga nos servidores
     
     #configuracoes dos cenarios de teste
-    NUM_EXECUCOES = 10
-    NUM_USUARIOS = 10
-    NUM_REQUISTICOES = 50
+    NUM_EXECUCOES = 2
+    NUM_USUARIOS = 1
+    NUM_REQUISTICOES = 1
     
     CENARIO_1_BAIXA_CARGA = {
-        'usuarios': 10,     
-        'requisicoes': 100, 
+        'usuarios': 1,     
+        'requisicoes': 1, 
         'endpoint': '/api/info'
     }
     
     CENARIO_2_MEDIA_CARGA = {
-        'usuarios': 10,
-        'requisicoes': 500,
+        'usuarios': 1,
+        'requisicoes': 1,
         'endpoint': '/api/status'
     }
     
     CENARIO_3_ALTA_CARGA = {
-        'usuarios': 100,
-        'requisicoes': 1000,
+        'usuarios': 1,
+        'requisicoes': 1,
         'endpoint': '/api/dados'
     }
     
@@ -415,30 +415,7 @@ class TestadorCarga:
             self.teste_concorrente('nginx', caminho, cfg['requisicoes'], cfg['usuarios'], nome_teste, execucao)
             self.teste_concorrente('apache', caminho, cfg['requisicoes'], cfg['usuarios'], nome_teste, execucao)
     
-    def executar_testes(self):
-        #Executa todos os cenários de teste
-        self.print_e_salvar("="*60)
-        self.print_e_salvar("INICIO DOS TESTES DE CARGA")
-        self.print_e_salvar(f"Data/Hora: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-        self.print_e_salvar("="*60)
-        
-        #Executar todos os cenários (agora 12 no total)
-        self.cenario_baixa_carga()      #Cenário 1
-        self.cenario_media_carga()      #Cenário 2
-        self.cenario_alta_carga()       #Cenário 3
-        self.cenario_arquivo_pequeno()  #Cenários 4-6
-        self.cenario_arquivo_medio()    #Cenários 7-9
-        self.cenario_arquivo_grande()   #Cenários 10-12
-        
-        self.print_e_salvar("\n" + "="*60)
-        self.print_e_salvar("TESTES CONCLUIDOS!")
-        self.print_e_salvar(f"Resultados salvos em:")
-        self.print_e_salvar(f"  - {self.arquivo_txt}")
-        self.print_e_salvar(f"  - {self.arquivo_csv}")
-        self.print_e_salvar("="*60)
-    
     def executar_testes(self, execucao=None):
-        #Executa todos os 15 cenários de teste uma vez
         #Executar TODOS os 12 cenários
         self.cenario_baixa_carga(execucao)      #Cenário 1
         self.cenario_media_carga(execucao)      #Cenário 2

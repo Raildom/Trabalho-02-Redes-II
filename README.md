@@ -214,7 +214,9 @@ X-Custom-ID: 40093cb61c18ade519baca198537dd16
 
 **Query Comparativa:**
 ```promql
-label_replace(nginx_up, "servidor", "nginx", "", "") or label_replace(apache_up, "servidor", "apache", "", "")
+label_replace(nginx_up, "servidor", "nginx", "", "") 
+or 
+label_replace(apache_up, "servidor", "apache", "", "")
 ```
 
 ### 2. Total de Requisições
