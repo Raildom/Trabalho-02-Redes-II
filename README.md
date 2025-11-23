@@ -11,7 +11,7 @@
 
 ## Link do Youtube
 
-**Vídeo de Demonstração**: [EM BREVE]
+**Vídeo de Demonstração**: [https://youtu.be/6MHiOsEtKuw]
 
 ---
 
@@ -86,7 +86,6 @@ Trabalho-02-Redes-II/
 │
 ├── src/
 │   ├── cliente.py
-│   ├── configuracao.py
 │   ├── gerador_hash.py
 │   └── gerar_arquivos_estaticos.py
 │
